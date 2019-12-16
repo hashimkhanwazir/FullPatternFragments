@@ -7,7 +7,7 @@
     <packaging>war</packaging>
 
     <properties>
-        <jettyVersion>9.4.22.v20191022</jettyVersion>
+        <jettyVersion>9.4.24.v20191120</jettyVersion>
         <jena.version>3.7.0</jena.version>
     </properties>
 
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.apache.commons</groupId>
             <artifactId>commons-compress</artifactId>
-            <version>1.16.1</version>
+            <version>1.19</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jena</groupId>
@@ -121,7 +121,7 @@
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
-            <version>4.3.5</version>
+            <version>4.3.6</version>
         </dependency>
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
