@@ -28,7 +28,7 @@ import dk.aau.cs.spf.model.TriplePattern;
 /**
  * @author Ilkcan Keles
  */
-public class BrTPFClient {
+public class SPFClient {
     private static ArrayList<TriplePattern> triplePatterns = new ArrayList<TriplePattern>();
     private static List<ProjectionElem> projectionElemList;
     private static QueryInput input;
