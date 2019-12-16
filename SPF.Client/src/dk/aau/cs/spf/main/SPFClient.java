@@ -53,7 +53,7 @@ public class SPFClient {
 
             System.out.println(SparqlQueryProcessor.SERVER_REQUESTS.get() + " " + SparqlQueryProcessor.TRANSFERRED_BYTES.get() + " " + SparqlQueryProcessor.RESPONSE_TIME);
         } catch (ParseException e) {
-            System.err.println("usage: java skytpf-client.jar -f startFragment -q query.sparql");
+            System.err.println("usage: java spf-client.jar -t false -f startFragment -q query.sparql");
         } catch (IllegalArgumentException e) {
             System.err.println(e.getMessage());
         } catch (IOException e) {
@@ -121,6 +121,9 @@ public class SPFClient {
         CommandLine commandLine = parser.parse(options, args);
 
         String s = commandLine.getOptionValue("t");
+	if(s == null) {
+	    System.err.println("usage: java spf-client.jar -t false -f startFragment -q query.sparql");	
+	}
         if(s.equals("true")) {
             tests = true;
             return;
