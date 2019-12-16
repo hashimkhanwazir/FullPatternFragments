@@ -35,10 +35,16 @@ public class BrTPFClient {
     private static QueryProcessingMethod qpMethod = QueryProcessingMethod.SPF;
     private static ArrayList<StarPattern> starPatterns;
     private static String queryStr = "";
+    private static boolean tests = false;
 
     public static void main(String[] args) {
         try {
             initializeInput(args);
+            if(tests) {
+                Experiment.main(Arrays.copyOfRange(args, 2, args.length-1));
+                return;
+            }
+
             initializeQueryAndConfig();
             SparqlQueryProcessor sqp =
                     new SparqlQueryProcessor(starPatterns, projectionElemList, input, qpMethod, true, true, true);
@@ -99,19 +105,30 @@ public class BrTPFClient {
     private static void initializeInput(String[] args)
             throws ParseException, IllegalArgumentException {
         Option optionF =
-                Option.builder("f").required(true).desc("Start fragment").longOpt("startFr").build();
+                Option.builder("f").required(false).desc("Start fragment").longOpt("startFr").build();
         optionF.setArgs(1);
         Option optionQ =
-                Option.builder("q").required(true).desc("SPARQL query file").longOpt("query").build();
+                Option.builder("q").required(false).desc("SPARQL query file").longOpt("query").build();
         optionQ.setArgs(1);
+        Option optionT =
+                Option.builder("t").required(true).desc("Run tests").longOpt("tests").build();
+        optionT.setArgs(1);
         Options options = new Options();
         options.addOption(optionF);
         options.addOption(optionQ);
 
         CommandLineParser parser = new DefaultParser();
         CommandLine commandLine = parser.parse(options, args);
+
+        String s = commandLine.getOptionValue("t");
+        if(s.equals("true")) {
+            tests = true;
+            return;
+        }
+
         input = new QueryInput();
         input.setStartFragment(commandLine.getOptionValue("f"));
         input.setQueryFile(commandLine.getOptionValue("q"));
     }
 }
+
