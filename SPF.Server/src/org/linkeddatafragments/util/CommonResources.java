@@ -6,11 +6,13 @@ import org.apache.jena.rdf.model.ResourceFactory;
 @SuppressWarnings("javadoc")
 public class CommonResources {
 	public final static String RDF = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+	public final static String XSD = "http://www.w3.org/2001/XMLSchema#";
 	public final static Property RDF_TYPE = createProperty(RDF + "type");
 	public final static Property RDF_SUBJECT = createProperty(RDF + "subject");
 	public final static Property RDF_PREDICATE = createProperty(RDF + "predicate");
 	public final static Property RDF_OBJECT = createProperty(RDF + "object");
-	
+	public final static Property XSD_INTEGER = createProperty(XSD + "integer");
+
 	public final static String VOID = "http://rdfs.org/ns/void#";
 	public final static Property VOID_TRIPLES = createProperty(VOID + "triples");
 	public final static Property VOID_SUBSET = createProperty(VOID + "subset");

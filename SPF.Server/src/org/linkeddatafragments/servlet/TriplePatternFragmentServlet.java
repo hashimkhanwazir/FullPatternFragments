@@ -1,26 +1,5 @@
 package org.linkeddatafragments.servlet;
 
-import static org.linkeddatafragments.util.CommonResources.HYDRA_COLLECTION;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_FIRSTPAGE;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_ITEMSPERPAGE;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_MAPPING;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_NEXTPAGE;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_PAGEDCOLLECTION;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_PREVIOUSPAGE;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_PROPERTY;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_SEARCH;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_TEMPLATE;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_TOTALITEMS;
-import static org.linkeddatafragments.util.CommonResources.HYDRA_VARIABLE;
-import static org.linkeddatafragments.util.CommonResources.INVALID_URI;
-import static org.linkeddatafragments.util.CommonResources.RDF_OBJECT;
-import static org.linkeddatafragments.util.CommonResources.RDF_PREDICATE;
-import static org.linkeddatafragments.util.CommonResources.RDF_SUBJECT;
-import static org.linkeddatafragments.util.CommonResources.RDF_TYPE;
-import static org.linkeddatafragments.util.CommonResources.VOID_DATASET;
-import static org.linkeddatafragments.util.CommonResources.VOID_SUBSET;
-import static org.linkeddatafragments.util.CommonResources.VOID_TRIPLES;
-
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -63,6 +42,8 @@ import org.apache.jena.sparql.syntax.ElementGroup;
 import org.rdfhdt.hdt.stars.StarString;
 import org.rdfhdt.hdt.util.Tuple;
 
+import static org.linkeddatafragments.util.CommonResources.*;
+
 /**
  * Servlet that responds with a Basic Linked Data Fragment.
  *
@@ -75,6 +56,7 @@ public class TriplePatternFragmentServlet extends HttpServlet {
             .compile("^\"(.*)\"(?:@(.*)|\\^\\^<?([^<>]*)>?)?$");
     private final static TypeMapper types = TypeMapper.getInstance();
     private final static long TRIPLESPERPAGE = 50;
+    private final static int MAXTPS = 10;
 
     private ConfigReader config;
     private HashMap<String, IDataSource> dataSources = new HashMap<>();
@@ -189,9 +171,12 @@ public class TriplePatternFragmentServlet extends HttpServlet {
 
                 for (int i = 0; i < num; i++) {
                     int j = i + 1;
-                    tpls.add(new Tuple<>(request.getParameter("p" + j), request.getParameter("o" + j)));
+                    String pred = request.getParameter("p" + j);
+                    String obj = request.getParameter("o" + j);
+                    tpls.add(new Tuple<>(pred == null ? "" : pred, obj == null ? "" : obj));
                 }
-                StarString star = new StarString(request.getParameter("subject"), tpls);
+                String subj = request.getParameter("subject");
+                StarString star = new StarString(subj == null ? "" : subj, tpls);
 
                 StarPatternFragment _fragment;
                 if (bindings != null) {
@@ -263,20 +248,43 @@ public class TriplePatternFragmentServlet extends HttpServlet {
 
         // add controls
         final Resource triplePattern = output.createResource();
-        final Resource subjectMapping = output.createResource();
-        final Resource predicateMapping = output.createResource();
-        final Resource objectMapping = output.createResource();
         output.add(datasetId, HYDRA_SEARCH, triplePattern);
+
+        String template = "{?s,triples";
+        for(int i = 0; i < MAXTPS; i++) {
+            int ii = i+1;
+            template += ",p"+ii+",o"+ii;
+
+            final Resource predMapping = output.createResource();
+            output.add(triplePattern, HYDRA_MAPPING, predMapping);
+            output.add(predMapping, HYDRA_VARIABLE,
+                    output.createLiteral("p"+ii));
+            output.add(predMapping, HYDRA_PROPERTY, RDF_PREDICATE);
+
+            final Resource objMapping = output.createResource();
+            output.add(triplePattern, HYDRA_MAPPING, objMapping);
+            output.add(objMapping, HYDRA_VARIABLE,
+                    output.createLiteral("o"+ii));
+            output.add(objMapping, HYDRA_PROPERTY, RDF_OBJECT);
+        }
+        template += "}";
+
         output.add(
                 triplePattern,
                 HYDRA_TEMPLATE,
-                output.createLiteral(datasetUrl
-                        + "{?subject,predicate,object}"));
+                output.createLiteral(datasetUrl + template));
+
+        final Resource subjectMapping = output.createResource();
         output.add(triplePattern, HYDRA_MAPPING, subjectMapping);
         output.add(subjectMapping, HYDRA_VARIABLE,
-                output.createLiteral("subject"));
+                output.createLiteral("s"));
         output.add(subjectMapping, HYDRA_PROPERTY, RDF_SUBJECT);
-        output.add(objectMapping, HYDRA_PROPERTY, RDF_OBJECT);
+
+        final Resource triplesMapping = output.createResource();
+        output.add(triplePattern, HYDRA_MAPPING, triplesMapping);
+        output.add(triplesMapping, HYDRA_VARIABLE,
+                output.createLiteral("triples"));
+        output.add(triplesMapping, HYDRA_PROPERTY, XSD_INTEGER);
 
         // serialize the output as Turtle
         response.setHeader("Server", "Linked Data Fragments Server");
