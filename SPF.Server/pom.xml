@@ -5,7 +5,7 @@
     <artifactId>ldfserver</artifactId>
     <version>0.2.2</version>
     <packaging>war</packaging>
-    <name>SmartKG++ Server</name>
+    <name>SPF Server</name>
     <url>http://linkeddatafragments.org</url>
     <description>
         This is a Java implementation of the Linked Data Fragments Server based on Jena.
