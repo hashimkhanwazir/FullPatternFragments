@@ -1,3 +1,5 @@
+This repository contains code modified from **[Triple Pattern Fragments](http://www.hydra-cg.com/spec/latest/triple-pattern-fragments/)**, to contain **Star Pattern Fragments**.
+
 # Linked Data Fragments Server <img src="http://linkeddatafragments.org/images/logo.svg" width="100" align="right" alt="" />
 On today's Web, Linked Data is published in different ways,
 which include [data dumps](http://downloads.dbpedia.org/3.9/en/),
@@ -10,11 +12,11 @@ is that they are either so powerful that their servers suffer from low availabil
 ([as is the case with SPARQL](http://sw.deri.org/~aidanh/docs/epmonitorISWC.pdf)),
 or either don't allow efficient querying.
 
-Instead, this server offers **[Triple Pattern Fragments](http://www.hydra-cg.com/spec/latest/triple-pattern-fragments/)**.
-Each Triple Pattern Fragment offers:
+Instead, this server offers **[Star Pattern Fragments](https://relweb.cs.aau.dk/spf/)**.
+Each Star Pattern Fragment offers:
 
-- **data** that corresponds to a _triple pattern_
-  _([example](http://data.linkeddatafragments.org/dbpedia?subject=&predicate=rdf%3Atype&object=dbpedia-owl%3ARestaurant))_.
+- **data** that corresponds to a _star pattern_
+  _([example](http://example.org/example?s=http%3A%2F%2Fexample.org%2Ftopic&triples=2&star=[p1,http%3A%2F%2Fexample.org%2Fpred1;p2,http%3A%2F%2Fexample.org%2Fpred2]))_.
 - **metadata** that consists of the (approximate) total triple count
   _([example](http://data.linkeddatafragments.org/dbpedia?subject=&predicate=rdf%3Atype&object=))_.
 - **controls** that lead to all other fragments of the same dataset
@@ -50,5 +52,3 @@ If no parameter is set, it looks for a default `config-example.json` in the fold
 This is software is still under development. It currently only supports:
 - HDT data sources
 - Turtle output
-
-A [more complete server](https://github.com/LinkedDataFragments/Server.js/) has been implemented for the Node.js platform.

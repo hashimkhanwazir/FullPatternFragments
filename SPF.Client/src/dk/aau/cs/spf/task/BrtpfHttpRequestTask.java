@@ -79,7 +79,19 @@ public class BrtpfHttpRequestTask {
             Set<String> boundVars = bindings.get(0).keySet();
             ArrayList<String> varsInURL = new ArrayList<String>(Sets.intersection(varsInTP, boundVars));
             valuesSb.append("(");
-            valuesSb.append(String.join(" ", varsInURL));
+
+            String varStr = String.join(" ", varsInURL);
+            String subjVar = tp.getSubjectVarName();
+            if(subjVar != null)
+                varStr = varStr.replace(subjVar, "?subject");
+            String predVar = tp.getPredicateVarName();
+            if(predVar != null)
+                varStr = varStr.replace(predVar, "?predicate");
+            String objVar = tp.getObjectVarName();
+            if(objVar != null)
+                varStr = varStr.replace(objVar, "?object");
+
+            valuesSb.append(varStr);
             valuesSb.append("){");
 
             Set<ArrayList<String>> set = new HashSet<>();

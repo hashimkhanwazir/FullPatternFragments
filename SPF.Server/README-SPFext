@@ -4,12 +4,25 @@ We added to following package from a modified version of the HDT repository:
 src/org/rdfhdt/*
 
 We modified the following files:
-src/org/linkeddatafragments/datasource/HdtDataSource.java
-src/org/linkeddatafragments/datasource/DataSourceFactory.java
-src/org/linkeddatafragments/servlet/TriplePatternFragmentServlet.java
+src/org/linkeddatafragments/datasource/hdt/HdtDataSource.java
+src/org/linkeddatafragments/servlet/LinkedDataFragmentServlet.java
+src/org/linkeddatafragments/util/CommonResources.java
+src/org/linkeddatafragments/views/RdfWriterImpl.java
 
 We added the following files:
-src/org/linkeddatafragments/datasource/HdtPPDataSource.java
-src/org/linkeddatafragments/datasource/StarPatternFragment.java
+src/org/linkeddatafragments/characteristicset/*
+src/org/linkeddatafragments/datasource/AbstractRequestProcessorForBindingsRestrictedTriplePatternFragments.java
+src/org/linkeddatafragments/datasource/AbstractRequestProcessorForStarPatternFragments.java
+src/org/linkeddatafragments/datasource/hdt/HdtBasedRequestProcessorForBRTPFs.java
+src/org/linkeddatafragments/datasource/hdt/HdtBasedRequestProcessorForSPFs.java
+src/org/linkeddatafragments/fragments/spf/*
+src/org/linkeddatafragments/fragments/tpf/BindingsRestrictedTriplePatternFragmentRequestImpl.java
+src/org/linkeddatafragments/fragments/tpf/BRTPFRequestParser.java
+src/org/linkeddatafragments/fragments/tpf/BRTPFRequestParserForJenaBackends.java
+src/org/linkeddatafragments/util/StarID.java
+src/org/linkeddatafragments/util/StarPatternElementParser.java
+src/org/linkeddatafragments/util/StarPatternElementParserForJena.java
+src/org/linkeddatafragments/util/StarString.java
+src/org/linkeddatafragments/util/Tuple.java
 
 For any questions, contact Christian Aebeloe at Aalborg University, Dept. of Computer Science: caebel@cs.aau.dk.

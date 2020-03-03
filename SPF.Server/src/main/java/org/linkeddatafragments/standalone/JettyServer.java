@@ -11,16 +11,15 @@ import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.linkeddatafragments.servlet.LinkedDataFragmentServlet;
-import org.linkeddatafragments.servlet.PartitioningServlet;
 
- 
+
 public class JettyServer {
     private static void printHelp(Options options) {
         HelpFormatter formatter = new HelpFormatter();
         formatter.printHelp("java -jar target/ldf-server.jar [config-example.json] [<options>]",
                     "Starts a standalone LDF Triple Pattern server. Options:", options, "");
     }
-    
+
     /**
      *
      * @param args
@@ -30,22 +29,22 @@ public class JettyServer {
         Options options = new Options();
         options.addOption("h", "help", false, "Print this help message and then exit.");
         options.addOption("p", "port", true, "The port the server listents to. The default is 8080.");
-        
+
         CommandLineParser parser = new DefaultParser();
         CommandLine commandLine = parser.parse(options, args);
-        
+
         String config = null;
         if (!commandLine.getArgList().isEmpty()) {
             config = commandLine.getArgs()[0];
-            
+
             System.out.println("commandLine: " + config);
         }
 
         if (commandLine.hasOption('h')) {
             printHelp(options);
             System.exit(-1);
-        }    
-        
+        }
+
         int port = 8080;
         if (commandLine.hasOption('p')) {
             port = Integer.parseInt(commandLine.getOptionValue('p'));
@@ -53,7 +52,7 @@ public class JettyServer {
 
         // create a new (Jetty) server, and add a servlet handler
         Server server = new Server(port);
-        
+
         // The filesystem paths we will map
         String pwdPath = System.getProperty("user.dir");
         String assetsPath = pwdPath + "/assets";
@@ -64,20 +63,14 @@ public class JettyServer {
         context.setResourceBase(pwdPath);
         context.setContextPath("/");
         server.setHandler(context);
-        
-        
-         // add a simple Servlet at "/partition/*"
-        ServletHolder holderPartition= new ServletHolder("partition", PartitioningServlet.class);
-        holderPartition.setInitParameter(LinkedDataFragmentServlet.CFGFILE, config);
-        context.addServlet(holderPartition, "/molecule/*");
 
         // add a simple Servlet at "/dynamic/*"
         ServletHolder holderDynamic = new ServletHolder("dynamic", LinkedDataFragmentServlet.class);
         holderDynamic.setInitParameter(LinkedDataFragmentServlet.CFGFILE, config);
         context.addServlet(holderDynamic, "/*");
-        
-       
-        
+
+
+
         // add special pathspec of "/home/" content mapped to the homePath
         ServletHolder holderHome = new ServletHolder("static-home", DefaultServlet.class);
         holderHome.setInitParameter("resourceBase",assetsPath);
@@ -90,9 +83,9 @@ public class JettyServer {
         ServletHolder holderPwd = new ServletHolder("default", DefaultServlet.class);
         holderPwd.setInitParameter("dirAllowed","true");
         context.addServlet(holderPwd,"/");
-        
-        
-        
+
+
+
         // start the server
         server.start();
         System.out.println("Started server, listening at port " + port);

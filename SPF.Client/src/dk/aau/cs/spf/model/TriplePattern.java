@@ -1,92 +1,104 @@
 package dk.aau.cs.spf.model;
 
 import java.util.ArrayList;
+
+import dk.aau.cs.spf.util.Tuple;
 import org.eclipse.rdf4j.query.algebra.StatementPattern;
 import org.eclipse.rdf4j.query.algebra.Var;
 
 public class TriplePattern {
-  private StatementPattern statementPattern;
-  private ArrayList<String> listOfVars;
-  private String subjectVarName;
-  private String predicateVarName;
-  private String objectVarName;
-  private int triplesCount;
+    private StatementPattern statementPattern;
+    private ArrayList<String> listOfVars;
+    private String subjectVarName;
+    private String predicateVarName;
+    private String objectVarName;
+    private int triplesCount;
 
 
-  public TriplePattern(StatementPattern statementPattern) {
-    this.statementPattern = statementPattern;
-    this.listOfVars = new ArrayList<String>();
-    subjectVarName = null;
-    Var subjectVar = statementPattern.getSubjectVar();
-    if (!subjectVar.isAnonymous() && !subjectVar.isConstant()) {
-      subjectVarName = "?" + subjectVar.getName();
-      listOfVars.add(subjectVarName);
+    public TriplePattern(StatementPattern statementPattern) {
+        this.statementPattern = statementPattern;
+        this.listOfVars = new ArrayList<String>();
+        subjectVarName = null;
+        Var subjectVar = statementPattern.getSubjectVar();
+        if (!subjectVar.isAnonymous() && !subjectVar.isConstant()) {
+            subjectVarName = "?" + subjectVar.getName();
+            listOfVars.add(subjectVarName);
+        }
+        predicateVarName = null;
+        Var predicateVar = statementPattern.getPredicateVar();
+        if (!predicateVar.isAnonymous() && !predicateVar.isConstant()) {
+            predicateVarName = "?" + predicateVar.getName();
+            listOfVars.add(predicateVarName);
+        }
+        objectVarName = null;
+        Var objectVar = statementPattern.getObjectVar();
+        if (!objectVar.isAnonymous() && !objectVar.isConstant()) {
+            objectVarName = "?" + objectVar.getName();
+            listOfVars.add(objectVarName);
+        }
     }
-    predicateVarName = null;
-    Var predicateVar = statementPattern.getPredicateVar();
-    if (!predicateVar.isAnonymous() && !predicateVar.isConstant()) {
-      predicateVarName = "?" + predicateVar.getName();
-      listOfVars.add(predicateVarName);
+
+    public boolean containsVar(String varName) {
+        return listOfVars.contains(varName);
     }
-    objectVarName = null;
-    Var objectVar = statementPattern.getObjectVar();
-    if (!objectVar.isAnonymous() && !objectVar.isConstant()) {
-      objectVarName = "?" + objectVar.getName();
-      listOfVars.add(objectVarName);
+
+    public StatementPattern getStatementPattern() {
+        return statementPattern;
     }
-  }
 
-  public boolean containsVar(String varName) {
-    return listOfVars.contains(varName);
-  }
-
-  public StatementPattern getStatementPattern() {
-    return statementPattern;
-  }
-
-  public int getNumberOfBoundVariables(ArrayList<String> boundVars) {
-    int numberOfBV = 0;
-    for (String boundVar : boundVars) {
-      if (containsVar(boundVar)) {
-        numberOfBV++;
-      }
+    public int getNumberOfBoundVariables(ArrayList<String> boundVars) {
+        int numberOfBV = 0;
+        for (String boundVar : boundVars) {
+            if (containsVar(boundVar)) {
+                numberOfBV++;
+            }
+        }
+        return numberOfBV;
     }
-    return numberOfBV;
-  }
 
-  public ArrayList<String> getListOfVars() {
-    return listOfVars;
-  }
+    public String getVarString(String varName) {
+        if(varName.equals(subjectVarName))
+            return "subject";
+        else if (varName.equals(predicateVarName))
+            return "predicate";
+        else if (varName.equals(objectVarName))
+            return "object";
+        return "";
+    }
 
-  public Var getObjectVar() {
-    return statementPattern.getObjectVar();
-  }
+    public ArrayList<String> getListOfVars() {
+        return listOfVars;
+    }
 
-  public Var getSubjectVar() {
-    return statementPattern.getSubjectVar();
-  }
+    public Var getObjectVar() {
+        return statementPattern.getObjectVar();
+    }
 
-  public Var getPredicateVar() {
-    return statementPattern.getPredicateVar();
-  }
+    public Var getSubjectVar() {
+        return statementPattern.getSubjectVar();
+    }
 
-  public String getSubjectVarName() {
-    return subjectVarName;
-  }
+    public Var getPredicateVar() {
+        return statementPattern.getPredicateVar();
+    }
 
-  public String getObjectVarName() {
-    return objectVarName;
-  }
+    public String getSubjectVarName() {
+        return subjectVarName;
+    }
 
-  public String getPredicateVarName() {
-    return predicateVarName;
-  }
+    public String getObjectVarName() {
+        return objectVarName;
+    }
 
-  public int getTriplesCount() {
-    return triplesCount;
-  }
+    public String getPredicateVarName() {
+        return predicateVarName;
+    }
 
-  public void setTriplesCount(int triplesCount) {
-    this.triplesCount = triplesCount;
-  }
+    public int getTriplesCount() {
+        return triplesCount;
+    }
+
+    public void setTriplesCount(int triplesCount) {
+        this.triplesCount = triplesCount;
+    }
 }

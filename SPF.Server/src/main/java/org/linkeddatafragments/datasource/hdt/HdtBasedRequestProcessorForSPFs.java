@@ -9,25 +9,19 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.shared.InvalidPropertyURIException;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
-import org.linkeddatafragments.datasource.AbstractRequestProcessorForBindingsRestrictedTriplePatterns;
+import org.linkeddatafragments.characteristicset.ICharacteristicSet;
 import org.linkeddatafragments.datasource.AbstractRequestProcessorForStarPatterns;
 import org.linkeddatafragments.fragments.ILinkedDataFragment;
 import org.linkeddatafragments.fragments.spf.IStarPatternElement;
 import org.linkeddatafragments.fragments.spf.IStarPatternFragmentRequest;
 import org.linkeddatafragments.fragments.spf.StarPatternFragmentImpl;
-import org.linkeddatafragments.fragments.tpf.ITriplePatternElement;
-import org.linkeddatafragments.fragments.tpf.ITriplePatternFragmentRequest;
-import org.linkeddatafragments.fragments.tpf.TriplePatternFragmentImpl;
 import org.linkeddatafragments.util.StarString;
 import org.linkeddatafragments.util.TripleElement;
 import org.linkeddatafragments.util.Tuple;
-import org.rdfhdt.hdt.dictionary.Dictionary;
-import org.rdfhdt.hdt.dictionary.DictionaryUtil;
 import org.rdfhdt.hdt.enums.TripleComponentRole;
 import org.rdfhdt.hdt.hdt.HDT;
 import org.rdfhdt.hdt.triples.IteratorTripleID;
 import org.rdfhdt.hdt.triples.TripleID;
-import org.rdfhdt.hdt.triples.TripleString;
 import org.rdfhdt.hdtjena.HDTGraph;
 import org.rdfhdt.hdtjena.NodeDictionary;
 
@@ -52,6 +46,11 @@ public class HdtBasedRequestProcessorForSPFs
     protected final Model model;
 
     /**
+     * The Characteristic Sets
+     */
+    protected final List<ICharacteristicSet> characteristicSets;
+
+    /**
      * The dictionary
      */
     protected final NodeDictionary dictionary;
@@ -61,10 +60,11 @@ public class HdtBasedRequestProcessorForSPFs
      *
      * @throws IOException if the file cannot be loaded
      */
-    public HdtBasedRequestProcessorForSPFs( HDT hdt, NodeDictionary dict )
+    public HdtBasedRequestProcessorForSPFs( HDT hdt, NodeDictionary dict, List<ICharacteristicSet> css )
     {
         datasource = hdt;
         dictionary = dict;
+        characteristicSets = css;
         model = ModelFactory.createModelForGraph(new HDTGraph(datasource));
     }
 
@@ -135,108 +135,7 @@ public class HdtBasedRequestProcessorForSPFs
             String subj = subject.isVariable() ? "" : subject.asConstantTerm().toString();
             StarString star = new StarString(subj, s);
 
-            int size = star.size();
-
-            if(size == 1)
-                return createFragmentByTriplePatternSubstitutionSingle(star, bindings, offset, limit);
             return createFragmentByTriplePatternSubstitution(star, bindings, offset, limit);
-        }
-
-        private ILinkedDataFragment createFragmentByTriplePatternSubstitutionSingle(
-                final StarString star,
-                final List<Binding> bindings,
-                final long offset,
-                final long limit ) {
-            final StarStringIterator it = new StarStringIterator(bindings, star);
-
-            final List<Model> stars = new ArrayList<>();
-            int triplesCheckedSoFar = 0;
-            int triplesAddedInCurrentPage = 0;
-            boolean atOffset;
-            int countBindingsSoFar = 0;
-            int found = 0;
-            int skipped = 0;
-            Dictionary dict = datasource.getDictionary();
-            while (it.hasNext()) {
-                StarString st = it.next();
-                final TripleString ts = st.getTriple(0);
-                final TripleID t = DictionaryUtil.tripleStringtoTripleID(dict, ts);
-                final IteratorTripleID matches = datasource.getTriples().search(t);
-
-                final boolean hasMatches = matches.hasNext();
-                if (hasMatches) {
-                    matches.goToStart();
-                    while (!(atOffset = (triplesCheckedSoFar == offset))
-                            && matches.hasNext()) {
-                        matches.next();
-                        triplesCheckedSoFar++;
-                    }
-
-                    // try to add `limit` triples to the result model
-                    if (atOffset) {
-                        for (int i = found; i < limit && matches.hasNext(); i++) {
-                            TripleID tid = matches.next();
-
-                            Model triples = ModelFactory.createDefaultModel();
-                            triples.add(triples.asStatement(toTriple(tid)));
-                            stars.add(triples);
-                        }
-                    }
-                }
-                countBindingsSoFar++;
-            }
-
-            final int bindingsSize = bindings.size();
-            final long minimumTotal = offset + triplesAddedInCurrentPage + 1;
-            final long estimatedTotal;
-            if (triplesAddedInCurrentPage < limit) {
-                estimatedTotal = offset + triplesAddedInCurrentPage;
-            }
-//         else // This else block is for testing purposes only. The next else block is the correct one.
-//         {
-//             estimatedTotal = minimumTotal;
-//         }
-            else {
-                final int THRESHOLD = 10;
-                final int maxBindingsToUseInEstimation;
-                if (bindingsSize <= THRESHOLD) {
-                    maxBindingsToUseInEstimation = bindingsSize;
-                } else {
-                    maxBindingsToUseInEstimation = THRESHOLD;
-                }
-
-                long estimationSum = 0L;
-                it.reset();
-                int i = 0;
-                while (it.hasNext() && i < maxBindingsToUseInEstimation) {
-                    i++;
-                    StarString st = it.next();
-                    final TripleString ts = st.getTriple(0);
-                    final TripleID t = DictionaryUtil.tripleStringtoTripleID(dict, ts);
-                    estimationSum += estimateResultSetSize(t);
-                }
-
-                if (bindingsSize <= THRESHOLD) {
-                    if (estimationSum <= minimumTotal)
-                        estimatedTotal = minimumTotal;
-                    else
-                        estimatedTotal = estimationSum;
-                } else // bindingsSize > THRESHOLD
-                {
-                    final double fraction = bindingsSize / maxBindingsToUseInEstimation;
-                    final double estimationAsDouble = fraction * estimationSum;
-                    final long estimation = Math.round(estimationAsDouble);
-                    if (estimation <= minimumTotal)
-                        estimatedTotal = minimumTotal;
-                    else
-                        estimatedTotal = estimation;
-                }
-            }
-
-            final long estimatedValid = estimatedTotal;
-
-            boolean isLastPage = found < limit;
-            return new StarPatternFragmentImpl(stars, estimatedValid, request.getFragmentURL(), request.getDatasetURL(), request.getPageNumber(), isLastPage);
         }
 
         private ILinkedDataFragment createFragmentByTriplePatternSubstitution(
@@ -246,13 +145,20 @@ public class HdtBasedRequestProcessorForSPFs
                 final long limit ) {
             final StarStringIterator it = new StarStringIterator(bindings, star);
 
+            //finding characteristic sets
+            List<ICharacteristicSet> css = new ArrayList<>();
+            for(ICharacteristicSet cs : characteristicSets) {
+                if(cs.matches(star)) css.add(cs);
+            }
+
             final List<Model> stars = new ArrayList<>();
             Set<String> processed = new HashSet<>();
             int found = 0;
-            long estSize = 0;
-            int skipped = 0;
+            double estSize = 0;
+            int skipped = 0, count = 0;
             while (it.hasNext()) {
                 StarString st = it.next();
+
                 String queryString = "select * where { ";
                 String subj = "<" + st.getSubject().toString() + ">";
                 if (subj.equals("<>"))
@@ -283,8 +189,7 @@ public class HdtBasedRequestProcessorForSPFs
 
                 final boolean hasMatches = results.hasNext();
 
-                boolean cacheContains = sizeCache.containsKey(queryString);
-                long size = offset;
+                double size = 0;
 
                 if (hasMatches) {
                     boolean atOffset;
@@ -294,6 +199,8 @@ public class HdtBasedRequestProcessorForSPFs
                         results.next();
                         skipped++;
                     }
+
+                    count = skipped;
 
                     // try to add `limit` triples to the result model
                     if (atOffset) {
@@ -305,31 +212,29 @@ public class HdtBasedRequestProcessorForSPFs
                             for (int j = 0; j < sz; j++) {
                                 triples.add(triples.asStatement(ts.get(j)));
                             }
-                            size++;
                             found++;
 
                             stars.add(triples);
                         }
-
-                        if (!cacheContains) {
-                            while (results.hasNext()) {
-                                size++;
-                                results.next();
-                            }
-
-                            sizeCache.put(queryString, size);
-                        }
                     }
-                } else if (!cacheContains) {
-                    sizeCache.put(queryString, 0L);
+
+                    count += found;
                 }
 
-                size = sizeCache.get(queryString);
+                if(count >= (limit)) {
+                    for (ICharacteristicSet cs : css) {
+                        size += cs.count(st);
+                    }
+                } else {
+                    size = count;
+                }
 
                 estSize += size;
+
+                if (found >= limit) break;
             }
 
-            final long estimatedValid = estSize;
+            final long estimatedValid = (long)estSize;
 
             boolean isLastPage = found < limit;
             return new StarPatternFragmentImpl(stars, estimatedValid, request.getFragmentURL(), request.getDatasetURL(), request.getPageNumber(), isLastPage);

@@ -88,8 +88,12 @@ public class SpfHttpRequestTask {
             StringBuilder valuesSb = new StringBuilder();
             Set<String> boundVars = bindings.get(0).keySet();
             ArrayList<String> varsInURL = new ArrayList<String>(Sets.intersection(varsInTP, boundVars));
+            List<String> vars = new ArrayList<>();
+            for(String str : varsInURL) {
+                vars.add("?"+tp.getVarString(str));
+            }
             valuesSb.append("(");
-            valuesSb.append(String.join(" ", varsInURL));
+            valuesSb.append(String.join(" ", vars));
             valuesSb.append("){");
 
             Set<ArrayList<String>> set = new HashSet<>();
@@ -148,14 +152,17 @@ public class SpfHttpRequestTask {
         isQuestionMarkAdded = appendTripleParam(sb, num, HttpRequestConfig.TRIPLES_PARAM,
                 isQuestionMarkAdded);
 
+        String str = "[";
         for (int i = 0; i < num; i++) {
             int j = i + 1;
-
-            isQuestionMarkAdded = appendUrlParam(sb, sp.getPredicateVar(i),
-                    "p"+j, isQuestionMarkAdded);
-            isQuestionMarkAdded = appendUrlParam(sb, sp.getObjectVar(i),
-                    "o"+j, isQuestionMarkAdded);
+            if(sp.getPredicateVar(i).getValue() != null)
+                str = str + "p"+j+"," + sp.getPredicateVar(i).getValue() + ";";
+            if(sp.getObjectVar(i).getValue() != null)
+                str = str + "o"+j+"," + sp.getObjectVar(i).getValue() + ";";
         }
+
+        str = str.substring(0, str.length()-1) + "]";
+        isQuestionMarkAdded = appendStringParam(sb, str, "star", isQuestionMarkAdded);
         if (!bindings.isEmpty()) {
             appendBindings(sb);
         }
@@ -221,6 +228,12 @@ public class SpfHttpRequestTask {
     private boolean appendTripleParam(StringBuilder sb, int num, String paramName,
                                       Boolean isQuestionMarkAdded) throws EncoderException {
         sb.append("&").append(paramName).append("=").append(num);
+        return isQuestionMarkAdded;
+    }
+
+    private boolean appendStringParam(StringBuilder sb, String str, String paramName,
+                                      Boolean isQuestionMarkAdded) throws EncoderException {
+        sb.append("&").append(paramName).append("=").append(urlCodec.encode(str));
         return isQuestionMarkAdded;
     }
 

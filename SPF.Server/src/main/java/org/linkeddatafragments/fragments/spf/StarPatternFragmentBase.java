@@ -109,24 +109,7 @@ public abstract class StarPatternFragmentBase extends LinkedDataFragmentBase
 
         datasetId.addProperty( CommonResources.HYDRA_SEARCH, triplePattern );
 
-        String template = "{?s,triples";
-        for(int i = 0; i < CommonResources.MAX_TPR; i++) {
-            int ii = i+1;
-            template += ",p"+ii+",o"+ii;
-
-            final Resource predMapping = model.createResource();
-            triplePattern.addProperty(HYDRA_MAPPING, predMapping);
-            predMapping.addProperty(HYDRA_VARIABLE, model.createLiteral("p"+ii));
-            predMapping.addProperty(HYDRA_PROPERTY, RDF_PREDICATE);
-
-            final Resource objMapping = model.createResource();
-            triplePattern.addProperty(HYDRA_MAPPING, objMapping);
-            objMapping.addProperty(HYDRA_VARIABLE, model.createLiteral("o"+ii));
-            objMapping.addProperty(HYDRA_PROPERTY, RDF_OBJECT);
-        }
-        template += "}";
-
-        triplePattern.addProperty(HYDRA_TEMPLATE, model.createLiteral(datasetURL + template));
+        triplePattern.addProperty(HYDRA_TEMPLATE, model.createLiteral(datasetURL + getTemplate()));
 
         final Resource subjectMapping = model.createResource();
         triplePattern.addProperty(HYDRA_MAPPING, subjectMapping);
@@ -137,6 +120,16 @@ public abstract class StarPatternFragmentBase extends LinkedDataFragmentBase
         triplePattern.addProperty(HYDRA_MAPPING, triplesMapping);
         triplesMapping.addProperty(HYDRA_VARIABLE, model.createLiteral("triples"));
         triplesMapping.addProperty(HYDRA_PROPERTY, XSD_INTEGER);
+
+        final Resource starMapping = model.createResource();
+        triplePattern.addProperty(HYDRA_MAPPING, starMapping);
+        starMapping.addProperty(HYDRA_VARIABLE, model.createLiteral("star"));
+        starMapping.addProperty(HYDRA_PROPERTY, XSD_STRING);
+
+        final Resource valuesMapping = model.createResource();
+        triplePattern.addProperty(HYDRA_MAPPING, valuesMapping);
+        valuesMapping.addProperty(HYDRA_VARIABLE, model.createLiteral("values"));
+        valuesMapping.addProperty(HYDRA_PROPERTY, XSD_STRING);
     }
 
     /**
@@ -144,13 +137,7 @@ public abstract class StarPatternFragmentBase extends LinkedDataFragmentBase
      * @return
      */
     public String getTemplate() {
-        String template = "{?s,triples";
-        for(int i = 0; i < CommonResources.MAX_TPR; i++) {
-            int ii = i+1;
-            template += ",p"+ii+",o"+ii;
-        }
-        template += "}";
-        return template;
+        return "{?s,triples,star,values}";
     }
 
     /**

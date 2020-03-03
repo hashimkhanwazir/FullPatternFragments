@@ -24,7 +24,6 @@ import org.linkeddatafragments.datasource.DataSourceFactory;
 import org.linkeddatafragments.datasource.DataSourceTypesRegistry;
 import org.linkeddatafragments.datasource.IDataSource;
 import org.linkeddatafragments.datasource.IDataSourceType;
-import org.linkeddatafragments.datasource.index.IndexDataSource;
 import org.linkeddatafragments.exceptions.DataSourceNotFoundException;
 import org.linkeddatafragments.fragments.FragmentRequestParserBase;
 import org.linkeddatafragments.fragments.ILinkedDataFragment;
@@ -49,18 +48,13 @@ public class LinkedDataFragmentServlet extends HttpServlet {
     private final Collection<String> mimeTypes = new ArrayList<>();
 
     private File getConfigFile(ServletConfig config) throws IOException {
-        System.out.println("getConfigFile");
         String path = config.getServletContext().getRealPath("/");
 
-        System.out.println("Path => " + path);
         if (path == null) {
-            // this can happen when running standalone
             path = System.getProperty("user.dir");
         }
         File cfg = new File("config-example.json");
-        // /home/amr/TPF/Server.Java/config-example.json
         if (config.getInitParameter(CFGFILE) != null) {
-            System.out.println("config.getInitParameter");
             cfg = new File(config.getInitParameter(CFGFILE));
         }
         if (!cfg.exists()) {
@@ -79,12 +73,10 @@ public class LinkedDataFragmentServlet extends HttpServlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         try {
-            System.out.println("loading Configuration File");
             // load the configuration
             File configFile = getConfigFile(servletConfig);
             config = new ConfigReader(new FileReader(configFile));
 
-            System.out.println("ConfigReader =>" + config.getMoleculesdatapath());
             // register data source types
             for (Entry<String, IDataSourceType> typeEntry : config.getDataSourceTypes().entrySet()) {
                 DataSourceTypesRegistry.register(typeEntry.getKey(),
@@ -137,12 +129,6 @@ public class LinkedDataFragmentServlet extends HttpServlet {
         String path = contextPath == null
                 ? requestURI
                 : requestURI.substring(contextPath.length());
-
-        if (path.equals("/") || path.isEmpty()) {
-            final String baseURL = FragmentRequestParserBase.extractBaseURL(request, config);
-            //  System.out.println("baseURL =======>" + baseURL);
-            return new IndexDataSource(baseURL, dataSources);
-        }
 
         String dataSourceName = path.substring(1);
         // System.out.println("dataSourceName =======> " + dataSourceName);
@@ -263,5 +249,5 @@ public class LinkedDataFragmentServlet extends HttpServlet {
         }
     }
 }
-     
-    
+
+

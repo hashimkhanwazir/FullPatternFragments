@@ -73,11 +73,27 @@ public class Experiment {
                                 input, QueryProcessingMethod.SPF, false, false, true);
                     } else if(method == QueryProcessingMethod.ENDPOINT) {
                         sqp = new SparqlQueryProcessor(queryStr, projectionElemList,
-                                input, QueryProcessingMethod.ENDPOINT, false, false, "http://130.226.98.100:8890/sparql");
+                                input, QueryProcessingMethod.ENDPOINT, false, false, "http://130.226.98.177:8890/sparql");
                     } else {
                         sqp = new SparqlQueryProcessor(triplePatterns, projectionElemList,
                                 input, method, false, false);
                     }
+
+                    /*sqp.processQuery();
+
+                    String sizeStr = "" + SparqlQueryProcessor.FRAGMENT_SIZES.get(0);
+                    for(int i = 1; i < SparqlQueryProcessor.FRAGMENT_SIZES.size(); i++) {
+                        sizeStr += "," + SparqlQueryProcessor.FRAGMENT_SIZES.get(i);
+                    }
+
+                    String tpsStr = "" + starPatterns.get(0).getNumberOfTriplePatterns();
+                    for(int i = 1; i < starPatterns.size(); i++) {
+                        tpsStr += "," + starPatterns.get(i).getNumberOfTriplePatterns();
+                    }
+
+                    String str = qf.getName() + ";" + sizeStr + ";" + tpsStr + ";" + SparqlQueryProcessor.NUMBER_OF_BINDINGS_RECEIVED;
+                    System.out.println(str);
+                    writer.write(str + "\n");*/
 
                     final Duration timeout = Duration.ofMinutes(5);
                     ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -138,7 +154,7 @@ public class Experiment {
                             input, QueryProcessingMethod.SPF, false, false, true);
                 } else if(method == QueryProcessingMethod.ENDPOINT) {
                     sqp = new SparqlQueryProcessor(queryStr, projectionElemList,
-                            input, QueryProcessingMethod.ENDPOINT, false, false, "http://130.226.98.100:8890/sparql");
+                            input, QueryProcessingMethod.ENDPOINT, false, false, "http://130.226.98.177:8890/sparql");
                 } else {
                     sqp = new SparqlQueryProcessor(triplePatterns, projectionElemList,
                             input, method, false, false);
@@ -182,6 +198,38 @@ public class Experiment {
         }
 
         if(executing == 0) System.exit(0);
+/*
+        String currSF = startingFragment + datasource;
+        QueryInput input = new QueryInput();
+        input.setStartFragment(currSF);
+        SparqlQueryProcessor sqp = new SparqlQueryProcessor(triplePatterns, projectionElemList,
+                input, QueryProcessingMethod.TPF, true, false);
+        sqp.processQuery();
+        sqp = new SparqlQueryProcessor(triplePatterns, projectionElemList,
+                input, QueryProcessingMethod.TPF, true, false);
+        sqp.processQuery();
+        int numberOfOutputBindings = sqp.getOutputBindings().size();
+        long tpfClientQPT = sqp.getQueryProcessingTime();
+        SparqlQueryProcessor sqp2 = new SparqlQueryProcessor(triplePatterns, projectionElemList,
+                input, QueryProcessingMethod.BRTPF, true, false);
+        sqp2.processQuery();
+        sqp2 = new SparqlQueryProcessor(triplePatterns, projectionElemList,
+                input, QueryProcessingMethod.BRTPF, true, false);
+        sqp2.processQuery();
+        int numberOfOutputBindings2 = sqp2.getOutputBindings().size();
+        long brtpfClientQPT = sqp2.getQueryProcessingTime();
+
+        SparqlQueryProcessor sqp3 = new SparqlQueryProcessor(starPatterns, projectionElemList,
+                input, QueryProcessingMethod.SPF, true, false, true);
+        sqp3.processQuery();
+        sqp3 = new SparqlQueryProcessor(starPatterns, projectionElemList,
+                input, QueryProcessingMethod.SPF, true, false, true);
+        sqp3.processQuery();
+        int numberOfOutputBindings3 = sqp3.getOutputBindings().size();
+        long spfClientQPT = sqp3.getQueryProcessingTime();
+
+        System.out.println(numberOfOutputBindings + " " + numberOfOutputBindings2 + " " + numberOfOutputBindings3);
+        System.out.println(Duration.ofMillis(tpfClientQPT) + "," + Duration.ofMillis(brtpfClientQPT) + "," + Duration.ofMillis(spfClientQPT));*/
     }
 
     private static void initializeQueryAndConfig(String queryFile)

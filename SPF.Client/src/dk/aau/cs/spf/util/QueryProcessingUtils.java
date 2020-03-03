@@ -39,13 +39,13 @@ public class QueryProcessingUtils {
         } else if (triplePatterns.size() == 1) {
             return triplePatterns.remove(0);
         }
-        int maxNoOfBV = 0;
+        int minUBV = 4;
         int indexOfNextTP = 0;
         for (int i = 0; i < triplePatterns.size(); i++) {
             TriplePattern currTP = triplePatterns.get(i);
-            int noOfBV = currTP.getNumberOfBoundVariables(boundVariables);
-            if (noOfBV > maxNoOfBV) {
-                maxNoOfBV = noOfBV;
+            int noOfV = currTP.getListOfVars().size() - currTP.getNumberOfBoundVariables(boundVariables);
+            if (noOfV < minUBV) {
+                minUBV = noOfV;
                 indexOfNextTP = i;
             }
         }
@@ -100,14 +100,17 @@ public class QueryProcessingUtils {
         isQuestionMarkAdded = appendTripleParam(sb, num, HttpRequestConfig.TRIPLES_PARAM,
                 isQuestionMarkAdded);
 
+        String str = "[";
         for (int i = 0; i < num; i++) {
             int j = i + 1;
-
-            isQuestionMarkAdded = appendUrlParamStar(sb, sp.getPredicateVar(i),
-                    "p" + j, isQuestionMarkAdded);
-            isQuestionMarkAdded = appendUrlParamStar(sb, sp.getObjectVar(i),
-                    "o" + j, isQuestionMarkAdded);
+            if(sp.getPredicateVar(i).getValue() != null)
+                str = str + "p"+j+"," + sp.getPredicateVar(i).getValue() + ";";
+            if(sp.getObjectVar(i).getValue() != null)
+                str = str + "o"+j+"," + sp.getObjectVar(i).getValue() + ";";
         }
+
+        str = str.substring(0, str.length()-1) + "]";
+        isQuestionMarkAdded = appendStringParam(sb, str, "star", isQuestionMarkAdded);
         return startingFragment + sb.toString();
     }
 
@@ -136,6 +139,12 @@ public class QueryProcessingUtils {
                 return true;
             }
         }
+        return isQuestionMarkAdded;
+    }
+
+    private static boolean appendStringParam(StringBuilder sb, String str, String paramName,
+                                      Boolean isQuestionMarkAdded) throws EncoderException {
+        sb.append("&").append(paramName).append("=").append(str);
         return isQuestionMarkAdded;
     }
 

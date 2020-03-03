@@ -23,12 +23,12 @@ public class TpfTripleHandler extends AbstractRDFHandler {
   private AtomicInteger numberOfTasks;
   private HashSet<Statement> processedTriples;
   private static final int HYDRA_NEXTPAGE_HASH =
-      new String("http://www.w3.org/ns/hydra/core#nextPage").hashCode();
+      new String("http://www.w3.org/ns/hydra/core#next").hashCode();
   private static final int DATASET_HASH = new String("http://rdfs.org/ns/void#Dataset").hashCode();
   private static final int SUBSET_HASH = new String("http://rdfs.org/ns/void#subset").hashCode();
 
   /**
-   * 
+   *
    */
   public TpfTripleHandler(ExecutorCompletionService<Boolean> executorCompletionService,
       TpfParseResponseTask parseResponseTask, ConcurrentHashMap<String, Content> httpResponseCache,
@@ -73,7 +73,7 @@ public class TpfTripleHandler extends AbstractRDFHandler {
 
   /*
    * (non-Javadoc)
-   * 
+   *
    * @see org.openrdf.rio.helpers.AbstractRDFHandler#handleStatement(org.openrdf.model.Statement)
    */
   @Override

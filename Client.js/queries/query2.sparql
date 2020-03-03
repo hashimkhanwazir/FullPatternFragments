@@ -1,0 +1,9 @@
+SELECT * WHERE {
+	?v0 <http://purl.org/goodrelations/includes> ?v1 .
+	<http://db.uwaterloo.ca/~galuc/wsdbm/Retailer6> <http://purl.org/goodrelations/offers> ?v0 .
+	<http://db.uwaterloo.ca/~galuc/wsdbm/Retailer6> <http://purl.org/goodrelations/name> ?v4 .
+	<http://db.uwaterloo.ca/~galuc/wsdbm/Retailer6> <http://schema.org/contactPoint> ?v5 .
+	?v0 <http://purl.org/goodrelations/price> ?v3 .
+	?v5 <http://xmlns.com/foaf/familyName> ?v6 .
+	?v5 <http://db.uwaterloo.ca/~galuc/wsdbm/userId> ?v7 .
+}

@@ -18,7 +18,6 @@ public class ConfigReader {
     private final Map<String, String> prefixes = new HashMap<>();
     private final String baseURL;
     private final String metadatapath;
-    private final String moleculesdatapath;
     /**
      * Creates a new configuration reader.
      *
@@ -28,10 +27,6 @@ public class ConfigReader {
         JsonObject root = new JsonParser().parse(configReader).getAsJsonObject();
         this.baseURL = root.has("baseURL") ? root.getAsJsonPrimitive("baseURL").getAsString() : null;
         this.metadatapath = root.has("metadatapath") ? root.getAsJsonPrimitive("metadatapath").getAsString() : null;
-        this.moleculesdatapath = root.has("moleculesdatapath") ? root.getAsJsonPrimitive("moleculesdatapath").getAsString() : null;
-        System.out.println("Hii");
-        System.out.println("ConfigReader.metadatapath" + this.metadatapath);
-        System.out.println("ConfigReader.baseURL" + this.baseURL);
         for (Entry<String, JsonElement> entry : root.getAsJsonObject("datasourcetypes").entrySet()) {
             final String className = entry.getValue().getAsString();
             dataSourceTypes.put(entry.getKey(), initDataSouceType(className) );
@@ -86,13 +81,6 @@ public class ConfigReader {
      */
     public String getMetadatapath() {
         return metadatapath;
-    }
-
-    /**
-     * @return the moleculesdatapath
-     */
-    public String getMoleculesdatapath() {
-        return moleculesdatapath;
     }
 
     /**

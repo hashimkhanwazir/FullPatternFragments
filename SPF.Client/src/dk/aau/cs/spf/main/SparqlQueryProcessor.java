@@ -264,6 +264,8 @@ public class SparqlQueryProcessor {
         else
             initializeOrderOfStarPatterns();
 
+        //todo
+
         initializeProcessingQuery();
         while (numberOfTasks.get() != 0) {
             executorCompletionService.take();

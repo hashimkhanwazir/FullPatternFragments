@@ -1,8 +1,11 @@
 package org.linkeddatafragments.datasource;
 
 import com.google.gson.JsonObject;
+import org.linkeddatafragments.datasource.hdt.HdtDataSource;
 import org.linkeddatafragments.exceptions.DataSourceCreationException;
 import org.linkeddatafragments.exceptions.UnknownDataSourceTypeException;
+
+import java.io.IOException;
 
 
 public class DataSourceFactory {
@@ -25,6 +28,10 @@ public class DataSourceFactory {
             throw new UnknownDataSourceTypeException(typeName);
 
         return type.createDataSource( title, description, settings );
+    }
+
+    public static IDataSource createMoleculeDatasource(String path) throws IOException {
+        return new HdtDataSource(path, "Molecule HDT file", path);
     }
 
 }

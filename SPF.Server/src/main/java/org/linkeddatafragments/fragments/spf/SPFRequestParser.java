@@ -12,7 +12,9 @@ import org.linkeddatafragments.util.Tuple;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SPFRequestParser<ConstantTermType,NamedVarType,AnonVarType>
         extends FragmentRequestParserBase {
@@ -86,6 +88,8 @@ public class SPFRequestParser<ConstantTermType,NamedVarType,AnonVarType>
          * @return
          */
         public IStarPatternElement<ConstantTermType,NamedVarType,AnonVarType> getSubject() {
+            if(request.getParameter("s") == null && !(request.getParameter("subject") == null))
+                return getParameterAsStarPatternElement("subject");
             return getParameterAsStarPatternElement("s");
         }
 
@@ -98,11 +102,24 @@ public class SPFRequestParser<ConstantTermType,NamedVarType,AnonVarType>
             List<Tuple<IStarPatternElement<ConstantTermType,NamedVarType,AnonVarType>,
                     IStarPatternElement<ConstantTermType,NamedVarType,AnonVarType>>> lst = new ArrayList<>();
 
+            String starString = request.getParameter("star").replace("[", "").replaceAll("]", "");
+            String[] elements = starString.split(";");
+
+            Map<String, String> map = new HashMap<>();
+
+            for(String s : elements) {
+                String[] ele = s.split(",");
+                map.put(ele[0], ele[1]);
+            }
+
             int triples = getNumTriples();
             for(int i = 0; i < triples; i++) {
                 int n = i+1;
-                lst.add(new Tuple<>(getParameterAsStarPatternElement("p"+n),
-                        getParameterAsStarPatternElement("o"+n)));
+                String p = map.getOrDefault("p"+n, "");
+                String o = map.getOrDefault("o"+n, "");
+
+                lst.add(new Tuple<>(getStringAsStarPatternElement(p),
+                        getStringAsStarPatternElement(o)));
             }
 
             return lst;
@@ -113,6 +130,12 @@ public class SPFRequestParser<ConstantTermType,NamedVarType,AnonVarType>
             return parseAsSetOfBindings(
                     request.getParameter("values"),
                     foundVariables);
+        }
+
+        private IStarPatternElement<ConstantTermType,NamedVarType,AnonVarType>
+        getStringAsStarPatternElement(final String ele )
+        {
+            return elmtParser.parseIntoStarPatternElement( ele );
         }
 
         /**

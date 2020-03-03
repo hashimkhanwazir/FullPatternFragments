@@ -27,7 +27,7 @@ public class StarHandler extends AbstractRDFHandler {
     private AtomicInteger numberOfTasks;
     private HashSet<List<Statement>> processedStars;
     private static final int HYDRA_NEXTPAGE_HASH =
-            new String("http://www.w3.org/ns/hydra/core#nextPage").hashCode();
+            new String("http://www.w3.org/ns/hydra/core#next").hashCode();
     private static final int DATASET_HASH = new String("http://rdfs.org/ns/void#Dataset").hashCode();
     private static final int SUBSET_HASH = new String("http://rdfs.org/ns/void#subset").hashCode();
 

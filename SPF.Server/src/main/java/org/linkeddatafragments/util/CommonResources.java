@@ -134,8 +134,7 @@ public class CommonResources {
         return ResourceFactory.createProperty(uri);
     }
 
-    public static int MAX_TPR = 10;
-
     public final static String XSD = "http://www.w3.org/2001/XMLSchema#";
     public final static Property XSD_INTEGER = createProperty(XSD + "integer");
+    public final static Property XSD_STRING = createProperty(XSD + "string");
 }

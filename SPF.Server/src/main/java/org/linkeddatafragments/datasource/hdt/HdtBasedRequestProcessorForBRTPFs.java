@@ -116,9 +116,9 @@ public class HdtBasedRequestProcessorForBRTPFs
                 final List<Var> foundVariables,
                 final long offset,
                 final long limit ) {
-            TripleElement _subject = subject.isVariable() ? parseAsResource(subject.asNamedVariable()) : parseAsResource(subject.asConstantTerm().toString());
+            TripleElement _subject = subject.isVariable() ? parseAsResource("?subject") : parseAsResource(subject.asConstantTerm().toString());
             TripleElement _predicate = predicate.isVariable() ? parseAsProperty(predicate.asNamedVariable()) : parseAsProperty(predicate.asConstantTerm().toString());
-            TripleElement _object = object.isVariable() ? parseAsNode(object.asNamedVariable()) : parseAsNode(object.asConstantTerm().toString());
+            TripleElement _object = object.isVariable() ? parseAsNode("?object") : parseAsNode(object.asConstantTerm().toString());
 
             final TripleIDCachingIterator it = new TripleIDCachingIterator(
                     bindings, foundVariables,
