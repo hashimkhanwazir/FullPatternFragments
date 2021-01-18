@@ -27,49 +27,54 @@
 
 package org.rdfhdt.hdt.hdt;
 
+import org.apache.jena.sparql.engine.binding.Binding;
+import org.linkeddatafragments.characteristicset.ICharacteristicSet;
+import org.linkeddatafragments.util.StarString;
 import org.rdfhdt.hdt.dictionary.Dictionary;
 import org.rdfhdt.hdt.header.Header;
 import org.rdfhdt.hdt.listener.ProgressListener;
 import org.rdfhdt.hdt.rdf.RDFAccess;
+import org.rdfhdt.hdt.triples.IteratorStarString;
 import org.rdfhdt.hdt.triples.Triples;
 
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 
 
 /**
  * Interface that specifies the methods for a HDT implementation
- * 
+ *
  * @author mario.arias
- * 
+ *
  */
 public interface HDT extends RDFAccess,Closeable {
 
 	/**
 	 * Gets the header of the HDT
-	 * 
+	 *
 	 * @return Header
 	 */
 	Header getHeader();
 
 	/**
 	 * Gets the dictionary of the HDT
-	 * 
+	 *
 	 * @return Dictionary
 	 */
 	Dictionary getDictionary();
 
 	/**
 	 * Gets the triples of the HDT
-	 * 
+	 *
 	 * @return Triples
 	 */
 	Triples getTriples();
-		
+
 	/**
 	 * Saves to OutputStream in HDT format
-	 * 
+	 *
 	 * @param output
 	 *            The OutputStream to save to
 	 */
@@ -77,22 +82,24 @@ public interface HDT extends RDFAccess,Closeable {
 
 	/**
 	 * Saves to a file in HDT format
-	 * 
-	 * @param output
-	 *            The OutputStream to save to
+	 *
 	 */
 	void saveToHDT(String fileName, ProgressListener listener) throws IOException;
-	
+
 	/**
 	 * Returns the size of the Data Structure in bytes.
 	 * @return
 	 */
 	long size();
-	
+
 	/**
 	 * Get the Base URI for the Dataset.
 	 * @return
 	 */
 	String getBaseURI();
+
+	IteratorStarString searchStar(StarString star);
+
+	IteratorStarString searchStarBindings(StarString star, List<Binding> bindings, List<ICharacteristicSet> characteristicSets);
 
 }

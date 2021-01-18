@@ -1,5 +1,8 @@
 package dk.aau.cs.spf.util;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 import dk.aau.cs.spf.model.*;
@@ -105,8 +108,12 @@ public class QueryProcessingUtils {
             int j = i + 1;
             if(sp.getPredicateVar(i).getValue() != null)
                 str = str + "p"+j+"," + sp.getPredicateVar(i).getValue() + ";";
+            else
+                str = str + "p"+j+"," + sp.getPredicateVarName(i) + ";";
             if(sp.getObjectVar(i).getValue() != null)
                 str = str + "o"+j+"," + sp.getObjectVar(i).getValue() + ";";
+            else
+                str = str + "o"+j+"," + sp.getObjectVarName(i) + ";";
         }
 
         str = str.substring(0, str.length()-1) + "]";
@@ -144,22 +151,30 @@ public class QueryProcessingUtils {
 
     private static boolean appendStringParam(StringBuilder sb, String str, String paramName,
                                       Boolean isQuestionMarkAdded) throws EncoderException {
-        sb.append("&").append(paramName).append("=").append(str);
+        sb.append("&").append(paramName).append("=").append(urlCodec.encode(str));
         return isQuestionMarkAdded;
+    }
+
+    private static String encodeValue(String value) {
+        try {
+            return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
+        } catch (UnsupportedEncodingException ex) {
+            throw new RuntimeException(ex.getCause());
+        }
     }
 
     private static boolean appendUrlParamStar(StringBuilder sb, Var var, String paramName,
                                               Boolean isQuestionMarkAdded) throws EncoderException {
         if (isQuestionMarkAdded) {
             if (!var.isAnonymous()) {
-                sb.append("&").append(paramName).append("=");
+                sb.append("&").append(paramName).append("=?").append(var.getName());
             } else if (var.isAnonymous() && var.isConstant()) {
                 sb.append("&").append(paramName).append("=")
                         .append(urlCodec.encode(var.getValue().stringValue()));
             }
         } else {
             if (!var.isAnonymous()) {
-                sb.append("?").append(paramName).append("=");
+                sb.append("?").append(paramName).append("=?").append(var.getName());
                 return true;
             } else if (var.isAnonymous() && var.isConstant()) {
                 sb.append("?").append(paramName).append("=")

@@ -157,8 +157,12 @@ public class SpfHttpRequestTask {
             int j = i + 1;
             if(sp.getPredicateVar(i).getValue() != null)
                 str = str + "p"+j+"," + sp.getPredicateVar(i).getValue() + ";";
+            else
+                str = str + "p"+j+"," + sp.getPredicateVarName(i) + ";";
             if(sp.getObjectVar(i).getValue() != null)
                 str = str + "o"+j+"," + sp.getObjectVar(i).getValue() + ";";
+            else
+                str = str + "o"+j+"," + sp.getObjectVarName(i) + ";";
         }
 
         str = str.substring(0, str.length()-1) + "]";
@@ -207,14 +211,16 @@ public class SpfHttpRequestTask {
                                    Boolean isQuestionMarkAdded) throws EncoderException {
         if (isQuestionMarkAdded) {
             if (!var.isAnonymous()) {
-                sb.append("&").append(paramName).append("=");
+                sb.append("&").append(paramName).append("=")
+                        .append(urlCodec.encode("?" + var.getName()));
             } else if (var.isAnonymous() && var.isConstant()) {
                 sb.append("&").append(paramName).append("=")
                         .append(urlCodec.encode(var.getValue().stringValue()));
             }
         } else {
             if (!var.isAnonymous()) {
-                sb.append("?").append(paramName).append("=");
+                sb.append("?").append(paramName).append("=")
+                        .append(urlCodec.encode("?" + var.getName()));
                 return true;
             } else if (var.isAnonymous() && var.isConstant()) {
                 sb.append("?").append(paramName).append("=")

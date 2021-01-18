@@ -57,6 +57,7 @@ public class SpfHttpRequestThread implements Callable<Boolean> {
             SpfResponseParserThread rpThread = new SpfResponseParserThread(prTask, executorCompletionService,
                     httpResponseCache, numberOfTasks);
             executorCompletionService.submit(rpThread);
+
         }
         return true;
     }

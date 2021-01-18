@@ -66,42 +66,7 @@
             return HDTManager.getInstance().doLoadHDT(hdtFileName, null);
         }
 
-        /**
-         * Create an HDT++ file from an HDT file
-         * @param hdtFileName
-         * @return
-         * @throws IOException
-         */
-        public static HDT mapHDTppFromHDT(String hdtFileName) throws IOException {
-            return HDTManager.getInstance().doMapHDTppFromHDT(hdtFileName, null);
-        }
 
-        /**
-         * Map an HDT++ file into memory to use it. This method does not load the whole file into memory,
-         * it lets the OS to handle memory pages as desired. Therefore it uses less memory but can be slower
-         * for querying because it needs to load those blocks from disk.
-         * NOTE: Use this method to go through all elements. If you plan to do queries, use mapIndexedHDT() instead.
-         * @param hdtFileName
-         * @param listener Listener to get notified of loading progress. Can be null if no notifications needed.
-         * @return
-         * @throws IOException
-         */
-        public static HDT mapHDTpp(String hdtFileName, ProgressListener listener) throws IOException {
-            return HDTManager.getInstance().doMapHDTpp(hdtFileName, listener);
-        }
-
-        /**
-         * Map an HDT++ file into memory to use it. This method does not load the whole file into memory,
-         * it lets the OS to handle memory pages as desired. Therefore it uses less memory but can be slower
-         * for querying because it needs to load those blocks from disk.
-         * NOTE: Use this method to go through all elements. If you plan to do queries, use mapIndexedHDT() instead.
-         * @param hdtFileName
-         * @return
-         * @throws IOException
-         */
-        public static HDT mapHDTpp(String hdtFileName) throws IOException {
-            return HDTManager.getInstance().doMapHDTpp(hdtFileName, null);
-        }
 
         /**
          * Map an HDT file into memory to use it. This method does not load the whole file into memory,
@@ -151,29 +116,6 @@
          */
         public static HDT loadHDT(InputStream hdtFile) throws IOException {
             return HDTManager.getInstance().doLoadHDT(hdtFile, null);
-        }
-
-        /**
-         * Load an HDT from an InputStream (File, socket...). NOTE: Use this method to go through all elements. If you plan
-         * to do queries, use loadIndexedHDT() instead.
-         * @param hdtFile
-         * @param listener Listener to get notified of loading progress. Can be null if no notifications needed.
-         * @return
-         * @throws IOException
-         */
-        public static HDT loadHDTpp(String hdtFile, ProgressListener listener) throws IOException {
-            return HDTManager.getInstance().doLoadHDTpp(hdtFile, listener);
-        }
-
-        /**
-         * Load an HDT from an InputStream (File, socket...). NOTE: Use this method to go through all elements. If you plan
-         * to do queries, use loadIndexedHDT() instead.
-         * @param hdtFile
-         * @return
-         * @throws IOException
-         */
-        public static HDT loadHDTpp(String hdtFile) throws IOException {
-            return HDTManager.getInstance().doLoadHDTpp(hdtFile, null);
         }
 
 
@@ -290,10 +232,8 @@
         // Abstract methods for the current implementation
         protected abstract HDTOptions doReadOptions(String file) throws IOException;
         protected abstract HDT doLoadHDT(String hdtFileName, ProgressListener listener) throws IOException;
-        protected abstract HDT doLoadHDTpp(String hdtFileName, ProgressListener listener) throws IOException;
         protected abstract HDT doLoadHDT(InputStream hdtFile, ProgressListener listener) throws IOException;
         protected abstract HDT doMapHDT(String hdtFileName, ProgressListener listener) throws IOException;
-        protected abstract HDT doMapHDTpp(String hdtFileName, ProgressListener listener) throws IOException;
         protected abstract HDT doLoadIndexedHDT(String hdtFileName, ProgressListener listener) throws IOException;
         protected abstract HDT doLoadIndexedHDT(InputStream hdtFileName, ProgressListener listener) throws IOException;
         protected abstract HDT doMapIndexedHDT(String hdtFileName, ProgressListener listener) throws IOException;
@@ -302,5 +242,4 @@
         protected abstract HDT doGenerateHDT(Iterator<TripleString> iterator, String baseURI,	HDTOptions hdtFormat, ProgressListener listener) throws IOException;
         protected abstract TripleWriter doGetHDTWriter(OutputStream out, String baseURI, HDTOptions hdtFormat) throws IOException;
         protected abstract TripleWriter doGetHDTWriter(String outFile, String baseURI, HDTOptions hdtFormat) throws IOException;
-        protected abstract HDT doMapHDTppFromHDT(String hdtFilename, ProgressListener listener) throws IOException;
     }

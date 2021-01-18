@@ -4,7 +4,6 @@ import org.rdfhdt.hdt.enums.RDFNotation;
 import org.rdfhdt.hdt.exceptions.NotFoundException;
 import org.rdfhdt.hdt.exceptions.ParserException;
 import org.rdfhdt.hdt.hdt.impl.HDTImpl;
-import org.rdfhdt.hdt.hdt.impl.HDTPpImpl;
 import org.rdfhdt.hdt.hdt.impl.TempHDTImporterOnePass;
 import org.rdfhdt.hdt.hdt.impl.TempHDTImporterTwoPass;
 import org.rdfhdt.hdt.hdt.writer.TripleWriterHDT;
@@ -34,7 +33,7 @@ public class HDTManagerImpl extends HDTManager {
 		hdt.loadFromHDT(hdtFileName, listener);
 		return hdt;
 	}
-	
+
 	@Override
 	protected HDT doMapHDT(String hdtFileName, ProgressListener listener) throws IOException {
 		HDTPrivate hdt = new HDTImpl(new HDTSpecification());
@@ -55,28 +54,6 @@ public class HDTManagerImpl extends HDTManager {
 		HDTPrivate hdt = new HDTImpl(new HDTSpecification());
 		hdt.loadFromHDT(hdtFileName, listener);
 		hdt.loadOrCreateIndex(listener);
-		return hdt;
-	}
-
-	@Override
-	public HDT doMapHDTppFromHDT(String hdtFilename, ProgressListener listener) throws IOException {
-		HDTPpImpl hdt = new HDTPpImpl(new HDTSpecification());
-		hdt.mapFromHDT(new File(hdtFilename), 0, listener);
-		hdt.makeHDTpp();
-		return hdt;
-	}
-
-	@Override
-	protected HDT doMapHDTpp(String hdtFileName, ProgressListener listener) throws IOException {
-		HDTPrivate hdt = new HDTPpImpl(new HDTSpecification());
-		hdt.mapFromHDT(new File(hdtFileName), 0, listener);
-		return hdt;
-	}
-
-	@Override
-	protected HDT doLoadHDTpp(String hdtFileName, ProgressListener listener) throws IOException {
-		HDTPrivate hdt = new HDTPpImpl(new HDTSpecification());
-		hdt.loadFromHDT(hdtFileName, listener);
 		return hdt;
 	}
 
@@ -112,24 +89,24 @@ public class HDTManagerImpl extends HDTManager {
 		} else {
 			loader = new TempHDTImporterOnePass();
 		}
-		
+
 		// Create TempHDT
 		TempHDT modHdt = loader.loadFromRDF(spec, rdfFileName, baseURI, rdfNotation, listener);
-		
+
 		// Convert to HDT
-		HDTImpl hdt = new HDTImpl(spec); 
+		HDTImpl hdt = new HDTImpl(spec);
 		hdt.loadFromModifiableHDT(modHdt, listener);
 		hdt.populateHeaderStructure(modHdt.getBaseURI());
-		
+
 		// Add file size to Header
 		try {
 			long originalSize = HeaderUtil.getPropertyLong(modHdt.getHeader(), "_:statistics", HDTVocabulary.ORIGINAL_SIZE);
 			hdt.getHeader().insert("_:statistics", HDTVocabulary.ORIGINAL_SIZE, originalSize);
 		} catch (NotFoundException e) {
 		}
-		
+
 		modHdt.close();
-		
+
 		return hdt;
 	}
 
@@ -140,21 +117,21 @@ public class HDTManagerImpl extends HDTManager {
 
 		// Create TempHDT
 		TempHDT modHdt = loader.loadFromTriples(spec, triples, baseURI, listener);
-		
+
 		// Convert to HDT
-		HDTImpl hdt = new HDTImpl(spec); 
+		HDTImpl hdt = new HDTImpl(spec);
 		hdt.loadFromModifiableHDT(modHdt, listener);
 		hdt.populateHeaderStructure(modHdt.getBaseURI());
-		
+
 		// Add file size to Header
 		try {
 			long originalSize = HeaderUtil.getPropertyLong(modHdt.getHeader(), "_:statistics", HDTVocabulary.ORIGINAL_SIZE);
 			hdt.getHeader().insert("_:statistics", HDTVocabulary.ORIGINAL_SIZE, originalSize);
 		} catch (NotFoundException e) {
 		}
-		
+
 		modHdt.close();
-		
+
 		return hdt;
 	}
 

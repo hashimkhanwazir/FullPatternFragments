@@ -6,6 +6,7 @@ import org.rdfhdt.hdt.triples.TripleID;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 
@@ -14,6 +15,8 @@ public class StarID implements Comparable<StarID>, Serializable {
 
     private int subject;
     private List<Tuple<Integer, Integer>> triples = new ArrayList<>();
+    private String subjVar = "";
+    private List<Tuple<String, String>> vars = new ArrayList<>();
 
     /**
      * Basic constructor
@@ -25,6 +28,20 @@ public class StarID implements Comparable<StarID>, Serializable {
     public StarID(int subject, List<Tuple<Integer, Integer>> triples) {
         this.subject = subject;
         this.triples = triples;
+    }
+
+    public StarID(List<TripleID> lst) {
+        this.subject = (int)lst.get(0).getSubject();
+        this.triples = new ArrayList<>();
+        for(TripleID tid : lst) {
+            this.triples.add(new Tuple<>((int) tid.getPredicate(), (int) tid.getObject()));
+        }
+    }
+
+    public StarID(int subject, List<Tuple<Integer, Integer>> triples, String subjVar, List<Tuple<String, String>> vars) {
+        this(subject, triples);
+        this.subjVar = subjVar;
+        this.vars = vars;
     }
 
     public StarID(int subject) {
@@ -39,6 +56,8 @@ public class StarID implements Comparable<StarID>, Serializable {
         super();
         subject = other.subject;
         triples = new ArrayList<>(other.triples);
+        subjVar = other.subjVar;
+        vars = new ArrayList<>(other.vars);
     }
 
     public int size() {
@@ -84,8 +103,34 @@ public class StarID implements Comparable<StarID>, Serializable {
         }
     }
 
+    public TripleID remove(int pos) {
+        vars.remove(pos);
+        Tuple<Integer, Integer> tpl = triples.remove(pos);
+        return new TripleID(subject, tpl.x, tpl.y);
+    }
+
+    public String getSubjVar() {
+        return subjVar;
+    }
+
+    public String getPredVar(int pos) {
+        return vars.get(pos).x;
+    }
+
+    public String getObjVar(int pos) {
+        return vars.get(pos).y;
+    }
+
+    public boolean isEmpty() {
+        return triples.isEmpty();
+    }
+
     public List<Tuple<Integer, Integer>> getTriples() {
         return triples;
+    }
+
+    public Tuple<String, String> getVar(int pos) {
+        return vars.get(pos);
     }
 
     public void setTriples(List<Tuple<Integer, Integer>> triples) {
@@ -135,16 +180,13 @@ public class StarID implements Comparable<StarID>, Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        StarID starID = (StarID) o;
-        return subject == starID.subject &&
-                Objects.equals(triples, starID.triples);
+        return this.hashCode() == o.hashCode();
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(subject, triples);
+        return Objects.hash(subject, new HashSet<>(triples));
     }
 
     /**

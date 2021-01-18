@@ -43,6 +43,21 @@ public class StarString {
         return new TripleString(subject, t.x, t.y);
     }
 
+    public TripleString getTripleString(int pos) {
+        Tuple<CharSequence, CharSequence> t = triples.get(pos);
+        return new TripleString(subject.toString().startsWith("?")? "" : subject,
+                t.x.toString().startsWith("?")? "" : t.x,
+                t.y.toString().startsWith("?")? "" : t.y);
+    }
+
+    public ArrayList<TripleString> toTripleStrings() {
+        ArrayList<TripleString> ret = new ArrayList<>();
+        for (Tuple<CharSequence, CharSequence> t : triples) {
+            ret.add(new TripleString(subject, t.x, t.y));
+        }
+        return ret;
+    }
+
     public List<CharSequence> getPredicates() {
         List<CharSequence> ret = new ArrayList<>();
 
@@ -78,19 +93,28 @@ public class StarString {
     }
 
     public StarID toStarID(Dictionary dictionary) {
-        int subj = dictionary.stringToId(subject, TripleComponentRole.SUBJECT);
+        int subj = (subject.equals("") || subject.charAt(0) == '?')? 0 : (int)dictionary.stringToId(subject, TripleComponentRole.SUBJECT);
+        String subjVar = (subject.equals("") || subject.charAt(0) == '?')? subject.toString() : "";
+
+        List<Tuple<String, String>> vars = new ArrayList<>();
         List<Tuple<Integer, Integer>> lst = new ArrayList<>();
         int size = size();
         for(int i = 0; i < size; i++) {
             TripleString tpl = getTriple(i);
             Tuple<Integer, Integer> t = new Tuple<>(
-                    dictionary.stringToId(tpl.getPredicate(), TripleComponentRole.PREDICATE),
-                    dictionary.stringToId(tpl.getObject(), TripleComponentRole.OBJECT)
+                    (tpl.getPredicate().equals("") || tpl.getPredicate().charAt(0) == '?')? 0 : (int)dictionary.stringToId(tpl.getPredicate(), TripleComponentRole.PREDICATE),
+                    (tpl.getObject().equals("") || tpl.getObject().charAt(0) == '?')? 0 : (int)dictionary.stringToId(tpl.getObject(), TripleComponentRole.OBJECT)
             );
             lst.add(t);
+
+            Tuple<String, String> t1 = new Tuple<>(
+                    tpl.getPredicate().charAt(0) == '?'? tpl.getPredicate().toString() : "",
+                    tpl.getObject().charAt(0) == '?'? tpl.getObject().toString() : ""
+            );
+            vars.add(t1);
         }
 
-        return new StarID(subj, lst);
+        return new StarID(subj, lst, subjVar, vars);
     }
 
     public void updateField(String name, String val) {
@@ -139,5 +163,44 @@ public class StarString {
     public void clear() {
         triples.clear();
         subject = "";
+    }
+
+    public List<String> getVariables() {
+        List<String> vars = new ArrayList<>();
+        if(subject.toString().startsWith("?"))
+            vars.add(subject.toString());
+
+        for(Tuple<CharSequence, CharSequence> tpl : triples) {
+            String pred = tpl.x.toString(), obj = tpl.y.toString();
+            if(pred.startsWith("?")) vars.add(pred);
+            if(obj.startsWith("?")) vars.add(obj);
+        }
+
+        return vars;
+    }
+
+    public int numBoundVars(List<String> bound) {
+        int bv = 0;
+        if(bound.contains(subject.toString())) bv++;
+
+        for(Tuple<CharSequence, CharSequence> tpl : triples) {
+            String pred = tpl.x.toString(), obj = tpl.y.toString();
+            if(bound.contains(pred)) bv++;
+            if(bound.contains(obj)) bv++;
+        }
+
+        return bv;
+    }
+
+    public int numBoundSO(List<String> bound) {
+        int bso = 0;
+        if(bound.contains(subject.toString()) || !subject.toString().startsWith("?")) bso++;
+
+        for(Tuple<CharSequence, CharSequence> tpl : triples) {
+            String obj = tpl.y.toString();
+            if(bound.contains(obj) || !obj.startsWith("?")) bso++;
+        }
+
+        return bso;
     }
 }

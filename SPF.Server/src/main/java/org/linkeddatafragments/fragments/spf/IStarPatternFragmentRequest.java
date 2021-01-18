@@ -37,4 +37,6 @@ public interface IStarPatternFragmentRequest<ConstantTermType,NamedVarType,AnonV
     int getTriples();
 
     List<Binding> getBindings();
+
+    long getRequestHash();
 }

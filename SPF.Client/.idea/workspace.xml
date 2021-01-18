@@ -1,0 +1,481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="72f1201d-5b7e-4dd0-8289-4a751fb8d69d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/dk/aau/cs/spf/task/StarHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/dk/aau/cs/spf/util/Tuple.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/LICENSE" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/target/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FUSProjectUsageTrigger">
+    <session id="2072492463">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="26" />
+          <entry key="project.open.time.0" value="5" />
+          <entry key="project.open.time.1" value="10" />
+          <entry key="project.open.time.14" value="1" />
+          <entry key="project.open.time.15" value="1" />
+          <entry key="project.open.time.2" value="6" />
+          <entry key="project.open.time.22" value="1" />
+          <entry key="project.open.time.3" value="2" />
+          <entry key="project.open.time.38" value="1" />
+          <entry key="project.open.time.4" value="1" />
+          <entry key="project.opened" value="28" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="java" value="21" />
+          <entry key="sparql" value="4" />
+          <entry key="xml" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="JAVA" value="21" />
+          <entry key="PLAIN_TEXT" value="4" />
+          <entry key="XML" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="java" value="720" />
+          <entry key="sparql" value="15" />
+          <entry key="xml" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.edit">
+        <counts>
+          <entry key="JAVA" value="720" />
+          <entry key="PLAIN_TEXT" value="15" />
+          <entry key="XML" value="10" />
+        </counts>
+      </usages-collector>
+    </session>
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/main/BrTPFClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="615">
+              <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/main/Experiment.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="255">
+              <caret line="60" column="17" lean-forward="true" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/main/SparqlQueryProcessor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2280">
+              <caret line="177" selection-start-line="177" selection-end-line="177" />
+              <folding>
+                <element signature="e#14660#14661#0" expanded="true" />
+                <element signature="e#14733#14734#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/callable/InitialHttpRequestThread.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="870">
+              <caret line="70" column="37" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="29" column="88" selection-start-line="29" selection-start-column="88" selection-end-line="29" selection-end-column="88" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/query.sparql">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="105">
+              <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>System.out.println</find>
+    </findStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/dk/aau/cs/spf/main/BrTPFClient.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/dk/aau/cs/spf/callable/SpfHttpRequestThread.java" />
+        <option value="$PROJECT_DIR$/src/dk/aau/cs/spf/util/QueryProcessingUtils.java" />
+        <option value="$PROJECT_DIR$/src/dk/aau/cs/spf/task/SpfHttpRequestTask.java" />
+        <option value="$PROJECT_DIR$/src/dk/aau/cs/spf/callable/InitialHttpRequestThread.java" />
+        <option value="$PROJECT_DIR$/query.sparql" />
+        <option value="$PROJECT_DIR$/src/dk/aau/cs/spf/main/Experiment.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="MavenProjectNavigator">
+    <treeState>
+      <expand>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="SPF-client" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+        </path>
+        <path>
+          <item name="" type="16c1761:MavenProjectsStructure$RootNode" />
+          <item name="SPF-client" type="9519ce18:MavenProjectsStructure$ProjectNode" />
+          <item name="Lifecycle" type="58874e2:MavenProjectsStructure$LifecycleNode" />
+        </path>
+      </expand>
+      <select />
+    </treeState>
+  </component>
+  <component name="MavenRunner">
+    <option name="skipTests" value="true" />
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="64" />
+    <option name="y" value="30" />
+    <option name="width" value="1856" />
+    <option name="height" value="1050" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="spf" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="spf" type="462c0819:PsiDirectoryNode" />
+              <item name="callable" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="spf" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="spf" type="462c0819:PsiDirectoryNode" />
+              <item name="task" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="spf" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="watdiv_queries" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="watdiv_queries" type="462c0819:PsiDirectoryNode" />
+              <item name="client0" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="SPF-client" type="b2602c69:ProjectViewProjectNode" />
+              <item name="SPF.Client" type="462c0819:PsiDirectoryNode" />
+              <item name="watdiv_queries" type="462c0819:PsiDirectoryNode" />
+              <item name="client0" type="462c0819:PsiDirectoryNode" />
+              <item name="paths" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1604916780159" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.Unnamed">
+    <configuration name="Experiments" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="dk.aau.cs.spf.main.Experiment" />
+      <module name="SPF-client" />
+      <option name="PROGRAM_PARAMETERS" value="http://130.226.98.174:8080/watdiv10B watdiv_queries/client0 SPF results_stars 128 0 watdiv10B paths" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Unnamed" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="dk.aau.cs.spf.main.BrTPFClient" />
+      <module name="SPF-client" />
+      <option name="PROGRAM_PARAMETERS" value="-f http://130.226.98.174:8080/watdiv10B -q query.sparql" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.Unnamed" />
+      <item itemvalue="Application.Experiments" />
+    </list>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="72f1201d-5b7e-4dd0-8289-4a751fb8d69d" name="Default Changelist" comment="" />
+      <created>1584544188861</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1584544188861</updated>
+      <workItem from="1584544192695" duration="921000" />
+      <workItem from="1585925142328" duration="100000" />
+      <workItem from="1594722653362" duration="1294000" />
+      <workItem from="1594725646003" duration="833000" />
+      <workItem from="1595596048194" duration="8000" />
+      <workItem from="1595596753987" duration="4814000" />
+      <workItem from="1595855026539" duration="865000" />
+      <workItem from="1595932096406" duration="1579000" />
+      <workItem from="1596526238066" duration="129000" />
+      <workItem from="1597836705373" duration="61000" />
+      <workItem from="1597836773074" duration="1000" />
+      <workItem from="1598204461334" duration="30000" />
+      <workItem from="1598258486454" duration="88000" />
+      <workItem from="1601062528006" duration="63000" />
+      <workItem from="1601903424801" duration="59000" />
+      <workItem from="1601978655665" duration="1286000" />
+      <workItem from="1602027289109" duration="83000" />
+      <workItem from="1602027470244" duration="647000" />
+      <workItem from="1604717258258" duration="2538000" />
+      <workItem from="1607441346086" duration="500000" />
+      <workItem from="1608115471957" duration="3956000" />
+      <workItem from="1608643590906" duration="875000" />
+      <workItem from="1609169541896" duration="319000" />
+      <workItem from="1609342218185" duration="228000" />
+      <workItem from="1609345196388" duration="295000" />
+      <workItem from="1609373935706" duration="463000" />
+      <workItem from="1609604587006" duration="628000" />
+      <workItem from="1609675882676" duration="4666000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="27329000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="64" y="30" width="1856" height="1050" extended-state="6" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19281767" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info id="Image Layers" order="2" />
+      <window_info id="Designer" order="3" />
+      <window_info id="UI Designer" order="4" />
+      <window_info id="Capture Tool" order="5" />
+      <window_info id="Favorites" order="6" side_tool="true" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32683983" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3979751" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Terminal" order="9" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
+      <window_info anchor="bottom" id="Messages" order="11" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="right" id="Database" order="5" />
+      <window_info anchor="right" id="Theme Preview" order="6" />
+      <window_info anchor="right" id="Palette&#9;" order="7" />
+      <window_info active="true" anchor="right" id="Maven Projects" order="8" visible="true" weight="0.18176796" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="debuggerHistoryManager">
+    <expressions id="evaluateExpression">
+      <expression>
+        <expression-string>var.getName()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>var.getValue()</expression-string>
+        <language-id>JAVA</language-id>
+        <evaluation-mode>EXPRESSION</evaluation-mode>
+      </expression>
+    </expressions>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/model/StarPattern.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="94" column="15" selection-start-line="94" selection-start-column="15" selection-end-line="94" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/util/QueryProcessingUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="495">
+          <caret line="46" column="57" selection-start-line="46" selection-start-column="57" selection-end-line="46" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/task/SpfHttpRequestTask.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1995">
+          <caret line="151" selection-start-line="151" selection-end-line="151" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/callable/SpfHttpRequestThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="404">
+          <caret line="39" selection-start-line="39" selection-end-line="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/watdiv_queries/client0/paths/query3890.sparql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" lean-forward="true" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/main/BrTPFClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="615">
+          <caret line="64" column="9" selection-start-line="64" selection-start-column="9" selection-end-line="64" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/main/SparqlQueryProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2280">
+          <caret line="177" selection-start-line="177" selection-end-line="177" />
+          <folding>
+            <element signature="e#14660#14661#0" expanded="true" />
+            <element signature="e#14733#14734#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/callable/InitialHttpRequestThread.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="870">
+          <caret line="70" column="37" selection-start-line="70" selection-start-column="37" selection-end-line="70" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="88" selection-start-line="29" selection-start-column="88" selection-end-line="29" selection-end-column="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/query.sparql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/dk/aau/cs/spf/main/Experiment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="60" column="17" lean-forward="true" selection-start-line="60" selection-start-column="17" selection-end-line="60" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>

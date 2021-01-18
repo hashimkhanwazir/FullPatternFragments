@@ -32,25 +32,24 @@ import org.rdfhdt.hdt.options.ControlInfo;
 import org.rdfhdt.hdt.options.HDTOptions;
 import org.rdfhdt.hdt.options.HDTSpecification;
 import org.rdfhdt.hdt.triples.impl.BitmapTriples;
-import org.rdfhdt.hdt.triples.impl.BitmapTriplesPp;
 import org.rdfhdt.hdt.triples.impl.TriplesList;
 
 /**
  * Factory that creates Triples objects
- * 
+ *
  */
 public class TriplesFactory {
-		
+
 	public static final String TEMP_TRIPLES_IMPL_LIST = "list";
 
 	private TriplesFactory() {}
-	
+
 	/**
 	 * Creates a new TempTriples (writable triples structure)
-	 * 
+	 *
 	 * @return TempTriples
 	 */
-	static public TempTriples createTempTriples(HDTOptions spec) {		
+	static public TempTriples createTempTriples(HDTOptions spec) {
 //		String triplesImpl = spec.get("tempTriples.impl");
 
 		// Implementations available in the Core
@@ -58,17 +57,17 @@ public class TriplesFactory {
 			return new TriplesList(spec);
 //		}
 	}
-	
+
 	/**
 	 * Creates a new Triples based on an HDTOptions
-	 * 
+	 *
 	 * @param specification
 	 *            The HDTOptions to read
 	 * @return Triples
 	 */
 	static public TriplesPrivate createTriples(HDTOptions spec) {
 		String type = spec.get("triples.format");
-		
+
 		if(type==null) {
 			return new BitmapTriples(spec);
 		} else if(HDTVocabulary.TRIPLES_TYPE_TRIPLESLIST.equals(type)) {
@@ -79,23 +78,21 @@ public class TriplesFactory {
 			return new BitmapTriples(spec);
 		}
 	}
-	
+
 	/**
 	 * Creates a new Triples based on a ControlInformation
-	 * 
+	 *
 	 * @param specification
 	 *            The HDTOptions to read
 	 * @return Triples
 	 */
 	public static TriplesPrivate createTriples(ControlInfo ci) {
 		String format = ci.getFormat();
-		
+
 		if(HDTVocabulary.TRIPLES_TYPE_TRIPLESLIST.equals(format)) {
 			return new TriplesList(new HDTSpecification());
 		} else if(HDTVocabulary.TRIPLES_TYPE_BITMAP.equals(format)) {
 			return new BitmapTriples();
-		} else if(HDTVocabulary.TRIPLES_TYPE_BITMAP_PP.equals(format)) {
-			return new BitmapTriplesPp();
 		} else {
 			throw new IllegalArgumentException("No implementation for Triples type: "+format);
 		}

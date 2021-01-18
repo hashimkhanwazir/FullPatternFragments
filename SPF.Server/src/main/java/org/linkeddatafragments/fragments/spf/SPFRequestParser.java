@@ -80,7 +80,27 @@ public class SPFRequestParser<ConstantTermType,NamedVarType,AnonVarType>
                     getSubject(),
                     getStars(),
                     getBindings(),
-                    getNumTriples());
+                    getNumTriples(),
+                    getRequestHash());
+        }
+
+        private long getRequestHash() {
+            String s = request.getParameter("s");
+            long sHash = 0;
+            if(s != null)
+                sHash = s.hashCode();
+
+            String star = request.getParameter("star");
+            long starHash = 0;
+            if(star != null)
+                starHash = star.hashCode();
+
+            String bindings = request.getParameter("values");
+            long bindingsHash = 0;
+            if(bindings != null)
+                bindingsHash = bindings.hashCode();
+
+            return sHash + starHash + bindingsHash;
         }
 
         /**

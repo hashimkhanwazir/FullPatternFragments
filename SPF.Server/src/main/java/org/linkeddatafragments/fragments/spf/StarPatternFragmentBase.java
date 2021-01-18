@@ -24,7 +24,7 @@ public abstract class StarPatternFragmentBase extends LinkedDataFragmentBase
      * @param datasetURL
      */
     public StarPatternFragmentBase( final String fragmentURL,
-                                      final String datasetURL ) {
+                                    final String datasetURL ) {
         this( 0L, fragmentURL, datasetURL, 1, true );
     }
 
@@ -36,9 +36,9 @@ public abstract class StarPatternFragmentBase extends LinkedDataFragmentBase
      * @param pageNumber
      */
     public StarPatternFragmentBase( final String fragmentURL,
-                                      final String datasetURL,
-                                      final long pageNumber,
-                                      final boolean isLastPage ) {
+                                    final String datasetURL,
+                                    final long pageNumber,
+                                    final boolean isLastPage ) {
         this( 0L, fragmentURL, datasetURL, pageNumber, isLastPage );
     }
 
@@ -51,11 +51,21 @@ public abstract class StarPatternFragmentBase extends LinkedDataFragmentBase
      * @param isLastPage
      */
     public StarPatternFragmentBase( long totalSize,
-                                      final String fragmentURL,
-                                      final String datasetURL,
-                                      final long pageNumber,
-                                      final boolean isLastPage ) {
+                                    final String fragmentURL,
+                                    final String datasetURL,
+                                    final long pageNumber,
+                                    final boolean isLastPage ) {
         super( fragmentURL, datasetURL, pageNumber, isLastPage );
+        this.totalSize = totalSize < 0L ? 0L : totalSize;
+    }
+
+    public StarPatternFragmentBase( long totalSize,
+                                    final String fragmentURL,
+                                    final String datasetURL,
+                                    final long pageNumber,
+                                    final boolean isLastPage,
+                                    final int numResults) {
+        super( fragmentURL, datasetURL, pageNumber, isLastPage, numResults );
         this.totalSize = totalSize < 0L ? 0L : totalSize;
     }
 

@@ -27,7 +27,7 @@
 						    <appendAssemblyId>false</appendAssemblyId>
 						    <archive>
 						        <manifest>
-						            <mainClass>dk.aau.cs.spf.main.SPFClient</mainClass>
+						            <mainClass>dk.aau.cs.spf.main.Experiment</mainClass>
 						        </manifest>
 						    </archive>
 						    <descriptorRefs>
@@ -106,6 +106,6 @@
 		    <artifactId>jena-arq</artifactId>
 		    <version>3.9.0</version>
 		</dependency>
-		
+
 	</dependencies>
 </project>

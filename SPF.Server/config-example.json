@@ -1,10 +1,8 @@
 {
   "title": "My Linked Data Fragments server",
 
-  "metadatapath": "/home/caebel/jetty/jetty/data/watdiv/statsPart_watdiv10M.json",
-  "moleculesdatapath": "/home/caebel/jetty/jetty/data/part_families_watdiv_10M/hdt/",
   "datasourcetypes": {
-    "HdtDatasource"       : "org.linkeddatafragments.datasource.hdt.HdtDataSourceType"
+    "HdtDatasource": "org.linkeddatafragments.datasource.hdt.HdtDataSourceType"
   },
 
   "datasources": {

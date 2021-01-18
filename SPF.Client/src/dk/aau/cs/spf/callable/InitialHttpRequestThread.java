@@ -67,6 +67,8 @@ public class InitialHttpRequestThread implements Callable<Integer> {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            return Integer.MAX_VALUE;
         }
         return triplesCount;
     }

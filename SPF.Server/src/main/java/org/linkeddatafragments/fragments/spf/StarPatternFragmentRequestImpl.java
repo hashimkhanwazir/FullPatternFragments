@@ -22,6 +22,8 @@ public class StarPatternFragmentRequestImpl<CTT,NVT,AVT>
 
     private final int numTriples;
 
+    private final long requestHash;
+
     /**
      *
      * @param fragmentURL
@@ -31,14 +33,15 @@ public class StarPatternFragmentRequestImpl<CTT,NVT,AVT>
      * @param subject
      */
     public StarPatternFragmentRequestImpl( final String fragmentURL,
-                                             final String datasetURL,
-                                             final boolean pageNumberWasRequested,
-                                             final long pageNumber,
-                                             final IStarPatternElement<CTT,NVT,AVT> subject,
-                                             final List<Tuple<IStarPatternElement<CTT,NVT,AVT>, IStarPatternElement<CTT,NVT,AVT>>> stars,
-                                             final List<Binding> bindings,
-                                             final int triples
-                                           )
+                                           final String datasetURL,
+                                           final boolean pageNumberWasRequested,
+                                           final long pageNumber,
+                                           final IStarPatternElement<CTT,NVT,AVT> subject,
+                                           final List<Tuple<IStarPatternElement<CTT,NVT,AVT>, IStarPatternElement<CTT,NVT,AVT>>> stars,
+                                           final List<Binding> bindings,
+                                           final int triples,
+                                           final long requestHash
+    )
     {
         super( fragmentURL, datasetURL, pageNumberWasRequested, pageNumber );
 
@@ -52,6 +55,12 @@ public class StarPatternFragmentRequestImpl<CTT,NVT,AVT>
         this.stars = stars;
         this.bindings = bindings;
         this.numTriples = triples;
+        this.requestHash = requestHash;
+    }
+
+    @Override
+    public long getRequestHash() {
+        return requestHash;
     }
 
     @Override

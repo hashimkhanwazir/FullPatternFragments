@@ -12,7 +12,7 @@ import org.linkeddatafragments.util.CommonResources;
 
 
 
- 
+
 public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
 {
 
@@ -36,6 +36,8 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
      */
     public final boolean isLastPage;
 
+    protected final int numResults;
+
     /**
      *
      * @param fragmentURL
@@ -52,6 +54,20 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
         this.datasetURL = datasetURL;
         this.pageNumber = pageNumber;
         this.isLastPage = isLastPage;
+        this.numResults = 0;
+    }
+
+    protected LinkedDataFragmentBase( final String fragmentURL,
+                                      final String datasetURL,
+                                      final long pageNumber,
+                                      final boolean isLastPage,
+                                      int numResults )
+    {
+        this.fragmentURL = fragmentURL;
+        this.datasetURL = datasetURL;
+        this.pageNumber = pageNumber;
+        this.isLastPage = isLastPage;
+        this.numResults = numResults;
     }
 
     /**
@@ -82,10 +98,11 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
         return ILinkedDataFragmentRequest.TRIPLESPERPAGE;
     }
 
+
     /**
      * This implementation uses {@link #addMetadata(Model)}, which should be
-     * overridden in subclasses (instead of overriding this method). 
-     * @return 
+     * overridden in subclasses (instead of overriding this method).
+     * @return
      */
     @Override
     public StmtIterator getMetadata()
@@ -97,8 +114,8 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
 
     /**
      * This implementation uses {@link #addControls(Model)}, which should be
-     * overridden in subclasses (instead of overriding this method). 
-     * @return 
+     * overridden in subclasses (instead of overriding this method).
+     * @return
      */
     @Override
     public StmtIterator getControls()
@@ -121,7 +138,7 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
         datasetId.addProperty( CommonResources.RDF_TYPE, CommonResources.VOID_DATASET );
         datasetId.addProperty( CommonResources.RDF_TYPE, CommonResources.HYDRA_COLLECTION );
         datasetId.addProperty( CommonResources.VOID_SUBSET, fragmentId );
-        
+
         Literal itemsPerPage = model.createTypedLiteral(this.getMaxPageSize());
         datasetId.addProperty( CommonResources.HYDRA_ITEMSPERPAGE, itemsPerPage);
 
@@ -149,7 +166,7 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
         final Resource firstPageId =
                 model.createResource(
                         pagedURL.setParameter(ILinkedDataFragmentRequest.PARAMETERNAME_PAGE,
-                                              "1").toString() );
+                                "1").toString() );
 
         fragmentId.addProperty( CommonResources.HYDRA_FIRSTPAGE, firstPageId );
 
@@ -158,7 +175,7 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
             final Resource prevPageId =
                     model.createResource(
                             pagedURL.setParameter(ILinkedDataFragmentRequest.PARAMETERNAME_PAGE,
-                                                  prevPageNumber).toString() );
+                                    prevPageNumber).toString() );
 
             fragmentId.addProperty( CommonResources.HYDRA_PREVIOUSPAGE, prevPageId );
         }
@@ -168,7 +185,7 @@ public abstract class LinkedDataFragmentBase implements ILinkedDataFragment
             final Resource nextPageId =
                     model.createResource(
                             pagedURL.setParameter(ILinkedDataFragmentRequest.PARAMETERNAME_PAGE,
-                                                  nextPageNumber).toString() );
+                                    nextPageNumber).toString() );
 
             fragmentId.addProperty( CommonResources.HYDRA_NEXTPAGE, nextPageId );
         }

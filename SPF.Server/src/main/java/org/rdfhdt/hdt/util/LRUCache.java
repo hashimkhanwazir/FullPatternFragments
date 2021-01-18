@@ -31,24 +31,24 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 /**
- * @author mario.arias 
+ * @author mario.arias
  *
  */
 public class LRUCache<K,V> extends LinkedHashMap<K, V> {
-	
+
 	private static final long serialVersionUID = 1L;
-	
+
 	int entries=1024;
-	
+
 	public LRUCache() {
 		this(1024);
 	}
-	
+
 	public LRUCache(int entries) {
 		super(entries+1, .75F, true);
 		this.entries = entries;
 	}
-	
+
 	 // This method is called just after a new entry has been added
 	@Override
     public boolean removeEldestEntry(Map.Entry<K,V> eldest) {

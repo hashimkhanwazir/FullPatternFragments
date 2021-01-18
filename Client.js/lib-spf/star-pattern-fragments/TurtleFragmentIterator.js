@@ -58,7 +58,7 @@ TurtleFragmentIterator.prototype._transform = function (chunk, done) {
 TurtleFragmentIterator.prototype._processTriple = function (triple) {
   // This separation between data and metadata/controls is an approximation;
   // for a proper separation, use an RDF format with graph support (see TrigFragmentParser).
-  if (triple.subject !== this._fragmentUrl && triple.predicate.indexOf(rdf.HYDRA) !== 0) {
+  if (triple.subject !== this._fragmentUrl && triple.predicate.indexOf(rdf.HYDRA) !== 0 && triple.predicate.indexOf('#dataset') !== 0) {
     this._push(triple);
   }
   else {
@@ -76,7 +76,7 @@ TurtleFragmentIterator.prototype._processStar = function (star) {
     return;
   }
 
-  if (JSON.stringify(star.star).indexOf(rdf.HYDRA) === -1)
+  if (JSON.stringify(star.star).indexOf(rdf.HYDRA) === -1 && JSON.stringify(star.subject).indexOf('#dataset') === -1)
     this._push(star);
   else {
     var metadataStream = this.metadataStream;

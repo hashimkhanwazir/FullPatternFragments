@@ -89,7 +89,7 @@ public abstract class AbstractRequestProcessorForStarPatterns<CTT,NVT,AVT>
             return createFragment( spfRequest.getSubject(),
                     spfRequest.getStars(),
                     spfRequest.getBindings(),
-                    offset, limit );
+                    offset, limit, spfRequest.getRequestHash() );
         }
 
         /**
@@ -107,7 +107,8 @@ public abstract class AbstractRequestProcessorForStarPatterns<CTT,NVT,AVT>
                 final List<Tuple<IStarPatternElement<CTT,NVT,AVT>, IStarPatternElement<CTT,NVT,AVT>>> stars,
                 final List<Binding> bindings,
                 final long offset,
-                final long limit )
+                final long limit,
+                final long requestHash)
                 throws IllegalArgumentException;
 
         /**

@@ -9,34 +9,33 @@ import org.apache.jena.rdf.model.*;
 import org.apache.jena.shared.InvalidPropertyURIException;
 import org.apache.jena.sparql.core.Var;
 import org.apache.jena.sparql.engine.binding.Binding;
+import org.linkeddatafragments.characteristicset.CharacteristicSetImpl;
 import org.linkeddatafragments.characteristicset.ICharacteristicSet;
+import org.linkeddatafragments.config.ConfigReader;
 import org.linkeddatafragments.datasource.AbstractRequestProcessorForStarPatterns;
 import org.linkeddatafragments.fragments.ILinkedDataFragment;
 import org.linkeddatafragments.fragments.spf.IStarPatternElement;
 import org.linkeddatafragments.fragments.spf.IStarPatternFragmentRequest;
 import org.linkeddatafragments.fragments.spf.StarPatternFragmentImpl;
-import org.linkeddatafragments.util.StarString;
-import org.linkeddatafragments.util.TripleElement;
-import org.linkeddatafragments.util.Tuple;
-import org.rdfhdt.hdt.enums.TripleComponentRole;
+import org.linkeddatafragments.util.*;
 import org.rdfhdt.hdt.hdt.HDT;
-import org.rdfhdt.hdt.triples.IteratorTripleID;
-import org.rdfhdt.hdt.triples.TripleID;
+import org.rdfhdt.hdt.iterator.DictionaryTranslateIteratorStar;
+import org.rdfhdt.hdt.triples.*;
+import org.rdfhdt.hdt.triples.impl.CompoundIteratorStarID;
 import org.rdfhdt.hdtjena.HDTGraph;
 import org.rdfhdt.hdtjena.NodeDictionary;
 
 import java.io.IOException;
 import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 
 import static org.linkeddatafragments.util.CommonResources.INVALID_URI;
 import static org.linkeddatafragments.util.RDFTermParser.STRINGPATTERN;
 
 public class HdtBasedRequestProcessorForSPFs
-        extends AbstractRequestProcessorForStarPatterns<RDFNode,String,String> {
-    private Map<String, Long> sizeCache = new ConcurrentHashMap<>();
+        extends AbstractRequestProcessorForStarPatterns<RDFNode, String, String> {
     private final String regex = "^(https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|]";
+    private final LRUCache<Tuple<Long, Long>, IteratorStarString> pageCache;
 
     /**
      * HDT Datasource
@@ -55,39 +54,38 @@ public class HdtBasedRequestProcessorForSPFs
      */
     protected final NodeDictionary dictionary;
 
+    protected static Map<StarString, Double> elemSizeCache = new HashMap<>();
+
     /**
      * Creates the request processor.
      *
      * @throws IOException if the file cannot be loaded
      */
-    public HdtBasedRequestProcessorForSPFs( HDT hdt, NodeDictionary dict, List<ICharacteristicSet> css )
-    {
+    public HdtBasedRequestProcessorForSPFs(HDT hdt, NodeDictionary dict, List<ICharacteristicSet> css, LRUCache<Tuple<Long, Long>, IteratorStarString> cache) {
         datasource = hdt;
         dictionary = dict;
         characteristicSets = css;
+        pageCache = cache;
         model = ModelFactory.createModelForGraph(new HDTGraph(datasource));
     }
 
     /**
-     *
      * @param request
      * @return
      * @throws IllegalArgumentException
      */
     @Override
     protected Worker getSPFSpecificWorker(
-            final IStarPatternFragmentRequest<RDFNode,String,String> request )
-            throws IllegalArgumentException
-    {
-        return new Worker( request );
+            final IStarPatternFragmentRequest<RDFNode, String, String> request)
+            throws IllegalArgumentException {
+        return new Worker(request);
     }
 
     /**
      * Worker class for HDT
      */
     protected class Worker
-            extends AbstractRequestProcessorForStarPatterns.Worker<RDFNode,String,String>
-    {
+            extends AbstractRequestProcessorForStarPatterns.Worker<RDFNode, String, String> {
 
 
         /**
@@ -96,9 +94,8 @@ public class HdtBasedRequestProcessorForSPFs
          * @param req
          */
         public Worker(
-                final IStarPatternFragmentRequest<RDFNode,String,String> req )
-        {
-            super( req );
+                final IStarPatternFragmentRequest<RDFNode, String, String> req) {
+            super(req);
         }
 
         /**
@@ -112,346 +109,127 @@ public class HdtBasedRequestProcessorForSPFs
          */
         @Override
         protected ILinkedDataFragment createFragment(
-                final IStarPatternElement<RDFNode,String,String> subject,
-                final List<Tuple<IStarPatternElement<RDFNode,String,String>,
-                        IStarPatternElement<RDFNode,String,String>>> stars,
+                final IStarPatternElement<RDFNode, String, String> subject,
+                final List<Tuple<IStarPatternElement<RDFNode, String, String>,
+                        IStarPatternElement<RDFNode, String, String>>> stars,
                 final List<Binding> bindings,
                 final long offset,
-                final long limit )
-        {
+                final long limit,
+                final long requestHash) {
             List<Tuple<CharSequence, CharSequence>> s = new ArrayList<>();
-            int i = 1;
-            for(Tuple<IStarPatternElement<RDFNode,String,String>,
-                    IStarPatternElement<RDFNode,String,String>> tpl : stars) {
-                IStarPatternElement<RDFNode,String,String> pe = tpl.x;
-                IStarPatternElement<RDFNode,String,String> oe = tpl.y;
-                String pred = pe.isVariable() ? "" : pe.asConstantTerm().toString();
-                String obj = oe.isVariable() ? "" : oe.asConstantTerm().toString();
+            for (Tuple<IStarPatternElement<RDFNode, String, String>,
+                    IStarPatternElement<RDFNode, String, String>> tpl : stars) {
+                IStarPatternElement<RDFNode, String, String> pe = tpl.x;
+                IStarPatternElement<RDFNode, String, String> oe = tpl.y;
+                String pred = pe.isVariable() ? "?" + pe.asNamedVariable() : pe.asConstantTerm().toString();
+                String obj = oe.isVariable() ? "?" + oe.asNamedVariable() : oe.asConstantTerm().toString();
 
                 s.add(new Tuple<>(pred, obj));
-                i++;
             }
 
-            String subj = subject.isVariable() ? "" : subject.asConstantTerm().toString();
+            String subj = subject.isVariable() ? "?" + subject.asNamedVariable() : subject.asConstantTerm().toString();
             StarString star = new StarString(subj, s);
 
-            return createFragmentByTriplePatternSubstitution(star, bindings, offset, limit);
+            return createFragmentByTriplePatternSubstitution(star, bindings, offset, limit, requestHash);
         }
 
         private ILinkedDataFragment createFragmentByTriplePatternSubstitution(
                 final StarString star,
                 final List<Binding> bindings,
                 final long offset,
-                final long limit ) {
-            final StarStringIterator it = new StarStringIterator(bindings, star);
+                final long limit,
+                final long requestHash) {
+            final List<Model> stars = new ArrayList<>();
+            int found = 0;
+            int skipped = 0, count = 0;
+            double size = 0;
 
-            //finding characteristic sets
-            List<ICharacteristicSet> css = new ArrayList<>();
-            for(ICharacteristicSet cs : characteristicSets) {
-                if(cs.matches(star)) css.add(cs);
+            boolean isNew = true;
+            Tuple<Long, Long> initialKey = new Tuple<>(requestHash, offset);
+            IteratorStarString results;
+
+            if (pageCache.containsKey(initialKey)) {
+                results = pageCache.get(initialKey);
+                isNew = false;
+            } else {
+                results = datasource.searchStarBindings(star, bindings, characteristicSets);
             }
 
-            final List<Model> stars = new ArrayList<>();
-            Set<String> processed = new HashSet<>();
-            int found = 0;
-            double estSize = 0;
-            int skipped = 0, count = 0;
-            while (it.hasNext()) {
-                StarString st = it.next();
+            final boolean hasMatches = results.hasNext();
 
-                String queryString = "select * where { ";
-                String subj = "<" + st.getSubject().toString() + ">";
-                if (subj.equals("<>"))
-                    subj = "?s";
+            if (hasMatches) {
+                boolean atOffset;
 
-                List<Tuple<CharSequence, CharSequence>> tpls = st.getTriples();
-                int s = tpls.size();
-                for (int i = 0; i < s; i++) {
-                    Tuple<CharSequence, CharSequence> tpl = tpls.get(i);
-                    String pred = tpl.x.toString();
-                    String obj = tpl.y.toString();
-
-                    pred = pred.equals("") ? "?p" + (i + 1) : "<" + pred + ">";
-                    obj = obj.equals("") ? "?o" + (i + 1) : "<" + obj + ">";
-
-                    queryString += subj + " " + pred + " " + obj + " . ";
-                }
-
-                int indx = queryString.lastIndexOf(".");
-                queryString = queryString.substring(0, indx) + " }";
-
-                if (processed.contains(queryString)) continue;
-                processed.add(queryString);
-
-                Query query = QueryFactory.create(queryString);
-                QueryExecution qe = QueryExecutionFactory.create(query, model);
-                ResultSet results = qe.execSelect();
-
-                final boolean hasMatches = results.hasNext();
-
-                double size = 0;
-
-                if (hasMatches) {
-                    boolean atOffset;
-
+                if (isNew) {
                     for (int i = skipped; !(atOffset = i == offset)
                             && results.hasNext(); i++) {
                         results.next();
                         skipped++;
                     }
-
-                    count = skipped;
-
-                    // try to add `limit` triples to the result model
-                    if (atOffset) {
-                        for (int i = found; i < limit && results.hasNext(); i++) {
-                            List<Triple> ts = toTriples(results.next(), st);
-
-                            Model triples = ModelFactory.createDefaultModel();
-                            int sz = ts.size();
-                            for (int j = 0; j < sz; j++) {
-                                triples.add(triples.asStatement(ts.get(j)));
-                            }
-                            found++;
-
-                            stars.add(triples);
-                        }
-                    }
-
-                    count += found;
-                }
-
-                if(count >= (limit)) {
-                    for (ICharacteristicSet cs : css) {
-                        size += cs.count(st);
-                    }
                 } else {
-                    size = count;
+                    atOffset = true;
+                    skipped = (int) offset;
+                }
+                count = skipped;
+
+                if (atOffset) {
+                    for (int i = found; i < limit && results.hasNext(); i++) {
+                        List<Triple> tpl = toTriples(results.next());
+                        Model triples = ModelFactory.createDefaultModel();
+
+                        int sz = tpl.size();
+                        for (int j = 0; j < sz; j++) {
+                            triples.add(triples.asStatement(tpl.get(j)));
+                        }
+                        found++;
+
+                        stars.add(triples);
+                    }
                 }
 
-                estSize += size;
-
-                if (found >= limit) break;
+                count += found;
             }
 
-            final long estimatedValid = (long)estSize;
+
+            if (count >= (limit + offset)) {
+                size = results.estimatedNumResults();
+                //size = DictionaryTranslateIteratorStar.estimateCardinality(star, bindings, ConfigReader.getInstance().getCharacteristicSets());
+            } else {
+                size = count;
+            }
+
+            //if(size == 0 && count > 0)
+            //    size = DictionaryTranslateIteratorStar.estimateCardinality(star, bindings, ConfigReader.getInstance().getCharacteristicSets());
+
+            if(size == 0 && count > 0)
+                size = count;
+
+            final long estimatedValid = (long) size;
 
             boolean isLastPage = found < limit;
-            return new StarPatternFragmentImpl(stars, estimatedValid, request.getFragmentURL(), request.getDatasetURL(), request.getPageNumber(), isLastPage);
+
+            pageCache.remove(initialKey);
+            if (results.hasNext()) {
+                Tuple<Long, Long> key = new Tuple<>(requestHash, (long) count);
+                pageCache.put(key, results);
+            }
+
+            return new StarPatternFragmentImpl(stars, estimatedValid, request.getFragmentURL(), request.getDatasetURL(), request.getPageNumber(), isLastPage, found);
         }
 
-        private List<Triple> toTriples(QuerySolution sol, StarString star) {
+        private List<Triple> toTriples(StarString star) {
             List<Triple> ret = new ArrayList<>();
 
-            String subj = star.getSubject().toString();
-            subj = subj.equals("") ? sol.get("s").toString() : subj;
-
-            Node subjNode = NodeFactory.createURI(subj);
-
-            List<Tuple<CharSequence, CharSequence>> tpls = star.getTriples();
-            int s = tpls.size();
+            int s = star.size();
             for (int i = 0; i < s; i++) {
-                Tuple<CharSequence, CharSequence> tpl = tpls.get(i);
-                if (tpl.x == null || tpl.y == null)continue;
-                String pred = tpl.x.toString();
-                String obj = tpl.y.toString();
-
-                pred = pred.equals("") ? sol.get("p" + (i + 1)).toString() : pred;
-                obj = obj.equals("") ? sol.get("o" + (i + 1)).toString() : obj;
-
-                ret.add(new Triple(subjNode, NodeFactory.createURI(pred),
-                        obj.matches(regex) ? NodeFactory.createURI(obj) : NodeFactory.createLiteral(obj)));
+                TripleString tpl = star.getTriple(i);
+                String obj = tpl.getObject().toString();
+                ret.add(new Triple(NodeFactory.createURI(tpl.getSubject().toString()),
+                        NodeFactory.createURI(tpl.getPredicate().toString()),
+                        obj.matches(regex) ? NodeFactory.createURI(obj) : NodeFactory.createLiteral(obj.replace("\"", ""))));
             }
 
             return ret;
         }
-
-        private long estimateResultSetSize(final TripleID t) {
-            final IteratorTripleID matches = datasource.getTriples().search(t);
-
-            if (matches.hasNext())
-                return Math.max(matches.estimatedNumResults(), 1L);
-            else
-                return 0L;
-        }
-
-        /**
-         * Parses the given value as an RDF resource.
-         *
-         * @param value the value
-         * @return the parsed value, or null if unspecified
-         */
-        private TripleElement parseAsResource(String value) {
-            final TripleElement subject = parseAsNode(value);
-            if (subject.object == null) {
-                return new TripleElement("null", null);
-            }
-            if (subject.name.equals("Var")) {
-                return subject;
-            }
-            return subject.object == null || subject.object instanceof Resource ? new TripleElement(
-                    "RDFNode", (Resource) subject.object) : new TripleElement(
-                    "Property", INVALID_URI);
-        }
-
-        /**
-         * Parses the given value as an RDF property.
-         *
-         * @param value the value
-         * @return the parsed value, or null if unspecified
-         */
-        private TripleElement parseAsProperty(String value) {
-            // final RDFNode predicateNode = parseAsNode(value);
-            final TripleElement predicateNode = parseAsNode(value);
-            if (predicateNode.object == null) {
-                return new TripleElement("null", null);
-            }
-            if (predicateNode.name.equals("Var")) {
-                return predicateNode;
-            }
-            if (predicateNode.object instanceof Resource) {
-                try {
-                    return new TripleElement(
-                            "Property",
-                            ResourceFactory
-                                    .createProperty(((Resource) predicateNode.object)
-                                            .getURI()));
-                } catch (InvalidPropertyURIException ex) {
-                    return new TripleElement("Property", INVALID_URI);
-                }
-            }
-            return predicateNode.object == null ? null : new TripleElement(
-                    "Property", INVALID_URI);
-        }
-
-        /**
-         * Parses the given value as an RDF node.
-         *
-         * @param value the value
-         * @return the parsed value, or null if unspecified
-         */
-        private TripleElement parseAsNode(String value) {
-            // nothing or empty indicates an unknown
-            if (value == null || value.length() == 0) {
-                return new TripleElement("null", null);
-            }
-            // find the kind of entity based on the first character
-            final char firstChar = value.charAt(0);
-            switch (firstChar) {
-                // variable or blank node indicates an unknown
-                case '?':
-                    return new TripleElement(Var.alloc(value.replaceAll("\\?", "")));
-                case '_':
-                    return null;
-                // angular brackets indicate a URI
-                case '<':
-                    return new TripleElement(
-                            ResourceFactory.createResource(value.substring(1,
-                                    value.length() - 1)));
-                // quotes indicate a string
-                case '"':
-                    final Matcher matcher = STRINGPATTERN.matcher(value);
-                    if (matcher.matches()) {
-                        final String body = matcher.group(1);
-                        final String lang = matcher.group(2);
-                        final String type = matcher.group(3);
-                        if (lang != null) {
-                            return new TripleElement(
-                                    ResourceFactory.createLangLiteral(body, lang));
-                        }
-                        if (type != null) {
-                            return new TripleElement(
-                                    ResourceFactory.createTypedLiteral(body,
-                                            TypeMapper.getInstance().getSafeTypeByName(type)));
-                        }
-                        return new TripleElement(
-                                ResourceFactory.createPlainLiteral(body));
-                    }
-                    return new TripleElement("Property", INVALID_URI);
-                // assume it's a URI without angular brackets
-                default:
-                    return new TripleElement(
-                            ResourceFactory.createResource(value));
-            }
-        }
-
-        private class StarStringIterator implements Iterator<StarString> {
-            private List<Binding> bindings;
-            private StarString star;
-            private int current = 0;
-            private StarString next = null;
-
-            StarStringIterator(List<Binding> bindings, StarString star) {
-                this.bindings = bindings;
-                this.star = star;
-            }
-
-            private void bufferNext() {
-                if(bindings == null && current == 0) {
-                    next = star;
-                    current++;
-                    return;
-                }
-                if(bindings == null) {
-                    next = null;
-                    return;
-                }
-                if (current >= bindings.size()) {
-                    next = null;
-                    return;
-                }
-                Binding binding = bindings.get(current);
-                current++;
-                StarString s = new StarString(star.getSubject(), star.getTriples());
-
-                Iterator<Var> vars = binding.vars();
-                while (vars.hasNext()) {
-                    Var var = vars.next();
-                    Node node = binding.get(var);
-
-                    String val = "";
-                    if (node.isLiteral())
-                        val = node.getLiteral().toString();
-                    else if (node.isURI())
-                        val = node.getURI();
-
-                    s.updateField(var.getVarName(), val);
-                }
-
-                next = s;
-            }
-
-            public void reset() {
-                current = 0;
-            }
-
-            @Override
-            public boolean hasNext() {
-                if (next == null)
-                    bufferNext();
-                return next != null;
-            }
-
-            @Override
-            public StarString next() {
-                StarString n = next;
-                next = null;
-                return n;
-            }
-        }
     } // end of Worker
-
-    /**
-     * Converts the HDT triple to a Jena Triple.
-     *
-     * @param tripleId the HDT triple
-     * @return the Jena triple
-     */
-    private Triple toTriple(TripleID tripleId) {
-        return new Triple(
-                dictionary.getNode(tripleId.getSubject(), TripleComponentRole.SUBJECT),
-                dictionary.getNode(tripleId.getPredicate(), TripleComponentRole.PREDICATE),
-                dictionary.getNode(tripleId.getObject(), TripleComponentRole.OBJECT)
-        );
-    }
 }
