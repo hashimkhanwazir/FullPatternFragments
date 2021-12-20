@@ -27,7 +27,7 @@
 						    <appendAssemblyId>false</appendAssemblyId>
 						    <archive>
 						        <manifest>
-						            <mainClass>dk.aau.cs.spf.main.Experiment</mainClass>
+						            <mainClass>dk.aau.cs.spf.main.SPFClient</mainClass>
 						        </manifest>
 						    </archive>
 						    <descriptorRefs>
