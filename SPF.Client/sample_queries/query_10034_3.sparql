@@ -1,0 +1,1 @@
+select * where {?v3 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?v1}
