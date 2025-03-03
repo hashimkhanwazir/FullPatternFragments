@@ -6,17 +6,11 @@
   },
 
   "datasources": {
-    "iswc": {
-      "title": "ISWC",
-      "type": "HdtDatasource",
-      "description": "ISWC with HDT back-end",
-      "settings": { "file": "data/iswc.hdt" }
-    },
     "watdiv": {
       "title": "WatDiv",
       "type": "HdtDatasource",
       "description": "WatDiv with HDT back-end",
-      "settings": { "file": "data/watdiv.hdt" }
+      "settings": { "file": "/home/hashim/IdeaProjects/StarPatternFragments/SPF.Server/data/watdiv10M.hdt" }
     }
   },
 
