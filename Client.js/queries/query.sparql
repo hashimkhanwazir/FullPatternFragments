@@ -1,9 +1,0 @@
-SELECT * WHERE {
-	?v0 <http://xmlns.com/foaf/age> <http://db.uwaterloo.ca/~galuc/wsdbm/AgeGroup2> .
-	?v0 <http://xmlns.com/foaf/familyName> ?v2 .
-	?v3 <http://purl.org/ontology/mo/artist> ?v0 .
-	?v3 <http://schema.org/description> ?v4 .
-	?v5 <http://db.uwaterloo.ca/~galuc/wsdbm/purchaseFor> ?v3 .
-	?v5 <http://purl.org/goodrelations/price> ?v6 .
-	?v0 <http://schema.org/nationality> <http://db.uwaterloo.ca/~galuc/wsdbm/Country1> .
-}
