@@ -73,9 +73,13 @@ public class SparqlQueryProcessor {
     /**
      *
      */
+    ///***** Constructor No. 1 ******/
     public SparqlQueryProcessor(ArrayList<TriplePattern> triplePatterns,
-                                List<ProjectionElem> projectionElemList, QueryInput input, QueryProcessingMethod method,
-                                boolean isMultiThreaded, boolean printOutput) {
+                                List<ProjectionElem> projectionElemList, 
+                                QueryInput input, 
+                                QueryProcessingMethod method,
+                                boolean isMultiThreaded, 
+                                boolean printOutput) {
         this.triplePatterns = triplePatterns;
         this.unorderedTriplePatterns = new ArrayList<TriplePattern>();
         for (TriplePattern triplePattern : triplePatterns) {
@@ -98,14 +102,23 @@ public class SparqlQueryProcessor {
         this.endpoint = "";
     }
 
+    
+////**** Constructor No. 2, meant for the Star Pattern ****//////////
     public SparqlQueryProcessor(ArrayList<StarPattern> starPatterns,
-                                List<ProjectionElem> projectionElemList, QueryInput input, QueryProcessingMethod method,
-                                boolean isMultiThreaded, boolean printOutput, boolean starPattern) {
+                                List<ProjectionElem> projectionElemList, 
+                                QueryInput input, 
+                                QueryProcessingMethod method,
+                                boolean isMultiThreaded, 
+                                boolean printOutput, 
+                                boolean starPattern) {
+        System.out.println("\n** Object scp of the SparqlQueryProcessor(7 args) class constructed for Star Pattern**");
         this.starPatterns = starPatterns;
         this.unorderedStarPatterns = new ArrayList<StarPattern>();
-        for (StarPattern triplePattern : starPatterns) {
-            unorderedStarPatterns.add(triplePattern);
+        for (StarPattern sp : starPatterns) {
+            unorderedStarPatterns.add(sp);
+            System.out.println("\n>>The unordered star patterns are:\n " + unorderedStarPatterns);
         }
+
         this.projectionElemList = projectionElemList;
         this.input = input;
         starPatternOrder = new ArrayList<StarPattern>();
@@ -124,9 +137,17 @@ public class SparqlQueryProcessor {
         this.endpoint = "";
     }
 
+//*********************************************************************************************//
+
+
+    ///**** Constructor No. 3, for the Endpoint *****////////
     public SparqlQueryProcessor(String queryString,
-                                List<ProjectionElem> projectionElemList, QueryInput input, QueryProcessingMethod method,
-                                boolean isMultiThreaded, boolean printOutput, String endpoint) {
+                                List<ProjectionElem> projectionElemList, 
+                                QueryInput input, 
+                                QueryProcessingMethod method,
+                                boolean isMultiThreaded, 
+                                boolean printOutput, 
+                                String endpoint) {
         this.projectionElemList = projectionElemList;
         this.input = input;
         httpResponseCache = new ConcurrentHashMap<String, Content>();
@@ -149,6 +170,8 @@ public class SparqlQueryProcessor {
      * @throws InterruptedException
      *
      */
+
+    //*** Meant for the ordering the Triple Patterns based on the cardinality estimation  ***/
     private void initializeOrderOfTriplePatterns() throws InterruptedException, ExecutionException {
         int minTriplesCount = Integer.MAX_VALUE;
         TriplePattern firstTriplePattern = null;
@@ -171,22 +194,31 @@ public class SparqlQueryProcessor {
         }
     }
 
+
+    //*** Meant for the ordering the Star Pattern based on the cardinality estimation ***/
     private void initializeOrderOfStarPatterns() throws InterruptedException, ExecutionException {
+        System.out.println("\n**Inside the initializeOrderOfStarPatterns() of the SparqlQueryProcessor class**");
         int minTriplesCount = Integer.MAX_VALUE;
         StarPattern firstStarPattern = null;
         ExecutorService executorService = Executors.newFixedThreadPool(nThreads);
         for (StarPattern starPattern : unorderedStarPatterns) {
+            System.out.println("\n ** Processing StarPattern to bring it in order according to least cardinality estimation: " + starPattern);
             InitialHttpRequestTask httpRequestTask = new InitialHttpRequestTask(input.getStartFragment(), starPattern);
+            System.out.println("** The Star to be sent is " + starPattern);
             Future<Integer> f = executorService.submit(new InitialHttpRequestThread(httpRequestTask, httpResponseCache));
             int triplesCount = f.get();
+            System.out.println("** Received triples count: " + triplesCount);
             if (triplesCount < minTriplesCount) {
                 minTriplesCount = triplesCount;
                 firstStarPattern = starPattern;
+                System.out.println(" ** Updated firstStarPattern with fewer triples: " + minTriplesCount);
             }
         }
+        System.out.println("\n** Final selected firstStarPattern: " + firstStarPattern);
 
         executorService.shutdown();
         if (firstStarPattern != null) {
+            System.out.println(" >>> firstStarPattern is not NULL ");
             starPatternOrder.add(firstStarPattern);
             unorderedStarPatterns.remove(firstStarPattern);
             orderRemainingSPs();
@@ -205,10 +237,18 @@ public class SparqlQueryProcessor {
     private void orderRemainingSPs() {
         while (!unorderedStarPatterns.isEmpty()) {
             ArrayList<String> boundVariables = QueryProcessingUtils.getBoundVariablesSP(starPatternOrder);
+            System.out.println("\n** orderRemainingSPs() Bound Variables at this step: " + boundVariables);
+            System.out.println("\n** The unordered star patterns are: " + unorderedStarPatterns);
             StarPattern nextSP = QueryProcessingUtils
                     .findAndRemoveNextWithMaxNumberOfBVSP(unorderedStarPatterns, boundVariables);
             starPatternOrder.add(nextSP);
         }
+
+        // ** Print the final ordered Star Patterns after ordering is complete **
+    System.out.println("\n** ALL Ordered Star Patterns **");
+    for (StarPattern sp : starPatternOrder) {
+        System.out.println(sp);
+    }
     }
 
     private void initializeProcessingQuery() {
@@ -231,6 +271,7 @@ public class SparqlQueryProcessor {
                     executorCompletionService, numberOfTasks);
             executorCompletionService.submit(hrt);
         } else {
+            System.out.println("**********************************************");
             executorService = Executors.newFixedThreadPool(nThreads);
             executorCompletionService = new ExecutorCompletionService<Boolean>(executorService);
             SpfHttpRequestTask httpRequestTask = new SpfHttpRequestTask(starPatternOrder,
@@ -241,6 +282,9 @@ public class SparqlQueryProcessor {
             executorCompletionService.submit(hrt);
         }
     }
+
+
+
 
     public void processQuery() throws InterruptedException, ExecutionException {
         SERVER_REQUESTS = new AtomicInteger(0);
@@ -254,15 +298,22 @@ public class SparqlQueryProcessor {
         FRAGMENT_SIZES = new ArrayList<>();
 
         if(method == QueryProcessingMethod.ENDPOINT) {
+            // if the method is ENDPOINT then call this function
             processQueryEndpoint();
+            System.out.println("In the scp.processQuery() method equal to ENDPOINT");
             return;
         }
 
         long start = System.currentTimeMillis();
-        if(!starPattern)
+        if(!starPattern) {
+            // If starPattern is FALSE then call this function
             initializeOrderOfTriplePatterns();
-        else
+        }
+        else {
+        // If starPattern is TRUE then call this function
+            System.out.println("In the scp.processQuery() method equal to StarPatternFragments");
             initializeOrderOfStarPatterns();
+        }
 
         //todo
 

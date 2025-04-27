@@ -22,7 +22,8 @@ import org.linkeddatafragments.fragments.tpf.ITriplePatternFragmentRequest;
 //TODO: Refactor to a composable & flexible architecture using DataSource types, fragments types and request types
 
 
-public class HtmlTriplePatternFragmentWriterImpl extends TriplePatternFragmentWriterBase implements ILinkedDataFragmentWriter {
+public class HtmlTriplePatternFragmentWriterImpl extends TriplePatternFragmentWriterBase 
+                                                 implements ILinkedDataFragmentWriter {
     private final Configuration cfg;
 
     private final Template indexTemplate;
@@ -38,7 +39,8 @@ public class HtmlTriplePatternFragmentWriterImpl extends TriplePatternFragmentWr
      * @param datasources
      * @throws IOException
      */
-    public HtmlTriplePatternFragmentWriterImpl(Map<String, String> prefixes, HashMap<String, IDataSource> datasources) throws IOException {
+    public HtmlTriplePatternFragmentWriterImpl(Map<String, String> prefixes, 
+                                               HashMap<String, IDataSource> datasources) throws IOException {
         super(prefixes, datasources);
 
         cfg = new Configuration(Configuration.VERSION_2_3_22);
@@ -62,9 +64,11 @@ public class HtmlTriplePatternFragmentWriterImpl extends TriplePatternFragmentWr
      * @throws TemplateException
      */
     @Override
-    public void writeFragment(ServletOutputStream outputStream, IDataSource datasource, ITriplePatternFragment fragment,  ITriplePatternFragmentRequest tpfRequest) throws IOException, TemplateException{
+    public void writeFragment(ServletOutputStream outputStream, 
+                              IDataSource datasource, 
+                              ITriplePatternFragment fragment,  
+                              ITriplePatternFragmentRequest tpfRequest) throws IOException, TemplateException{
         Map data = new HashMap();
-
         // base.ftl.html
         data.put("assetsPath", "assets/");
         data.put("header", datasource.getTitle());

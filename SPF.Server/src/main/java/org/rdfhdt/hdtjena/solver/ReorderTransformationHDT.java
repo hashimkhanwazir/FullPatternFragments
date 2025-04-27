@@ -52,6 +52,7 @@ import static org.apache.jena.sparql.engine.optimizer.reorder.PatternElements.VA
  *
  */
 public class ReorderTransformationHDT extends ReorderTransformationSubstitution {
+
 	
     /** Maximum value for a match involving two terms. */
     public static final int MultiTermMax = 100;
@@ -72,7 +73,8 @@ public class ReorderTransformationHDT extends ReorderTransformationSubstitution 
 	{
 		this.stats = graph.getStatisticsHandler();
 		numTriples = graph.size();
-	
+	    System.out.println("\nClass ReorderTransformationHDT constructor called ");
+		System.out.println("\ngraph.size() = "+numTriples);
 		initializeMatcher();
 				
 		// FIXME: Compute exactly for using the HDT  
@@ -80,6 +82,7 @@ public class ReorderTransformationHDT extends ReorderTransformationSubstitution 
 		TERM_S = dict.getNsubjects()/Math.max(numTriples, 1);
 		TERM_P = dict.getNpredicates()/Math.max(numTriples, 1);
 		TERM_O = dict.getNobjects()/Math.max(numTriples, 1);
+		System.out.println("\nTERM_S:"+TERM_S+" TERM_P:"+TERM_P+" TERM_O:"+TERM_O);
 	}
 
     private void initializeMatcher () {
@@ -129,19 +132,22 @@ public class ReorderTransformationHDT extends ReorderTransformationSubstitution 
 		// Include guesses for SP, OP, typeClass
 		if ( pt.subject.isNode() && !pt.subject.isVar()) {
 			S = stats.getStatistic(pt.subject.getNode(), Node.ANY, Node.ANY) ;
+			System.out.println("S = "+S);
 		} else if ( TERM.equals(pt.subject) ) {
 			S = TERM_S ;
 		}
 
 		// rdf:type.
-		if ( pt.predicate.isNode() && !pt.predicate.isVar())
+		if ( pt.predicate.isNode() && !pt.predicate.isVar()){
 			P = stats.getStatistic(Node.ANY, pt.predicate.getNode(), Node.ANY) ;
+			System.out.println("P = "+P);}
 		else if ( TERM.equals(pt.predicate) ) {
 			P = TERM_P ;
 		}
 
-		if ( pt.object.isNode() && !pt.object.isVar())
+		if ( pt.object.isNode() && !pt.object.isVar()){
 			O = stats.getStatistic(Node.ANY, Node.ANY, pt.object.getNode()) ;
+			System.out.println("O = "+O);}
 		else if ( TERM.equals(pt.object) ) {
 			O = TERM_O ;
 		}

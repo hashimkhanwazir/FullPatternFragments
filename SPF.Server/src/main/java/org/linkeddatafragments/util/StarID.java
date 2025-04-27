@@ -42,6 +42,11 @@ public class StarID implements Comparable<StarID>, Serializable {
         this(subject, triples);
         this.subjVar = subjVar;
         this.vars = vars;
+        System.out.println("\nClass StarID - Constructor StarID created having these values:");
+        System.out.println(" this.subjVar = "+this.subjVar);
+        System.out.println(" this.vars = "+this.vars);
+        System.out.println(" this.triples = "+this.triples);
+        System.out.println(" this.subject = "+this.subject);
     }
 
     public StarID(int subject) {
@@ -167,16 +172,26 @@ public class StarID implements Comparable<StarID>, Serializable {
         return result;
     }
 
+//    @Override
+//    public String toString() {
+//        String str = subject + "";
+
+//        for(Tuple<Integer, Integer> t : triples) {
+//            str += "\n    " + t.x + " " + t.y;
+//        }
+//        System.out.println("This is the returning point ");
+//        return str;
+//    }
+
     @Override
-    public String toString() {
-        String str = subject + "";
-
-        for(Tuple<Integer, Integer> t : triples) {
-            str += "\n    " + t.x + " " + t.y;
-        }
-
-        return str;
-    }
+public String toString() {
+    return "StarID{" +
+           "subject=" + subject +
+           ", triples=" + triples +
+           ", subjVar='" + subjVar + '\'' +
+           ", vars=" + vars +
+           '}';
+}
 
     @Override
     public boolean equals(Object o) {

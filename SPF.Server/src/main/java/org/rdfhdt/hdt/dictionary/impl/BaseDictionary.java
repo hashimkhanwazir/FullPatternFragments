@@ -92,9 +92,16 @@ public abstract class BaseDictionary implements DictionaryPrivate {
 	 */
 	@Override
 	public int stringToId(CharSequence str, TripleComponentRole position) {
+		System.out.println("\nClass BaseDict - Method - stringToId(str, position) -- str = "+str);
+		System.out.println("TripleComponentRole position = "+position);
 		str = DelayedString.unwrap(str);
+		System.out.println("str = DelayedString.unwrap(str) so -- str = "+str);
+		
 
 		if(str==null || str.length()==0) {
+			boolean a = str==null;
+			boolean b = str.length() == 0;
+			System.out.println("str==null is "+a+" and str.length()==0 is "+b);
 			return 0;
 		}
 				
@@ -107,29 +114,47 @@ public abstract class BaseDictionary implements DictionaryPrivate {
 		switch(position) {
 		case SUBJECT:
 			ret = shared.locate(str);
+			System.out.println("-- ret = shared.locate(str) -- ret = "+ret);
 			if(ret!=0) {
+				System.out.println("--inside the if (ret!=0)");
 				return getGlobalId(ret, DictionarySectionRole.SHARED);
 			}
+			
 			ret = subjects.locate(str);
+			System.out.println("-- ret = subjects.locate(str); -- ret = "+ret);
+			
 			if(ret!=0) {
+				System.out.println("--inside the if (ret!=0)");
 				return getGlobalId(ret, DictionarySectionRole.SUBJECT);
 			}
 			return -1;
-		case PREDICATE:
+		
+			//////////////////////////////////////////////////
+			
+			case PREDICATE:
 			ret = predicates.locate(str);
+			System.out.println("ret = predicates.locate(str) --- ret = "+ret);
 			if(ret!=0) {
+				System.out.println("Case:PREDICATE -- inside the if (ret!=0)");
 				return getGlobalId(ret, DictionarySectionRole.PREDICATE);
 			}
 			return -1;
-		case OBJECT:
+		
+		//////////////////////////////////////////////////////////////////////
+		
+			case OBJECT:
 			if(str.charAt(0)!='"') {
 				ret = shared.locate(str);
+				System.out.println("Case:OBJECT --- ret = shared.locate(str) -- ret = "+ret);
 				if(ret!=0) {
+					System.out.println("Case:OBJECT --- (SHARED) inside the if (ret!=0)");
 					return getGlobalId(ret, DictionarySectionRole.SHARED);
 				}
 			}
 			ret = objects.locate(str);
+			System.out.println("Case:OBJECT - ret = objects.locate(str) --- ret = "+ret);
 			if(ret!=0) {
+				System.out.println("Case:OBJECT -- (OBJECT) inside the if (ret!=0)");
 				return getGlobalId(ret, DictionarySectionRole.OBJECT);
 			}
 			return -1;

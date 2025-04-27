@@ -389,6 +389,7 @@ public class HDTImpl implements HDTPrivate {
 	 */
 	@Override
 	public Dictionary getDictionary() {
+		System.out.println("\nClass HDTImpl.java - getDictionary() called");
 		return dictionary;
 	}
 
@@ -399,6 +400,10 @@ public class HDTImpl implements HDTPrivate {
 	 */
 	@Override
 	public Triples getTriples() {
+		  System.out.println("\nClass HDTImpl.java - getTriples() called");
+		//System.out.println("triples.size() == "+triples.size());
+		//System.out.println("triples.getType() == "+triples.getType());
+		//System.out.println("triples.toString() == "+triples.toString());
 		return triples;
 	}
 
@@ -548,29 +553,48 @@ public class HDTImpl implements HDTPrivate {
 
 	@Override
 	public IteratorStarString searchStarBindings(StarString star, List<Binding> bindings, List<ICharacteristicSet> characteristicSets) {
+		System.out.println("\nClass HDTImpl.java - Method searchStarBindings(star, bindings, charset) called");
 		if(isClosed) {
-			throw new IllegalStateException("Cannot search an already closed HDT");
+			System.out.println("----- if(isClosed == True) HDT is closed. Throwing IllegalStateException.");
+			throw new IllegalStateException("------Cannot search an already closed HDT");
 		}
 
+		// Print characteristicSets
+		System.out.println("-----Characteristic Sets = " + characteristicSets);
+		System.out.println("-----Bindings = " + bindings);
+		
+		// Or iterate over the list for better visibility
+		System.out.println("-----Printing each characteristic set: ");
+		for (ICharacteristicSet set : characteristicSets) {
+			System.out.println(" - " + set.toString());
+		}
+        
+		System.out.println("-----Constructor - DictionaryTranslateIteratorStar IteratorStarString called iterator");
 		IteratorStarString iterator = new DictionaryTranslateIteratorStar(star, bindings, characteristicSets, this);
 
 		if(!iterator.hasNext()) {
+			System.out.println("---------if(!iterator.hasNext()) ");
+			System.out.println("-- then Iterator has no next element. Returning empty IteratorStarString.");
 			//throw new NotFoundException("String not found in dictionary");
 			return new IteratorStarString() {
 				@Override
 				public StarString next() {
+					System.out.println("Step 7: next() called, returning null.");
 					return null;
 				}
 				@Override
 				public boolean hasNext() {
+					System.out.println("Step 8: hasNext() called, returning false.");
 					return false;
 				}
 				@Override
 				public ResultEstimationType numResultEstimation() {
+					System.out.println("Step 9: numResultEstimation() called, returning EXACT.");
 					return ResultEstimationType.EXACT;
 				}
 				@Override
 				public long estimatedNumResults() {
+					System.out.println("Step 10: estimatedNumResults() called, returning 0.");
 					return 0;
 				}
 			};

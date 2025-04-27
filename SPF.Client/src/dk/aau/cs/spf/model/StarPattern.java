@@ -80,11 +80,15 @@ public class StarPattern {
 
     public int getNumberOfBoundVariables(ArrayList<String> boundVars) {
         int numberOfBV = 0;
+        System.out.println("\n** Inside getNumberOfBoundVariables() **");
+        System.out.println("Bound Variables List: " + boundVars);
         for (String boundVar : boundVars) {
             if (containsVar(boundVar)) {
+                System.out.println(" Checking if StarPattern contains bound variable " + boundVar );
                 numberOfBV++;
             }
         }
+        System.out.println("Total Bound Variables Found: " + numberOfBV);
         return numberOfBV;
     }
 
@@ -127,4 +131,14 @@ public class StarPattern {
     public void setTriplesCount(int triplesCount) {
         this.triplesCount = triplesCount;
     }
+
+    @Override
+public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("StarPattern:\n");
+    for (StatementPattern sp : statementPatterns) {
+        sb.append("  ").append(sp).append("\n");
+    }
+    return sb.toString();
+}
 }

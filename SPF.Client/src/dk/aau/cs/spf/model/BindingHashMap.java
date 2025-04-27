@@ -7,18 +7,28 @@ import java.util.Set;
 
 public class BindingHashMap {
   private HashMap<String, VarBinding> bindingMap;
+  // Static counter to track the number of instances
+  private static int instanceCounter = 0;
+
 
   public BindingHashMap() {
+    instanceCounter++;
+    System.out.println("Created an empty BindingHashMap No. " + instanceCounter);
     bindingMap = new HashMap<String, VarBinding>();
   }
 
+
   public BindingHashMap(BindingHashMap bindingHashMap) {
     this.bindingMap = new HashMap<String, VarBinding>(bindingHashMap.bindingMap);
+    System.out.println("Created a copy of BindingHashMap: " + this.toString());
   }
 
+
   public void put(String variable, VarBinding binding) {
+    System.out.println("Adding binding: " + variable + " -> " + binding);
     bindingMap.put(variable, binding);
   }
+
 
   public VarBinding get(String variable) {
     if (bindingMap.containsKey(variable)) {
@@ -28,10 +38,12 @@ public class BindingHashMap {
     }
   }
 
+
   public Set<String> keySet() {
     return bindingMap.keySet();
   }
 
+  
   public boolean containsKey(String variable) {
     return bindingMap.containsKey(variable);
   }

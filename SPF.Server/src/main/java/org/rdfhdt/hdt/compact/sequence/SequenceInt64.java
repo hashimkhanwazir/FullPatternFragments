@@ -118,6 +118,7 @@ public class SequenceInt64 implements DynamicSequence {
 	 */
 	@Override
 	public long getNumberOfElements() {
+		System.out.println("number of elements = "+ numelements);
 		return numelements;
 	}
 

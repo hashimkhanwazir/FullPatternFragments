@@ -235,23 +235,36 @@ public class BitmapTriples implements TriplesPrivate {
 	 */
 	@Override
 	public IteratorTripleID search(TripleID pattern) {
+		
+		System.out.println("\nClass BitmapTriples.java - Method search (TripleID pattern)");
+        System.out.println("Pattern is: " + pattern);
+		
 		if(isClosed) {
 			throw new IllegalStateException("Cannot search on BitmapTriples if it's already closed");
 		}
 		
 		if (getNumberOfElements() == 0 || pattern.isNoMatch()) {
+			System.out.println("IF getNumberOfElements() == 0 || pattern.isNoMatch() then return new EmptyTriplesIterator(order)");
 			return new EmptyTriplesIterator(order);
 		}
 		
 		
 		TripleID reorderedPat = new TripleID(pattern);
+		System.out.println("TripleID reorderedPat = new TripleID(pattern); - so reorderedPat = "+reorderedPat);
+
 		TripleOrderConvert.swapComponentOrder(reorderedPat, TripleComponentOrder.SPO, order);
+		
 		String patternString = reorderedPat.getPatternString();
+
+		System.out.println("\nClass BitmapTriples.java - String patternString = reorderedPat.getPatternString() so patternString = "+ patternString);
 		
 		if(patternString.equals("?P?")) {
+			System.out.println("IF patternString.equals(?P?)");
 			if(this.predicateIndex!=null) {
+				System.out.println("if(this.predicateIndex!=null) - ie, this.predicateIndex = "+this.predicateIndex+" Then return new BitmapTriplesIteratorYFOQ(this, pattern)");
 				return new BitmapTriplesIteratorYFOQ(this, pattern);
 			} else {
+				System.out.println("Else, return new BitmapTriplesIteratorY(this, pattern);");
 				return new BitmapTriplesIteratorY(this, pattern);
 			}
 		}
@@ -259,22 +272,27 @@ public class BitmapTriples implements TriplesPrivate {
 		if(indexZ!=null && bitmapIndexZ!=null) {
 			// USE FOQ
 			if(patternString.equals("?PO") || patternString.equals("??O")) {
+				System.out.println("IF patternString.equals(?PO) OR (??O) then BitmapTriplesIterZFOQ ");
 				return new BitmapTriplesIteratorZFOQ(this, pattern);	
 			}			
 		} else {
 			if(patternString.equals("?PO")) {
+				System.out.println("Else if (patternString.equals(?PO)");
 				return new SequentialSearchIteratorTripleID(pattern, new BitmapTriplesIteratorZ(this, pattern));
 			}
 
 			if(patternString.equals("??O")) {
+				System.out.println("IF patternString.equals(??O)");
 				return new BitmapTriplesIteratorZ(this, pattern);
 			}
 		}
 		
 		IteratorTripleID bitIt = new BitmapTriplesIterator(this, pattern);
 		if(patternString.equals("???") || patternString.equals("S??") || patternString.equals("SP?") || patternString.equals("SPO")) {
+			System.out.println("IF patternsString ??? or S?? or SP? or SPO - return bitIt");
 			return bitIt;
 		} else {
+			System.out.println("return new SequentialSearchIteratorTripleID(pattern, bitIt)");
 			return new SequentialSearchIteratorTripleID(pattern, bitIt);
 		}
 

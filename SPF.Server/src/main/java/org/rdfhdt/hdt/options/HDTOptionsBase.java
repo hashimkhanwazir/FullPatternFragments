@@ -62,6 +62,7 @@ public class HDTOptionsBase implements HDTOptions {
 	
 	@Override
     public void setOptions(String options) {
+		System.out.println("Class HDTOptionsBase.java - Method: setOptions(String Options)");
 		for(String item : options.split(";")) {
 			int pos = item.indexOf('=');
 			if(pos!=-1) {
@@ -69,6 +70,7 @@ public class HDTOptionsBase implements HDTOptions {
 				String value = item.substring(pos+1);
 				properties.setProperty(property, value);
 			}
+			
 		}
 	}
 

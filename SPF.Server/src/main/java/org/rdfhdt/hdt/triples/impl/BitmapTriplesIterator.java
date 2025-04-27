@@ -51,9 +51,14 @@ public class BitmapTriplesIterator implements IteratorTripleID {
 	private int x, y, z;
 	
 	public BitmapTriplesIterator(BitmapTriples triples, TripleID pattern) {
+		System.out.println("\nClass BitmapTripleIterator(BitmapTriples triples, TripleID pattern)");
 		this.triples = triples;
 		this.returnTriple = new TripleID();
 		this.pattern = new TripleID();
+		System.out.println("this.triples = "+triples);
+		System.out.println("this.returnTriple = new TripleID() - so this.returnTriple = "+this.returnTriple);
+		System.out.println("this.pattern = new TripleID() - so this.pattern = "+this.pattern);
+		System.out.println("Call newSearch(pattern)");
 		newSearch(pattern);
 	}
 
@@ -78,9 +83,18 @@ public class BitmapTriplesIterator implements IteratorTripleID {
 		patX = this.pattern.getSubject();
 		patY = this.pattern.getPredicate();
 		patZ = this.pattern.getObject();
-		
+
 		adjY = triples.adjY;
 		adjZ = triples.adjZ;
+        
+		System.out.println("patX = this.pattern.getSubject() - So patX = "+this.pattern.getSubject());
+		System.out.println("patY = this.pattern.getPredicate() - So patY = "+this.pattern.getPredicate());
+		System.out.println("patZ = this.pattern.getObject() - So patZ = "+this.pattern.getObject());
+
+		System.out.println("adjY = triples.adjY; - so adjY = "+adjY);
+		System.out.println("adjZ = triples.adjZ; - so adjZ = "+adjZ);
+
+
 		
 //		((BitSequence375)triples.bitmapZ).dump();
 				

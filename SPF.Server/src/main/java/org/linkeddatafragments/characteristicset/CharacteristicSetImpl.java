@@ -75,6 +75,7 @@ public class CharacteristicSetImpl extends CharacteristicSetBase {
 
             Integer count = predicateMap.get(triple.getPredicate().toString()).x;
             Integer objects = predicateMap.get(triple.getPredicate().toString()).y;
+            
             if(count == null) continue;
 
             double multiplicity = (double) count / (double) distinct;

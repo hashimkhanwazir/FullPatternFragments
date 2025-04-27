@@ -97,30 +97,45 @@ public class TripleOrderConvert {
     private TripleOrderConvert() {}
 	
 	public static void swapComponentOrder(TripleID triple, TripleComponentOrder from, TripleComponentOrder to) {
+        
+        System.out.println("\nClass TripleOrderConvert  Method: swapComponentOrder(triple, from, to) ");
+        System.out.println("triple = "+triple);
+        System.out.println("from = "+from);
+        System.out.println("to = "+to);
 		if(from==to) {
+            System.out.println("from == to so return nothing");
 			return;
 		}
-		if(from== TripleComponentOrder.Unknown || to== TripleComponentOrder.Unknown) {
+
+		if(from == TripleComponentOrder.Unknown || to == TripleComponentOrder.Unknown) {
 			throw new IllegalArgumentException("Cannot swap Unknown Orders");
 		}
+
 		boolean swap1 = swap1tab[from.ordinal() - 1][to.ordinal() - 1];
         boolean swap2 = swap2tab[from.ordinal() - 1][to.ordinal() - 1];
         boolean swap3 = swap3tab[from.ordinal() - 1][to.ordinal() - 1];
+        System.out.println("swap1 = "+swap1+" , swap2 = "+swap2+" , swap3 = "+swap3);
 		
         if(swap1){
             int tmp = triple.getSubject();
             triple.setSubject(triple.getPredicate());
             triple.setPredicate(tmp);
+            System.out.println("Class TripleOrderConvert.java - Method: swapComponentOrder(t, f, t)");
+            System.out.println("___if(swap1)__ is TRUE ");
         }
         if(swap2){
             int tmp = triple.getSubject();
             triple.setSubject(triple.getObject());
             triple.setObject(tmp);
+            System.out.println("Class TripleOrderConvert.java - Method: swapComponentOrder(t, f, t)");
+            System.out.println("___if(swap2)__ is TRUE ");
         }
         if(swap3){
             int tmp = triple.getPredicate();
             triple.setPredicate(triple.getObject());
             triple.setObject(tmp);
+            System.out.println("Class TripleOrderConvert.java - Method: swapComponentOrder(t, f, t)");
+            System.out.println("___if(swap3)__ is TRUE ");
         }
 	}
 }

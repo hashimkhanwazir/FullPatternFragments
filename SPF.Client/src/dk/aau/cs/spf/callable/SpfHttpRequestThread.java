@@ -15,19 +15,23 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorCompletionService;
 import java.util.concurrent.atomic.AtomicInteger;
 
+
 public class SpfHttpRequestThread implements Callable<Boolean> {
     private SpfHttpRequestTask httpRequestTask;
     private ConcurrentHashMap<String, Content> httpResponseCache;
     private ExecutorCompletionService<Boolean> executorCompletionService;
     private AtomicInteger numberOfTasks;
 
+    
     public SpfHttpRequestThread(SpfHttpRequestTask httpRequestTask,
                                   ConcurrentHashMap<String, Content> httpResponseCache,
-                                  ExecutorCompletionService<Boolean> executorCompletionService, AtomicInteger numberOfTasks) {
+                                  ExecutorCompletionService<Boolean> executorCompletionService, 
+                                  AtomicInteger numberOfTasks) {
         this.httpRequestTask = httpRequestTask;
         this.httpResponseCache = httpResponseCache;
         this.executorCompletionService = executorCompletionService;
         this.numberOfTasks = numberOfTasks;
+        System.out.println("************* I am in the spfHttpRequestThread() constructor ************");
     }
 
     /*
@@ -35,6 +39,7 @@ public class SpfHttpRequestThread implements Callable<Boolean> {
      *
      * @see java.util.concurrent.Callable#call()
      */
+    
     @Override
     public Boolean call() throws ClientProtocolException, IOException {
         String httpUrl = httpRequestTask.getFragmentURL();

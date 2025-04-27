@@ -35,9 +35,9 @@ public class JettyServer {
 
         String config = null;
         if (!commandLine.getArgList().isEmpty()) {
-            config = commandLine.getArgs()[0];
-
-            System.out.println("commandLine: " + config);
+            // java -jar ./target/ldf-server.jar config-example.json, the first arg is config-example
+            config = commandLine.getArgs()[0]; 
+            System.out.println("JettyServer main class --- commandLine: " + config); // therefore the output will be "commandLine: config-example" 
         }
 
         if (commandLine.hasOption('h')) {
@@ -45,7 +45,8 @@ public class JettyServer {
             System.exit(-1);
         }
 
-        int port = 8080;
+        int port = 8080; // This is default port, if we give -p in command line arg, then we can change it 
+
         if (commandLine.hasOption('p')) {
             port = Integer.parseInt(commandLine.getOptionValue('p'));
         }
@@ -88,7 +89,7 @@ public class JettyServer {
 
         // start the server
         server.start();
-        System.out.println("Started server, listening at port " + port);
+        System.out.println("JettyServer class - Started server, listening at port " + port);
 
         // The use of server.join() the will make the current thread join and wait until the server is done executing.
         // See http://docs.oracle.com/javase/7/docs/api/java/lang/Thread.html#join()

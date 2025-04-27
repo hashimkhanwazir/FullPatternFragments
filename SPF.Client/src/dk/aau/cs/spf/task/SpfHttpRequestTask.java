@@ -26,8 +26,11 @@ public class SpfHttpRequestTask {
     private static URLCodec urlCodec = new URLCodec("utf8");
     private boolean single = false;
 
-    public SpfHttpRequestTask(ArrayList<StarPattern> spOrder, String startingFragment,
-                              ArrayList<BindingHashMap> bindings, int tpIdx,
+
+    public SpfHttpRequestTask(ArrayList<StarPattern> spOrder, 
+                              String startingFragment,
+                              ArrayList<BindingHashMap> bindings, 
+                              int tpIdx,
                               ConcurrentLinkedQueue<BindingHashMap> outputBindings) {
         this.spOrder = spOrder;
         this.startingFragment = startingFragment;
@@ -40,10 +43,15 @@ public class SpfHttpRequestTask {
         } catch (EncoderException e) {
             e.printStackTrace();
         }
+        System.out.println(" ********* I am inside the SpfHttpRequestTask() constructor ****** ");
     }
 
-    public SpfHttpRequestTask(ArrayList<StarPattern> spOrder, ArrayList<BindingHashMap> bindings,
-                              int tpIdx, String fragmentURL, ConcurrentLinkedQueue<BindingHashMap> outputBindings) {
+
+    public SpfHttpRequestTask(ArrayList<StarPattern> spOrder, 
+                              ArrayList<BindingHashMap> bindings,
+                              int tpIdx,
+                              String fragmentURL, 
+                              ConcurrentLinkedQueue<BindingHashMap> outputBindings) {
         this.spOrder = spOrder;
         this.bindings = bindings;
         this.tpIdx = tpIdx;

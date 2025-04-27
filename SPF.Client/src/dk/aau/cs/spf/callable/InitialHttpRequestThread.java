@@ -33,6 +33,7 @@ public class InitialHttpRequestThread implements Callable<Integer> {
         int triplesCount = 0;
         try {
             String httpUrl = httpRequestTask.getFragmentURL();
+            System.out.println("\n** InitialHttpRequestThread() call The httpUrl is = " + httpUrl);
             Content content = null;
             boolean cacheContains = false;
             if (httpResponseCache.containsKey(httpUrl)) {
@@ -42,8 +43,18 @@ public class InitialHttpRequestThread implements Callable<Integer> {
                 SparqlQueryProcessor.NUMBER_OF_HTTP_REQUESTS.incrementAndGet();
 
                 SparqlQueryProcessor.SERVER_REQUESTS.incrementAndGet();
+                // The request goes to the server for getting cardinality estimation for a star pattern
                 content = Request.Get(httpUrl).addHeader("accept", "text/turtle").execute().returnContent();
+
+            // Print raw HTTP response
+                System.out.println("\n**Initial HTTP Response Content:\n" + content.asString() + "\n ------------------------------");
                 SparqlQueryProcessor.TRANSFERRED_BYTES.addAndGet(content.asBytes().length + httpUrl.getBytes().length);
+            
+                //   System.out.println("\n ** The content returned as Bytes:\n" + content.asBytes().length + httpUrl.getBytes().length);
+            //    System.out.println("\n ** The content returned:\n" + content.toString());
+            // Stop the program after the first request-response cycle
+            //System.exit(0);
+
             }
             InputStream stream = content.asStream();
             CountMetadataHandler countMetadataHandler = new CountMetadataHandler(stream);

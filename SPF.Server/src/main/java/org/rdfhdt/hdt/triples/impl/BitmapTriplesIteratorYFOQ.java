@@ -58,22 +58,33 @@ public class BitmapTriplesIteratorYFOQ implements IteratorTripleID {
 		DeflateIntegerIterator index;
 		
 		public BitmapTriplesIteratorYFOQ(BitmapTriples triples, TripleID pattern) {
+			System.out.println("\nClass BitmapTriplesIteratorYFOQ(BitmapTriples triples, TripleID pattern) constructor called.");
 			this.triples = triples;
-			this.pattern = new TripleID(pattern);
+			this.pattern = new TripleID(pattern); // copies the object
 			this.returnTriple = new TripleID();
 			
 			TripleOrderConvert.swapComponentOrder(this.pattern, TripleComponentOrder.SPO, triples.order);
 			patY = this.pattern.getPredicate();
+			System.out.println("patY = "+patY);
+
 			if(patY==0) {
+				System.out.println("If patY == 0 then: exception that it is not meant to process this pattern");
 				throw new IllegalArgumentException("This structure is not meant to process this pattern");
 			}
 			
 			adjY = new AdjacencyList(triples.getSeqY(), triples.getBitmapY());
 			adjZ = new AdjacencyList(triples.getSeqZ(), triples.getBitmapZ());
+
+			System.out.println("adjY = "+adjY);
+			System.out.println("adjZ = "+adjZ);
 			
 			numOccurrences = triples.predicateIndex.getNumOcurrences(patY);
 			predBase = triples.predicateIndex.getBase(patY);
 			maxZ = triples.adjZ.getNumberOfElements();
+
+			System.out.println("predBase = "+predBase);
+			System.out.println("numOccurances = "+numOccurrences);
+			System.out.println("maxZ = triples.adjZ.getNumberOfElements() - so maxZ = "+maxZ);
 			
 			goToStart();
 		}
@@ -111,7 +122,7 @@ public class BitmapTriplesIteratorYFOQ implements IteratorTripleID {
 				z = (int) adjZ.get(posZ);
 			}
 			posZ++;	
-		
+		 
 			updateOutput();
 			
 			return returnTriple;
@@ -164,6 +175,14 @@ public class BitmapTriplesIteratorYFOQ implements IteratorTripleID {
 			x = (int) adjY.findListIndex(posY)+1;
 			y = (int) adjY.get(posY);
 	        z = (int) adjZ.get(posZ);
+			System.out.println("\nMethod goToStart() called, so here: \nnumOccurance = "+numOccurrence);
+			System.out.println("posY = "+posY);
+			System.out.println("posZ = prevZ = adjZ.find(posY); - so posZ = "+posZ);
+			System.out.println("nextZ = adjZ.last(posY); - so nextZ = "+nextZ);
+			System.out.println("x = (int) adjY.findListIndex(posY)+1; - so x = "+x);
+			System.out.println("y = (int) adjY.get(posY); - so y = "+y);
+			System.out.println("z = (int) adjZ.get(posZ); - so z = "+z);
+
 		}
 
 		/* (non-Javadoc)

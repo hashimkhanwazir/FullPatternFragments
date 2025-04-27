@@ -47,6 +47,7 @@ public class LinkedDataFragmentServlet extends HttpServlet {
     private final HashMap<String, IDataSource> dataSources = new HashMap<>();
     private final Collection<String> mimeTypes = new ArrayList<>();
 
+    // getConfigFile function
     private File getConfigFile(ServletConfig config) throws IOException {
         String path = config.getServletContext().getRealPath("/");
 
@@ -73,27 +74,34 @@ public class LinkedDataFragmentServlet extends HttpServlet {
     @Override
     public void init(ServletConfig servletConfig) throws ServletException {
         try {
+            System.out.println("\nLDFServlet class - init - starting point");
             // load the configuration
             File configFile = getConfigFile(servletConfig);
+            
             config = new ConfigReader(new FileReader(configFile));
-
-            // register data source types
+            //System.out.println("Config file path: " + configFile.getAbsolutePath());
+            //System.out.println("Config file name: " + configFile.getName());
+            
+            // register data source types - Datasources type is HdtDatasource
             for (Entry<String, IDataSourceType> typeEntry : config.getDataSourceTypes().entrySet()) {
+               // System.out.println("\nData Source Type Key: " + typeEntry.getKey());
+               // System.out.println("Data Source Type Value: " + typeEntry.getValue());
                 DataSourceTypesRegistry.register(typeEntry.getKey(),
                         typeEntry.getValue());
             }
 
-            // register data sources
+            // register data sources - Datasource is Watdiv and its path and description can be shown here
             for (Entry<String, JsonObject> dataSource : config.getDataSources().entrySet()) {
+                //System.out.println("Data Source Key: " + dataSource.getKey());
+                //System.out.println("Data Source Value (JSON): " + dataSource.getValue().toString());
                 dataSources.put(dataSource.getKey(), DataSourceFactory.create(dataSource.getValue()));
             }
-
             // register content types
             //MIMEParse.register("text/html");
             //MIMEParse.register(Lang.RDFXML.getHeaderString());
             //MIMEParse.register(Lang.NTRIPLES.getHeaderString());
             //MIMEParse.register(Lang.JSONLD.getHeaderString());
-            MIMEParse.register(Lang.TTL.getHeaderString());
+            MIMEParse.register(Lang.TTL.getHeaderString()); // In our case the MIME type is text/turtle
         } catch (Exception e) {
             throw new ServletException(e);
         }
@@ -124,19 +132,24 @@ public class LinkedDataFragmentServlet extends HttpServlet {
         String contextPath = request.getContextPath();
         String requestURI = request.getRequestURI();
 
-        //  System.out.println("contextPath =======>" + contextPath);
-        //  System.out.println("requestURI =======>" + requestURI);
+          //System.out.println("contextPath =======>" + contextPath);
+          //System.out.println("requestURI =======>" + requestURI);
         String path = contextPath == null
                 ? requestURI
                 : requestURI.substring(contextPath.length());
+        //System.out.println("Extracted path after removing contextPath: " + path);
 
         String dataSourceName = path.substring(1);
-        // System.out.println("dataSourceName =======> " + dataSourceName);
+        //System.out.println("dataSourceName =======> " + dataSourceName);
         IDataSource dataSource = dataSources.get(dataSourceName);
         if (dataSource == null) {
+            System.out.println("ERROR: DataSource '" + dataSourceName + "' not found!");
             throw new DataSourceNotFoundException(dataSourceName);
+        } else {
+            System.out.println("SUCCESS: Found DataSource for '" + dataSourceName + "'");
         }
         return dataSource;
+
     }
 
     /**
@@ -148,25 +161,39 @@ public class LinkedDataFragmentServlet extends HttpServlet {
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         ILinkedDataFragment fragment = null;
         try {
+             // Print a log when the servlet starts processing the request
+        System.out.println("\nLDFServlet.doGet() - Request received at LinkedDataFragmentServlet - Start Processing");
+        //System.out.println("Request URI: " + request.getRequestURI());
+        System.out.println("--Query String: " + request.getQueryString());
+        System.out.println("--Request Parameters below: ");
+        System.out.println(" --triples: " + request.getParameter("triples"));
+        System.out.println(" --values: " + request.getParameter("values"));
+        System.out.println("\n");
 
-          /*  if (request.getParameter("stats") != null) {
-                response.getWriter().write("HI FROM STATISTICS");
-                return;
-            }*/
+            //if (request.getParameter("stats") != null) {
+            //    response.getWriter().write("HI FROM STATISTICS");
+            //    return;
+            // }
+
             //   System.out.println("===================Hi Javier===================");
             //     System.out.println("===================Start DoGet===================");
             // do conneg
+            
             String acceptHeader = request.getHeader(HttpHeaders.ACCEPT);
             String bestMatch = MIMEParse.bestMatch(acceptHeader);
+            
             //   System.out.println("Accept Header ==>" + acceptHeader);
             //   System.out.println("Best Match==>" + acceptHeader);
-
-            // set additional response headers
+            // System.out.println("The Best Match is ==> " + bestMatch); // Here MIME type "text/turtle" is used 
+            
+            
+            // ############ RESPONSE HEADERS ################
+            // set additional response headers //
             response.setHeader(HttpHeaders.SERVER, "Linked Data Fragments Server");
             response.setContentType(bestMatch);
             response.setCharacterEncoding(StandardCharsets.UTF_8.name());
 
-            // create a writer depending on the best matching mimeType
+            // ############ create a writer depending on the best matching mimeType #############
             ILinkedDataFragmentWriter writer = LinkedDataFragmentWriterFactory.create(config.getPrefixes(), dataSources, bestMatch);
 
             try {
@@ -197,29 +224,52 @@ public class LinkedDataFragmentServlet extends HttpServlet {
 
                 final ILinkedDataFragmentRequest ldfRequest;
 
-                if (request.getParameter("triples") == null) {
+                if (request.getParameter("triples") == null) {  // TPF //
                     if (request.getParameter("values") == null) {
+                        System.out.println("\n Class LDFServlet() - Request type matches TPF !!!");
+                        
+                        // ***** request parser *****//
                         ldfRequest = dataSource.getRequestParser(IDataSource.ProcessorType.TPF)
                                 .parseIntoFragmentRequest(request, config);
+                        System.out.println("\n Class LDFServlet() - ldfRequest is generated !!!");        
+                        
+                        // ***** request processor *****//
                         fragment = dataSource.getRequestProcessor(IDataSource.ProcessorType.TPF)
                                 .createRequestedFragment(ldfRequest);
-                    } else {
-                        ldfRequest = dataSource.getRequestParser(IDataSource.ProcessorType.BRTPF)
+                        System.out.println("\nLDFServlet() - fragment is generated !!!");
+                                
+                    
+                        } else {  // brTPF  //
+                            System.out.println("\nClass LDFServlet() - Request type matches brTPF !!!");
+
+                            // ***** request parser *****//
+                            ldfRequest = dataSource.getRequestParser(IDataSource.ProcessorType.BRTPF)
                                 .parseIntoFragmentRequest(request, config);
-                        fragment = dataSource.getRequestProcessor(IDataSource.ProcessorType.BRTPF)
+                            System.out.println("\nClass LDFServlet() - ldfRequest is generated");
+                                
+                            // ***** request processor *****//
+                            fragment = dataSource.getRequestProcessor(IDataSource.ProcessorType.BRTPF)
                                 .createRequestedFragment(ldfRequest);
+                            System.out.println("\nClass LDFServlet() - fragment is generated !!!");
                     }
-                } else {
+                
+                } else {  // SPF request //
+                    System.out.println("\nLDFServlet() - ProcessorType is SPF !!!");
+
+                    // ***** request parser *****//
                     ldfRequest = dataSource.getRequestParser(IDataSource.ProcessorType.SPF)
                             .parseIntoFragmentRequest(request, config);
+                    
+                    // ***** request processor *****//
                     fragment = dataSource.getRequestProcessor(IDataSource.ProcessorType.SPF)
                             .createRequestedFragment(ldfRequest);
-                }
+                    System.out.println("\nClass LDFServlet() - fragment is generated !!!");
+                } 
 
-                //   System.out.println(" ldfRequest (TriplePatternFragmentRequest) ==>" + ldfRequest.toString());
-
+                // ######################## Writing the selected fragment ###########################
                 writer.writeFragment(response.getOutputStream(), dataSource, fragment, ldfRequest);
                 // System.out.println("===================End DoGet===================");
+           
             } catch (DataSourceNotFoundException ex) {
                 try {
                     response.setStatus(404);

@@ -30,7 +30,7 @@ import dk.aau.cs.spf.model.TriplePattern;
  */
 public class SPFClient {
     private static ArrayList<TriplePattern> triplePatterns = new ArrayList<TriplePattern>();
-    private static List<ProjectionElem> projectionElemList;
+    private static List<ProjectionElem> projectionElemList; // the elements in the SELECT clause are called projectionElemList 
     private static QueryInput input;
     private static QueryProcessingMethod qpMethod = QueryProcessingMethod.SPF;
     private static ArrayList<StarPattern> starPatterns;
@@ -45,13 +45,20 @@ public class SPFClient {
                 return;
             }
 
+            // First: method to be called //
             initializeQueryAndConfig();
+            
+            // Second: The object sqp to be created by calling this constructor
             SparqlQueryProcessor sqp =
-                    new SparqlQueryProcessor(starPatterns, projectionElemList, input, qpMethod, false, true, true);
+            new SparqlQueryProcessor(starPatterns, projectionElemList, input, qpMethod, false, true, true);
+            
+            // Third: 
             sqp.processQuery();
+            
             sqp.printBindings();
 
-            System.out.println(SparqlQueryProcessor.SERVER_REQUESTS.get() + " " + SparqlQueryProcessor.TRANSFERRED_BYTES.get() + " " + SparqlQueryProcessor.RESPONSE_TIME);
+            
+            System.out.println("NoOfRequests: "+ SparqlQueryProcessor.SERVER_REQUESTS.get() + "  " + "TransferredBytes: "+ SparqlQueryProcessor.TRANSFERRED_BYTES.get() + " " + "ResponseTime: "+SparqlQueryProcessor.RESPONSE_TIME);
         } catch (ParseException e) {
             System.err.println("usage: java skytpf-client.jar -f startFragment -q query.sparql");
         } catch (IllegalArgumentException e) {
@@ -76,15 +83,24 @@ public class SPFClient {
         if (query instanceof Projection) {
             Projection proj = (Projection) query;
             projectionElemList = proj.getProjectionElemList().getElements();
-        } else {
-            throw new IllegalArgumentException("The given query should be a select query.");
+            // We can display the projection elements here:
+            System.out.println("nProjection Elements are:");
+            for (ProjectionElem elem : projectionElemList) {
+            System.out.println("- " + elem.getSourceName());  // or elem.toString()
+        } } else {
+            throw new IllegalArgumentException("The given query should be a select query!!!");
         }
         List<StatementPattern> statementPatterns = StatementPatternCollector.process(query);
+        System.out.println("\n** initializeQueryAndConfig() ** \n No. of Collected Statement Patterns = " + statementPatterns.size() + "\n");
+
         Map<String, List<StatementPattern>> patterns = new HashMap<>();
         for (StatementPattern statementPattern : statementPatterns) {
             TriplePattern tp = new TriplePattern(statementPattern);
             triplePatterns.add(tp);
             String subj = tp.getSubjectVarName();
+            System.out.println("Subject Variable: " + subj);
+
+            //Logic for extracting star patterns from the given query
 
             if(patterns.containsKey(subj)) {
                 patterns.get(subj).add(statementPattern);
@@ -95,15 +111,25 @@ public class SPFClient {
             }
         }
 
+        
+
         starPatterns = new ArrayList<>();
         Collection<List<StatementPattern>> lst = patterns.values();
         for(List<StatementPattern> stps : lst) {
-            starPatterns.add(new StarPattern(stps));
+            StarPattern sp = new StarPattern(stps);
+            starPatterns.add(sp);
         }
+
+        // Final output for verification
+        System.out.println("\n ** initializeQueryAndConfig()** Final Star Patterns List is : \n");
+        for (StarPattern sp : starPatterns) {
+        System.out.println(sp);
+}
     }
 
     private static void initializeInput(String[] args)
             throws ParseException, IllegalArgumentException {
+                System.out.println("\n** initializeInput() ** of the SPFClient.java class");
         Option optionF =
                 Option.builder("f").required(false).desc("Start fragment").longOpt("startFr").build();
         optionF.setArgs(1);

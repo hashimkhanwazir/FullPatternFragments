@@ -67,7 +67,42 @@ public class HdtBasedRequestProcessorForSPFs
         characteristicSets = css;
         pageCache = cache;
         model = ModelFactory.createModelForGraph(new HDTGraph(datasource));
+// Debugging: Print the received parameters
+System.out.println("\nHdtBasedRequestProcessorForSPFs - Constructor Parameters");
+
+// Print HDT dataset reference
+if (datasource == null) {
+    System.out.println("---HDT dataset: NULL");
+} else {
+    System.out.println("---HDT dataset: " + datasource.toString());
+}
+
+// Print NodeDictionary reference
+if (dictionary == null) {
+    System.out.println("---NodeDictionary: NULL");
+} else {
+    System.out.println("---NodeDictionary: " + dictionary.toString());
+}
+
+// Print Characteristic Sets
+System.out.println("\n---Characteristic Sets: ");
+if (characteristicSets == null || characteristicSets.isEmpty()) {
+    System.out.println("---No characteristic sets available.");
+} else {
+    for (ICharacteristicSet cs : characteristicSets) {
+        System.out.println(cs.toString());
     }
+}
+
+// Print Cache Information
+if (pageCache == null) {
+    System.out.println("---PageCache: NULL");
+} else {
+    System.out.println("---PageCache size: " + pageCache.toString());
+}
+    }
+
+    
 
     /**
      * @param request
@@ -117,8 +152,16 @@ public class HdtBasedRequestProcessorForSPFs
                 final long limit,
                 final long requestHash) {
             List<Tuple<CharSequence, CharSequence>> s = new ArrayList<>();
+            System.out.println("\nClass HdtBasedRequestProcessorForSPFs.java - Method createFragment");
+            System.out.println("---Received Request: Subject: " + subject);
+            System.out.println("---Stars: " + stars);
+            System.out.println("---Bindings: " + bindings);
+            System.out.println("---Offset: " + offset + ", Limit: " + limit);
+            System.out.println("---requestHash: " + requestHash);
+            System.out.println("-----Inside the for loop:");
             for (Tuple<IStarPatternElement<RDFNode, String, String>,
                     IStarPatternElement<RDFNode, String, String>> tpl : stars) {
+                        System.out.println("tpl = "+tpl);
                 IStarPatternElement<RDFNode, String, String> pe = tpl.x;
                 IStarPatternElement<RDFNode, String, String> oe = tpl.y;
                 String pred = pe.isVariable() ? "?" + pe.asNamedVariable() : pe.asConstantTerm().toString();
@@ -129,9 +172,11 @@ public class HdtBasedRequestProcessorForSPFs
 
             String subj = subject.isVariable() ? "?" + subject.asNamedVariable() : subject.asConstantTerm().toString();
             StarString star = new StarString(subj, s);
+            System.out.println("\n---So the constructed StarString:\n " + star);
 
             return createFragmentByTriplePatternSubstitution(star, bindings, offset, limit, requestHash);
         }
+
 
         private ILinkedDataFragment createFragmentByTriplePatternSubstitution(
                 final StarString star,
@@ -139,6 +184,7 @@ public class HdtBasedRequestProcessorForSPFs
                 final long offset,
                 final long limit,
                 final long requestHash) {
+            System.out.println("\n---Method CreateFragmentByTriplePatternSubstitution() is called");
             final List<Model> stars = new ArrayList<>();
             int found = 0;
             int skipped = 0, count = 0;
@@ -148,11 +194,16 @@ public class HdtBasedRequestProcessorForSPFs
             Tuple<Long, Long> initialKey = new Tuple<>(requestHash, offset);
             IteratorStarString results;
 
+
+
             if (pageCache.containsKey(initialKey)) {
                 results = pageCache.get(initialKey);
                 isNew = false;
+                System.out.println("---Using cached results.");
             } else {
+                System.out.println("---The characteristics sets is = " + characteristicSets.toString());
                 results = datasource.searchStarBindings(star, bindings, characteristicSets);
+                System.out.println("---New query executed against HDT dataset, and Results available:\n " + results.next());
             }
 
             final boolean hasMatches = results.hasNext();
@@ -213,6 +264,10 @@ public class HdtBasedRequestProcessorForSPFs
                 Tuple<Long, Long> key = new Tuple<>(requestHash, (long) count);
                 pageCache.put(key, results);
             }
+
+            System.out.println("Total Results Retrieved: " + found);
+            System.out.println("Estimated Total: " + estimatedValid);
+            System.out.println("Is Last Page: " + isLastPage);
 
             return new StarPatternFragmentImpl(stars, estimatedValid, request.getFragmentURL(), request.getDatasetURL(), request.getPageNumber(), isLastPage, found);
         }

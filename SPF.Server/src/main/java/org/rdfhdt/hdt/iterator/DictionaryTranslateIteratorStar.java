@@ -34,10 +34,17 @@ public class DictionaryTranslateIteratorStar implements IteratorStarString {
     }
 
     public DictionaryTranslateIteratorStar(StarString star, List<Binding> bindings, List<ICharacteristicSet> characteristicSets, HDT hdt) {
+        System.out.println("\n\n Class DictionaryTranslateIteratorStar() constructor");
+        System.out.println("---bindings: " + bindings);
+        System.out.println("---hdt: " + hdt);
+        System.out.println("---Star: " + star);
+
         this.iterator = new StarStringIterator(bindings, star);
         this.hdt = hdt;
         this.curr = iterator.next();
+        System.out.println("---curr = iterator.next() and curr is\n " + this.curr);
         this.currentIterator = new CompoundIteratorStarID(this.hdt, this.curr);
+        System.out.println("---currentIterator returned is\n " + currentIterator.next());
         estimateNumResultsNoCs(star, bindings);
     }
 
@@ -60,6 +67,8 @@ public class DictionaryTranslateIteratorStar implements IteratorStarString {
 
         return numResultEstimation;
     }
+
+
 
     private void estimateNumResults(StarString star, List<Binding> bindings, List<ICharacteristicSet> characteristicSets) {
         if(characteristicSets == null || characteristicSets.size() == 0) {
@@ -85,27 +94,42 @@ public class DictionaryTranslateIteratorStar implements IteratorStarString {
     }
 
     private void estimateNumResultsNoCs(StarString star, List<Binding> bindings) {
+        System.out.println("\nestimateNumResultsNoCs(star, bindings) is called.");
         StarStringIterator it = new StarStringIterator(bindings, star);
         while(it.hasNext()) {
+            System.out.println("--while(it.hasNext())");
             numResultEstimation += estimateNumResultsStar(it.next());
+            System.out.println("numResultEstimation += estimateNumResultsStar(it.next()) so numResultsEstimation = "+numResultEstimation );
         }
     }
 
+    
+    
     private long estimateNumResultsStar(StarString star) {
+        System.out.println("\nestimateNumResultsStar(StarString star) is called.");
         long size = hdt.getDictionary().getSubjects().getNumberOfElements();
+        System.out.println("---- size = hdt.getDictionary().getSubjects().getNumberOfElements(); == "+size);
         double nSize = size;
+        System.out.println("---- Size = size so nSize = "+nSize);
         int s = star.size();
+        System.out.println("---- s = star.size() so s = "+s);
         for(int i = 0; i < s; i++) {
             TripleString t = star.getTripleString(i);
+            System.out.println("--- TripleString t = star.getTripleString(i) so t = " + star.getTripleString(i));
             if(!t.getSubject().equals("") || !t.getObject().equals("")) {
-                try {
+                try { System.out.println("(if Sub or Obj is not Null), so if body executes");
+                      System.out.println("i.e., IteratorTripleString it = hdt.search(t.getSubject(), t.getPredicate(), t.getObject());");
                     IteratorTripleString it = hdt.search(t.getSubject(), t.getPredicate(), t.getObject());
+                    System.out.println("--- t.getSubject(): "+t.getSubject());
+                    System.out.println("--- t.getPredicate(): "+t.getPredicate());
+                    System.out.println("--- t.getObject(): "+t.getObject());
+                    System.out.println("");
                     double mult = (double)it.estimatedNumResults() / (double)size;
                     nSize = nSize * mult;
                 } catch (NotFoundException e) { continue; }
             }
         }
-
+        System.out.println("****** The estimated star results = "+nSize);
         return (long)nSize;
     }
 
@@ -182,6 +206,9 @@ public class DictionaryTranslateIteratorStar implements IteratorStarString {
         StarStringIterator(List<Binding> bindings, StarString star) {
             this.bindings = bindings;
             this.star = star;
+            System.out.println("\nStarStringIterator(bindings, star) constructor is called.");
+            System.out.println("-------------- this.star = " + star);
+            System.out.println("-------------- bindings = " + bindings);
         }
 
         private void bufferNext() {

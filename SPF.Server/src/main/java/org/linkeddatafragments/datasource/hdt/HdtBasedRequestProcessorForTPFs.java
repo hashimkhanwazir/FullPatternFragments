@@ -56,7 +56,9 @@ public class HdtBasedRequestProcessorForTPFs
     protected Worker getTPFSpecificWorker(
             final ITriplePatternFragmentRequest<RDFNode,String,String> request )
                                                 throws IllegalArgumentException
-    {
+    {   
+        System.out.println("\nClass HdtBasedRequestProcessorForTPFs.java - Method getTPFSpecificWorker(request)"); 
+        System.out.println(" ---Here is the request: " + request);
         return new Worker( request );
     }
 
@@ -74,8 +76,9 @@ public class HdtBasedRequestProcessorForTPFs
          */
         public Worker(
                 final ITriplePatternFragmentRequest<RDFNode,String,String> req )
-        {
+        {   
             super( req );
+            System.out.println("\n ---Worker instance created !!!");
         }
 
         /**
@@ -104,10 +107,11 @@ public class HdtBasedRequestProcessorForTPFs
 
             // look up the result from the HDT datasource)
             
-           // System.out.println("look up the result from the HDT datasource)");
+            System.out.println("\n ---Look up the result from the HDT datasource");
             int subjectId = subject.isVariable() ? 0 : dictionary.getIntID(subject.asConstantTerm().asNode(), TripleComponentRole.SUBJECT);
             int predicateId = predicate.isVariable() ? 0 : dictionary.getIntID(predicate.asConstantTerm().asNode(), TripleComponentRole.PREDICATE);
             int objectId = object.isVariable() ? 0 : dictionary.getIntID(object.asConstantTerm().asNode(), TripleComponentRole.OBJECT);
+            System.out.println("\n ---Triple details:" + " subjectId = "+subjectId+" predicateId = "+predicateId+" objectId = "+objectId );
         
             if (subjectId < 0 || predicateId < 0 || objectId < 0) {
                 return createEmptyTriplePatternFragment();
@@ -116,31 +120,50 @@ public class HdtBasedRequestProcessorForTPFs
             final Model triples = ModelFactory.createDefaultModel();
             IteratorTripleID matches = datasource.getTriples().search(new TripleID(subjectId, predicateId, objectId));
             boolean hasMatches = matches.hasNext();
+            System.out.println("\n--- Searching for triple matches.... Found: (True/False) " + hasMatches);
 		
             if (hasMatches) {
                 // try to jump directly to the offset
                 boolean atOffset;
                 if (matches.canGoTo()) {
                     try {
+                        System.out.println("\n--- Attempting to jump to offset: " + offset);
                         matches.goTo(offset);
                         atOffset = true;
+                        //System.out.println(" ------ Step 2a: Successfully jumped to offset.");
                     } // if the offset is outside the bounds, this page has no matches
                     catch (IndexOutOfBoundsException exception) {
                         atOffset = false;
+                        //System.out.println(" ----- Step 2b: Offset out of bounds. Setting atOffset = false.");
                     }
                 } // if not possible, advance to the offset iteratively
                 else {
-                    matches.goToStart();
+                      //System.out.println(" ----- Step 3: Cannot jump directly, advancing iteratively.");
+                      matches.goToStart();
                     for (int i = 0; !(atOffset = i == offset) && matches.hasNext(); i++) {
                         matches.next();
+                        //if (i % 10 == 0) { // Print every 10 iterations to avoid too much output
+                         //   System.out.println(" ------ Step 3a: Moved to match " + i);
+                       // }
                     }
+                   // System.out.println(" ------ Step 3b: Reached offset: " + offset + " -> atOffset = " + atOffset);  
                 }
                 // try to add `limit` triples to the result model
                 if (atOffset) {
+                    System.out.println("---Adding triples to the result model, limit = " + limit);
+                    // toTriple method convert the triple to Jena triple //
                     for (int i = 0; i < limit && matches.hasNext(); i++) {
                         triples.add(triples.asStatement(toTriple(matches.next())));
+
+                       // if (i % 10 == 0 || i == limit - 1) { // Print every 10th triple and last one
+                       //     System.out.println(" ------ Step 4a: Added " + (i + 1) + " triples so far.");
+                       // }
                     }
+                    System.out.println("\n---Finished selecting triples.");
                 }
+            }
+            else {
+                System.out.println("\n---No matches found.");
             }
 
             // estimates can be wrong; ensure 0 is returned if there are no results, 
@@ -153,6 +176,8 @@ public class HdtBasedRequestProcessorForTPFs
 
             // create the fragment
             final boolean isLastPage = ( estimatedTotal < offset + limit );
+            System.out.println("\n(Estimated total triples) estimatedTotal: " + estimatedTotal + " matches.estimatedNumResults(): " +matches.estimatedNumResults()+ 
+                               " (No. of triples in this page) triples.size(): " +triples.size());
             return createTriplePatternFragment( triples, estimatedTotal, isLastPage );
         }
 
@@ -164,6 +189,8 @@ public class HdtBasedRequestProcessorForTPFs
      * @param tripleId the HDT triple
      * @return the Jena triple
      */
+
+
     private Triple toTriple(TripleID tripleId) {
         return new Triple(
             dictionary.getNode(tripleId.getSubject(), TripleComponentRole.SUBJECT),

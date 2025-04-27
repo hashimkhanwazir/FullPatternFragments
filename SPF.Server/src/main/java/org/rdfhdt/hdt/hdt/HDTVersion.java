@@ -19,6 +19,7 @@ public class HDTVersion {
 	    };
 
 	  public static String get_index_suffix(String delimiter) {
+		System.out.println("The HDT version is generated here");
 	      return ".index.v" + HDT_VERSION + delimiter+INDEX_VERSION;
 	    };
 }

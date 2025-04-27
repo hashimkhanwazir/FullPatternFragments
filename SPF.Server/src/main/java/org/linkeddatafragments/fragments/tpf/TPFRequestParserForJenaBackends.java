@@ -17,6 +17,7 @@ public class TPFRequestParserForJenaBackends
     {
         if ( instance == null ) {
             instance = new TPFRequestParserForJenaBackends();
+            System.out.println(" ---instance of TPFRequestParserForJenaBackends created");
         }
         return instance;
     }

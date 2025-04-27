@@ -85,8 +85,11 @@ public abstract class AbstractRequestProcessorForStarPatterns<CTT,NVT,AVT>
             @SuppressWarnings("unchecked")
             final IStarPatternFragmentRequest<CTT,NVT,AVT> spfRequest =
                     (IStarPatternFragmentRequest<CTT,NVT,AVT>) request;
-
-            return createFragment( spfRequest.getSubject(),
+                    System.out.println("\nClass AbstractRequestProcessorForStarPatterns.java - Method createRequestedFragment()");
+System.out.println("----spfRequest.getSubject: "+spfRequest.getSubject()+
+"\n----spfRequest.getStars: "+spfRequest.getStars()+"\n----spfRequest.getBindings: "+spfRequest.getBindings());
+            
+                    return createFragment( spfRequest.getSubject(),
                     spfRequest.getStars(),
                     spfRequest.getBindings(),
                     offset, limit, spfRequest.getRequestHash() );
@@ -132,7 +135,8 @@ public abstract class AbstractRequestProcessorForStarPatterns<CTT,NVT,AVT>
                 final List<Model> triples,
                 final long totalSize,
                 final boolean isLastPage )
-        {
+        {       // Print the total count of matching triples
+                System.out.println("Total matching triples count: " + totalSize);
             return new StarPatternFragmentImpl( triples,
                     totalSize,
                     request.getFragmentURL(),

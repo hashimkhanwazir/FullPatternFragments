@@ -1,5 +1,6 @@
 package org.linkeddatafragments.datasource;
 
+import org.apache.jena.base.Sys;
 import org.linkeddatafragments.fragments.ILinkedDataFragment;
 import org.linkeddatafragments.fragments.ILinkedDataFragmentRequest;
 
@@ -21,7 +22,8 @@ abstract public class AbstractRequestProcessor
     final public ILinkedDataFragment createRequestedFragment(
             final ILinkedDataFragmentRequest request )
                     throws IllegalArgumentException
-    {
+    {   
+        System.out.println("\nClass AbstractRequestProcessor - Method createRequestedFragment(request)");
         return getWorker( request ).createRequestedFragment();
     }
 

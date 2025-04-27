@@ -63,6 +63,7 @@ public final class TripleID implements Comparable<TripleID>, Serializable {
 		this.subject = subject;
 		this.predicate = predicate;
 		this.object = object;
+	
 	}
 	
 	/**
@@ -74,6 +75,7 @@ public final class TripleID implements Comparable<TripleID>, Serializable {
 		this.subject = other.subject;
 		this.predicate = other.predicate;
 		this.object = other.object;
+		System.out.println("\nClass TripleID.java   Method: TripleID(TipleID other) means copies the Object.");
 	}
 
 	/**

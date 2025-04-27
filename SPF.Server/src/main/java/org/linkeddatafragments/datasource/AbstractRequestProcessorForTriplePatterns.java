@@ -129,14 +129,15 @@ public abstract class
         protected ITriplePatternFragment createTriplePatternFragment(
                                                      final Model triples,
                                                      final long totalSize,
-                                                     final boolean isLastPage )
-        {
+                                                     final boolean isLastPage)
+{            
+            System.out.println("\n TPF Imp returns an instance of ITriplePatternFragment class ");
             return new TriplePatternFragmentImpl( triples,
                                                   totalSize,
                                                   request.getFragmentURL(),
                                                   request.getDatasetURL(),
                                                   request.getPageNumber(),
-                                                  isLastPage );
+                                                  isLastPage );                
         }
 
     } // end of class Worker

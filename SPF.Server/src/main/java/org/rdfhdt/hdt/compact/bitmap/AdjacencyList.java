@@ -46,6 +46,12 @@ public class AdjacencyList {
 		super();
 		this.array = array;
 		this.bitmap = bitmap;
+		System.out.println("\nClass AdjacencyList.java - Constructor (Sequence array, Bitmap bitmap)");
+		System.out.println("this.array = array so array = "+array);
+		System.out.println("array.getNumberOfElements() = "+array.getNumberOfElements());
+		System.out.println("bitmap.getNumBits() = "+bitmap.getNumBits());
+		
+
 		if(array.getNumberOfElements()!=bitmap.getNumBits()) {
 			throw new IllegalArgumentException("Adjacency list bitmap and array should have the same size");
 		}

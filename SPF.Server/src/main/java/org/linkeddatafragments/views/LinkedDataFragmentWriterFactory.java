@@ -22,8 +22,10 @@ public class LinkedDataFragmentWriterFactory {
     public static ILinkedDataFragmentWriter create(Map <String, String> prefixes, HashMap<String, IDataSource> datasources, String mimeType) throws IOException {
         switch (mimeType) {
             case HTML:
+                //System.out.println("\nThe mimeType is " + mimeType + " so the case HTML is called\n\n ");
                 return new HtmlTriplePatternFragmentWriterImpl(prefixes, datasources);
             default:
+                //System.out.println("\nThe mimeType is " + mimeType + " so the case DEFAULT is called\n\n ");
                 return new RdfWriterImpl(prefixes, datasources, mimeType);
         }
     }

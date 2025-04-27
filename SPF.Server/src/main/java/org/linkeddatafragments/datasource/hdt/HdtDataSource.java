@@ -243,22 +243,37 @@ public class HdtDataSource extends DataSourceBase {
 
         this.characteristicSets.addAll(sets.values());
     }
+    
 
+    // ### This is Request Parser ###
     @Override
     public IFragmentRequestParser getRequestParser(ProcessorType processor) {
-        if (processor == ProcessorType.TPF)
+        System.out.println("\nClass HdtDataSource.java - Method getRequest-PARSER(ProcessorType)");
+        if (processor == ProcessorType.TPF){
+            System.out.println(" --inside ProcessorType.TPF for PARSING");
             return TPFRequestParserForJenaBackends.getInstance();
-        else if (processor == ProcessorType.BRTPF)
+        }
+        else if (processor == ProcessorType.BRTPF){
+            System.out.println(" --inside ProcessorType.brTPF for PARSING");
             return BRTPFRequestParserForJenaBackends.getInstance();
+        }
+        
+        System.out.println(" --inside ProcessorType.SPF for PARSING");
         return SPFRequestParserForJenaBackends.getInstance();
     }
-
+    
+    // ### This is Request Processor ###
     @Override
     public IFragmentRequestProcessor getRequestProcessor(ProcessorType processor) {
-        if (processor == ProcessorType.TPF)
-            return new HdtBasedRequestProcessorForTPFs(datasource, dictionary);
-        if (processor == ProcessorType.BRTPF)
-            return new HdtBasedRequestProcessorForBRTPFs(datasource, dictionary);
+        System.out.println("\nClass HdtDataSource.java - Method getRequest-PROCESSOR(ProcessorType)");
+        if (processor == ProcessorType.TPF){
+        System.out.println(" --inside ProcessorType.SPF for PROCESSING");
+            return new HdtBasedRequestProcessorForTPFs(datasource, dictionary);}
+        if (processor == ProcessorType.BRTPF){
+        System.out.println(" --inside the brTPF processor for PROCESSING");
+            return new HdtBasedRequestProcessorForBRTPFs(datasource, dictionary);}
+        System.out.println(" --inside the SPF processor for PROCESSING");
         return new HdtBasedRequestProcessorForSPFs(datasource, dictionary, characteristicSets, pageCache);
     }
+
 }

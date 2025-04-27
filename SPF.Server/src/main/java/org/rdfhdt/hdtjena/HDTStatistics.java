@@ -26,6 +26,7 @@
 
 package org.rdfhdt.hdtjena;
 
+import org.apache.jena.base.Sys;
 import org.apache.jena.graph.GraphStatisticsHandler;
 import org.apache.jena.graph.Node;
 import org.rdfhdt.hdt.compact.sequence.Sequence;
@@ -59,9 +60,11 @@ public class HDTStatistics implements GraphStatisticsHandler {
 	@Override
 	public long getStatistic(Node subject, Node predicate, Node object) {
 		try {
+			System.out.println("---getStatistic(s,p,o) called");
 			final BitmapTriples triples = (BitmapTriples) hdt.getTriples();
 			
 			if(subject.isVariable() && predicate.isVariable() && object.isVariable()) {
+				System.out.println("---if ?s ?p ?o all are variables then triples.getNumberOfElements: " + triples.getNumberOfElements());
 				return triples.getNumberOfElements();
 			}
 
@@ -70,6 +73,8 @@ public class HDTStatistics implements GraphStatisticsHandler {
 			s = nodeDictionary.getIntID(subject, TripleComponentRole.SUBJECT);
 			p = nodeDictionary.getIntID(predicate, TripleComponentRole.PREDICATE);
 			o = nodeDictionary.getIntID(object, TripleComponentRole.OBJECT);
+
+			System.out.println("\nsubjects: "+s+" predicates: "+p+" objects: "+o);
 
 			if(s<0||p<0||o<0) {
 				// Not in dataset
@@ -97,6 +102,7 @@ public class HDTStatistics implements GraphStatisticsHandler {
 			}
 
 			IteratorTripleID it = triples.search(new TripleID(s, p, o));
+			System.out.println("+++++++++ it.estimatedNumResults() +++++++++");
 			return it.estimatedNumResults();
 		} catch (Exception e) {
 			// Something went wrong. Worst case estimation instead of crashing.

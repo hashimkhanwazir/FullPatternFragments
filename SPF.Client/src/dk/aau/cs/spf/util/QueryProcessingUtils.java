@@ -27,6 +27,7 @@ public class QueryProcessingUtils {
         return boundedVariables;
     }
 
+
     public static ArrayList<String> getBoundVariablesSP(ArrayList<StarPattern> starPatterns) {
         ArrayList<String> boundedVariables = new ArrayList<String>();
         for (StarPattern starPattern : starPatterns) {
@@ -34,6 +35,7 @@ public class QueryProcessingUtils {
         }
         return boundedVariables;
     }
+
 
     public static TriplePattern findAndRemoveNextWithMaxNumberOfBV(
             ArrayList<TriplePattern> triplePatterns, ArrayList<String> boundVariables) {
@@ -55,25 +57,38 @@ public class QueryProcessingUtils {
         return triplePatterns.remove(indexOfNextTP);
     }
 
+
     public static StarPattern findAndRemoveNextWithMaxNumberOfBVSP(
             ArrayList<StarPattern> starPatterns, ArrayList<String> boundVariables) {
+                System.out.println("** Inside the findAndRemoveNextWithMaxNumberOfBVSP() function");       
+                System.out.println("** Total StarPatterns: " + starPatterns.size());  
+                System.out.println("**Displaying the Star Patterns:\n " + starPatterns.get(0));
+            
         if (starPatterns.isEmpty()) {
+            System.out.println("** No StarPatterns available.");
             return null;
         } else if (starPatterns.size() == 1) {
-            return starPatterns.remove(0);
+            System.out.println("** Only one StarPattern available, selecting it: " + starPatterns.get(0));
+        return starPatterns.remove(0);
         }
         int maxNoOfBV = 0;
         int indexOfNextTP = 0;
         for (int i = 0; i < starPatterns.size(); i++) {
             StarPattern currTP = starPatterns.get(i);
+            System.out.println("***** the currTP is " + currTP);
             int noOfBV = currTP.getNumberOfBoundVariables(boundVariables);
+            System.out.println("Checking StarPattern " + i + ": " + currTP);
+            System.out.println("   - Bound Variables Count: " + noOfBV);
+            System.out.println("   - Current Max Bound Variables: " + maxNoOfBV);
             if (noOfBV > maxNoOfBV) {
+                System.out.println("   -> Updating maxNoOfBV: " + maxNoOfBV + " -> " + noOfBV);
                 maxNoOfBV = noOfBV;
                 indexOfNextTP = i;
             }
         }
         return starPatterns.remove(indexOfNextTP);
     }
+
 
     public static String constructFragmentURL(String startingFragment, TriplePattern tp)
             throws EncoderException {
@@ -88,9 +103,11 @@ public class QueryProcessingUtils {
         return startingFragment + sb.toString();
     }
 
+    
     public static String constructFragmentURL(String startingFragment, StarPattern sp)
             throws EncoderException {
         if(sp.getNumberOfTriplePatterns() == 1) {
+
             return constructFragmentURL(startingFragment, new TriplePattern(sp.getStatement(0)));
         }
 
@@ -106,10 +123,12 @@ public class QueryProcessingUtils {
         String str = "[";
         for (int i = 0; i < num; i++) {
             int j = i + 1;
-            if(sp.getPredicateVar(i).getValue() != null)
+            if(sp.getPredicateVar(i).getValue() != null) {
                 str = str + "p"+j+"," + sp.getPredicateVar(i).getValue() + ";";
+            }
             else
                 str = str + "p"+j+"," + sp.getPredicateVarName(i) + ";";
+            
             if(sp.getObjectVar(i).getValue() != null)
                 str = str + "o"+j+"," + sp.getObjectVar(i).getValue() + ";";
             else
@@ -121,12 +140,14 @@ public class QueryProcessingUtils {
         return startingFragment + sb.toString();
     }
 
+    
     private static boolean appendTripleParam(StringBuilder sb, int num, String paramName,
                                              Boolean isQuestionMarkAdded) throws EncoderException {
         sb.append("&").append(paramName).append("=").append(num);
         return isQuestionMarkAdded;
     }
 
+    
     private static boolean appendUrlParam(StringBuilder sb, Var var, String paramName,
                                           Boolean isQuestionMarkAdded) throws EncoderException {
         if (isQuestionMarkAdded) {
@@ -149,12 +170,14 @@ public class QueryProcessingUtils {
         return isQuestionMarkAdded;
     }
 
+    
     private static boolean appendStringParam(StringBuilder sb, String str, String paramName,
                                       Boolean isQuestionMarkAdded) throws EncoderException {
         sb.append("&").append(paramName).append("=").append(urlCodec.encode(str));
         return isQuestionMarkAdded;
     }
 
+    
     private static String encodeValue(String value) {
         try {
             return URLEncoder.encode(value, StandardCharsets.UTF_8.toString());
@@ -163,6 +186,7 @@ public class QueryProcessingUtils {
         }
     }
 
+    
     private static boolean appendUrlParamStar(StringBuilder sb, Var var, String paramName,
                                               Boolean isQuestionMarkAdded) throws EncoderException {
         if (isQuestionMarkAdded) {
@@ -185,6 +209,7 @@ public class QueryProcessingUtils {
         return isQuestionMarkAdded;
     }
 
+    
     private static boolean matchesWithBinding(TriplePattern tp, Statement triple,
                                               BindingHashMap binding) {
         String subjectVarName = tp.getSubjectVarName();
@@ -211,6 +236,7 @@ public class QueryProcessingUtils {
 
     }
 
+    
     public static void extendBinding(TriplePattern tp, BindingHashMap binding, Statement triple) {
         String subjectVarName = tp.getSubjectVarName();
         if (subjectVarName != null && !binding.containsKey(subjectVarName)) {
@@ -234,6 +260,7 @@ public class QueryProcessingUtils {
         }
     }
 
+    
     public static BindingHashMap createBinding(TriplePattern tp, Statement triple) {
         BindingHashMap binding = new BindingHashMap();
         String subjectVarName = tp.getSubjectVarName();
@@ -259,6 +286,7 @@ public class QueryProcessingUtils {
         return binding;
     }
 
+    
     public static void extendBinding(BindingHashMap firstBHM, BindingHashMap secondBHM) {
         Set<String> secondVarNames = secondBHM.keySet();
         Set<String> firstVarNames = firstBHM.keySet();
@@ -268,6 +296,7 @@ public class QueryProcessingUtils {
         }
     }
 
+    
     public static ArrayList<BindingHashMap> extendBindings(ArrayList<BindingHashMap> bindings,
                                                            TriplePattern tp, Collection<Statement> triples) {
         ArrayList<BindingHashMap> extendedBindings = new ArrayList<BindingHashMap>();
@@ -293,6 +322,7 @@ public class QueryProcessingUtils {
         return extendedBindings;
     }
 
+    
     private static boolean matchesWithBinding(StarPattern tp, List<Statement> triple,
                                               BindingHashMap binding) {
         String subjectVarName = tp.getSubjectVarName();
@@ -333,6 +363,7 @@ public class QueryProcessingUtils {
 
     }
 
+    
     public static void extendBinding(StarPattern sp, BindingHashMap binding, List<Statement> stars) {
         String subjectVarName = sp.getSubjectVarName();
         if (subjectVarName != null && !binding.containsKey(subjectVarName)) {
@@ -369,6 +400,7 @@ public class QueryProcessingUtils {
         }
     }
 
+    
     public static ArrayList<BindingHashMap> extendBindings(ArrayList<BindingHashMap> bindings,
                                                            StarPattern sp, List<List<Statement>> stars) {
         ArrayList<BindingHashMap> extendedBindings = new ArrayList<>();
@@ -393,6 +425,7 @@ public class QueryProcessingUtils {
         return extendedBindings;
     }
 
+    
     public static BindingHashMap extendBindingWithSingleTriple(BindingHashMap currentBinding,
                                                                TriplePattern tp, Statement triple) {
         if (currentBinding == null) {

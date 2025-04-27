@@ -26,7 +26,9 @@ public class InitialHttpRequestTask {
         this.startingFragment = startingFragment;
         this.starPattern = starPattern;
         try {
+            System.out.println("***** I am in the initialHttpRequestTask()  ******** ");
             this.fragmentURL = QueryProcessingUtils.constructFragmentURL(startingFragment, starPattern);
+            System.out.println("***** InitialHttpRequestTask() Constructed Fragment URL: " + this.fragmentURL);
         } catch (EncoderException e) {
             e.printStackTrace();
         }

@@ -47,6 +47,7 @@ public class QueryAnalyzer {
         familiesconfig = FamiliesConfig.getInstance();
         familiesHashedByPredicate = familiesconfig.getFamiliesByPredicate();
 
+
     }
 
     /*
