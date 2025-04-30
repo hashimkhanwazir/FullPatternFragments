@@ -1,0 +1,8 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?s ?p ?o
+WHERE
+  { dbpr:Richard_Nixon
+              ?p  ?o .
+    ?s        ?p  ?o
+  }

@@ -1,0 +1,16 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?address ?location ?numberOfRooms ?numberOfSuites ?chain
+WHERE
+  { ?hotel  rdf:type              dbpo:Building ;
+            dbprop:chain          ?chain ;
+            dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+            dbprop:numberOfRooms  ?numberOfRooms ;
+            dbprop:numberOfSuites  ?numberOfSuites ;
+            dbprop:location       ?location ;
+            rdfs:comment          ?address
+  }

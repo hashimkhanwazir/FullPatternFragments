@@ -1,0 +1,10 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { dbpr:Jordan_Nagai
+              foaf:name  ?name1 .
+    <http://dbpedia.org/resource/Bob_Peterson_(filmmaker)>
+              foaf:name  ?name2
+  }

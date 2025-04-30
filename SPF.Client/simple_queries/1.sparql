@@ -1,0 +1,7 @@
+# Star-shaped query: Get all details of a person
+SELECT ?name ?email ?worksAt ?livesIn WHERE {
+    ?person <http://xmlns.com/foaf/0.1/name> "Alice" .
+    ?person <http://xmlns.com/foaf/0.1/mbox> ?email .
+    ?person <http://example.org/worksAt> ?worksAt .
+    ?person <http://example.org/livesIn> ?livesIn .
+}

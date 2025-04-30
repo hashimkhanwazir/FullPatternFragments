@@ -1,0 +1,8 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?squadra ?stadio
+WHERE
+  { ?squadra  dbpo:ground    ?stadio .
+    ?stadio   dbpo:location  :London
+  }

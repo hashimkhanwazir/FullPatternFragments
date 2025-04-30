@@ -1,0 +1,11 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  d:    <http://dbpedia.org/ontology/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?label ?capital
+WHERE
+  { ?currency  d:currency     :Euro ;
+              rdfs:label      ?label ;
+              dbprop:capital  ?capital
+  }

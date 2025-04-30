@@ -1,0 +1,9 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?influenced  rdf:type      dbpo:Person .
+    ?p        dbpo:influenced  ?influenced ;
+              rdf:type         dbpo:Person
+  }

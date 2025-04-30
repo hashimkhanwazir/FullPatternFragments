@@ -1,0 +1,11 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?a ?b ?c
+WHERE
+  { ?a  rdf:type       dbpo:Artist .
+    ?b  rdf:type       dbpo:Artist .
+    ?c  rdf:type       dbpo:Film ;
+        dbpo:starring  ?a ;
+        dbpo:starring  ?b
+  }

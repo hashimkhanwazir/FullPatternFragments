@@ -1,0 +1,6 @@
+
+
+SELECT ?org ?name WHERE {
+    ?org <http://schema.org/location> <http://example.org/City1> .
+    ?org <http://schema.org/name> ?name .
+}

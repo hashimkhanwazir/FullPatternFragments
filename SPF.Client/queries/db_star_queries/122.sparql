@@ -1,0 +1,10 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  umbelrc: <http://umbel.org/umbel/rc/>
+
+SELECT  ?s ?p ?o
+WHERE
+  { ?s  rdfs:label  "Richard Nixon"@en ;
+        rdf:type    umbelrc:Politician ;
+        ?p          ?o
+  }

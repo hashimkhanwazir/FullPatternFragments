@@ -1,0 +1,8 @@
+# Path-shaped query: Find the event attended by a person via organization
+SELECT ?eventName ?date WHERE {
+    ?person <http://xmlns.com/foaf/0.1/name> "Bob" .
+    ?person <http://example.org/worksAt> ?org .
+    ?event <http://schema.org/location> ?city .
+    ?event <http://schema.org/name> ?eventName .
+    ?event <http://schema.org/date> ?date .
+}

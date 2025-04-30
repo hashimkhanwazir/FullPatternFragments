@@ -1,0 +1,9 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+PREFIX  umbelrc: <http://umbel.org/umbel/rc/>
+
+SELECT  ?object
+WHERE
+  { ?s       dbprop:children  ?object .
+    ?object  rdf:type         umbelrc:Band_MusicGroup
+  }

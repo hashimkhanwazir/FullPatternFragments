@@ -1,0 +1,9 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  d:    <http://dbpedia.org/ontology/>
+
+SELECT  ?album ?artist ?producer
+WHERE
+  { ?album  d:producer       :Timbaland ;
+            d:musicalArtist  ?artist ;
+            d:producer       ?producer
+  }

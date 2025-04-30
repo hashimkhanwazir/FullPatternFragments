@@ -1,0 +1,9 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?object ?name
+WHERE
+  { dbpr:Pressure
+              ?predicate  ?object .
+    ?object   rdfs:label  ?name
+  }

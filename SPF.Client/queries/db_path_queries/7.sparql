@@ -1,0 +1,9 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?nama
+WHERE
+  { dbpr:Panama  dbpo:leader  ?o .
+    ?o        dbprop:name  ?nama
+  }

@@ -1,0 +1,8 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?region ?city
+WHERE
+  { :Lille  dbprop:region  ?region .
+    ?city   dbprop:region  ?region
+  }

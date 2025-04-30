@@ -1,0 +1,11 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?p ?l ?n
+WHERE
+  { ?p  rdf:type           dbpo:Person .
+    ?l  rdf:type           dbpo:Place .
+    ?p  dbprop:birthplace  ?l ;
+        dbprop:name        ?m
+  }

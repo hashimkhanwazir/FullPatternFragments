@@ -1,0 +1,9 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?river
+WHERE
+  { ?river   rdf:type      dbpo:River .
+    ?bridge  rdf:type      dbpo:Bridge ;
+             dbpo:crosses  ?river
+  }

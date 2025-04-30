@@ -1,0 +1,6 @@
+# Star-shaped query: Retrieve all people who own a car and work in a company
+SELECT ?person ?name ?company WHERE {
+    ?person <http://example.org/worksAt> ?company .
+    ?person <http://xmlns.com/foaf/0.1/name> ?name .
+    ?car <http://example.org/owner> ?person .
+}

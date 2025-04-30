@@ -1,0 +1,6 @@
+# Star-shaped query: Find all events happening in a city
+SELECT ?eventName ?date WHERE {
+    ?event <http://schema.org/location> <http://example.org/City1> .
+    ?event <http://schema.org/name> ?eventName .
+    ?event <http://schema.org/date> ?date .
+}

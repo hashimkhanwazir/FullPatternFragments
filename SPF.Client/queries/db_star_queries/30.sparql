@@ -1,0 +1,14 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?subject  rdf:type         dbpo:Airport ;
+              rdfs:label       ?label ;
+              dbprop:location  ?location ;
+              pos:lat          ?latitude ;
+              pos:long         ?longitude
+  }

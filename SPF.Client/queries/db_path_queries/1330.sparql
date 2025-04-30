@@ -1,0 +1,8 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  onto: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?l  onto:type      dbpr:Regions_of_Senegal .
+    ?o  onto:isPartOf  ?l
+  }

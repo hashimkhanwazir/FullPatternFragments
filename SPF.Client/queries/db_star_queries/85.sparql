@@ -1,0 +1,11 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dce:  <http://purl.org/dc/elements/1.1/>
+
+SELECT  ?birth ?other ?description
+WHERE
+  { dbpr:Ludwig_Wittgenstein
+              dbpo:birthDate   ?birth .
+    ?other    dbpo:birthDate   ?birth ;
+              dce:description  ?description
+  }

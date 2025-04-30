@@ -1,0 +1,12 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?o_author_genre ?o_author_nationality ?o_author_birthPlace ?o_author_name
+WHERE
+  { dbpr:J._R._R._Tolkien
+              dbpo:genre        ?o_author_genre ;
+              dbpo:nationality  ?o_author_nationality ;
+              dbpo:birthPlace   ?o_author_birthPlace ;
+              dbprop:name       ?o_author_name
+  }

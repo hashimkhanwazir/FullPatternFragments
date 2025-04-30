@@ -1,0 +1,11 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  str(?name)
+WHERE
+  { ?s  rdf:type         dbpo:IceHockeyPlayer ;
+        dbpo:birthPlace  dbpr:Budapest ;
+        foaf:name        ?name
+  }

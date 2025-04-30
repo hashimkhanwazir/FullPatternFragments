@@ -1,0 +1,9 @@
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  bif:  <bif:>
+
+SELECT  ?artist
+WHERE
+  { ?artist  foaf:name     ?name .
+    ?name    bif:contains  "\"Frank Sinatra\""
+  }

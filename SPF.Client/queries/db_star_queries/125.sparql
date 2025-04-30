@@ -1,0 +1,10 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?player  rdf:type              dbpo:SoccerPlayer ;
+             dbpo:birthDate        ?birthDate ;
+             <http://dbpedia.org/ontology/Person/height>  ?height ;
+             dbpo:position         ?position
+  }

@@ -1,0 +1,5 @@
+# Star-shaped query: Retrieve all properties of a company
+SELECT ?name ?location WHERE {
+    <http://example.org/Org2> <http://schema.org/name> ?name .
+    <http://example.org/Org2> <http://schema.org/location> ?location .
+}

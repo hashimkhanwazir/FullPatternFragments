@@ -1,0 +1,8 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?V
+WHERE
+  { dbpr:Tumko_Na_Bhool_Paayenge
+              ?V  dbpr:Dia_Mirza ;
+              ?V  dbpr:Salman_Khan
+  }

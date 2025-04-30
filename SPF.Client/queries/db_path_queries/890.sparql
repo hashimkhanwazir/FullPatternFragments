@@ -1,0 +1,7 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?ss ?sp ?s ?p
+WHERE
+  { ?ss  ?sp  ?s .
+    ?s   ?p   dbpr:United_States
+  }

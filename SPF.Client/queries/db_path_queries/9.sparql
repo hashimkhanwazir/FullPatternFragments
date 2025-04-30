@@ -1,0 +1,9 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  category: <http://dbpedia.org/resource/Category:>
+
+SELECT  ?person ?awards
+WHERE
+  { ?person  dbpo:award   ?awards .
+    ?awards  dct:subject  category:Nobel_Prize
+  }

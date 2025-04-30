@@ -1,0 +1,9 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?Who
+WHERE
+  { ?Who      dbprop:music  ?music .
+    dbpr:Harold_and_Maude
+              dbprop:music  ?music
+  }

@@ -1,0 +1,9 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?movies  dbpo:starring    :Andy_Kaufman ;
+             dbprop:starring  :Andy_Kaufman
+  }

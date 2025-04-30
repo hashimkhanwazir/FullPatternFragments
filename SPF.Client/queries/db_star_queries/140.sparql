@@ -1,0 +1,13 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  wiki: <http://en.wikipedia.org/wiki/>
+
+SELECT  ?f ?l ?a ?pt
+WHERE
+  { ?f  rdf:type              dbpo:PopulatedPlace ;
+        foaf:isPrimaryTopicOf  wiki:Salzburg ;
+        rdfs:label            ?l ;
+        <http://dbpedia.org/ontology/PopulatedPlace/areaTotal>  ?a
+  }

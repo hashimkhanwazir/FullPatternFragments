@@ -1,0 +1,9 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  url:  <http://schema.org/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?object
+WHERE
+  { ?s       dbprop:name  ?object .
+    ?object  rdf:type     url:MusicGroup
+  }

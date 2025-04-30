@@ -1,0 +1,10 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?name
+WHERE
+  { dbpr:Sweden  rdfs:label         ?name ;
+              dbpo:populationTotal  ?population ;
+              dbpo:flag             ?flag
+  }

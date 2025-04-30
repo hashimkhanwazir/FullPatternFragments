@@ -1,0 +1,9 @@
+PREFIX  wde:  <http://www.wikidata.org/entity/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?object
+WHERE
+  { ?s       dbprop:children  ?object .
+    ?object  rdf:type         wde:Q215627
+  }

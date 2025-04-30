@@ -6,6 +6,12 @@ import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
 
+import com.example.QueryUtils;  // added by Hashim
+import com.example.ShapeToQueryConverter; // same 
+import com.example.QueryShapeBatchProcessor; // same 
+import com.example.QueryShapeDetector;
+import com.example.QueryShapeSingleProcessor;
+
 import dk.aau.cs.spf.model.StarPattern;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -24,6 +30,11 @@ import org.eclipse.rdf4j.query.parser.QueryParser;
 import org.eclipse.rdf4j.query.parser.sparql.SPARQLParserFactory;
 import dk.aau.cs.spf.main.QueryInput.QueryProcessingMethod;
 import dk.aau.cs.spf.model.TriplePattern;
+
+import org.aksw.simba.fedsum.FedSumSourceSelection;
+import org.aksw.simba.quetsal.datastructues.HyperGraph.Vertex;
+import org.aksw.simba.quetsal.datastructues.HyperGraph.HyperEdge;
+
 
 /**
  * @author Ilkcan Keles
@@ -72,13 +83,21 @@ public class SPFClient {
         }
     }
 
+
     private static void initializeQueryAndConfig() throws IOException, IllegalArgumentException {
+        System.out.println("\n initializeQueryAndConfig() called");
         String queryString =
                 FileUtils.readFileToString(new File(input.getQueryFile()), StandardCharsets.UTF_8);
         queryStr = queryString;
+        System.out.println("\nThe queryStr = "+ queryStr);
+        // Lines added by Hashim //
+        //List<List<String>> allCombinations = QueryShapeDetector.detectFormattedShapes(queryStr);
+        //QueryShapeSingleProcessor.displayCombinations(allCombinations);
+        /////////////////////////////////////////////////////
         SPARQLParserFactory factory = new SPARQLParserFactory();
         QueryParser parser = factory.getParser();
         ParsedQuery parsedQuery = parser.parseQuery(queryString, null);
+        System.out.println("\nParsed query is = "+ parsedQuery);
         TupleExpr query = parsedQuery.getTupleExpr();
         if (query instanceof Projection) {
             Projection proj = (Projection) query;
@@ -91,9 +110,13 @@ public class SPFClient {
             throw new IllegalArgumentException("The given query should be a select query!!!");
         }
         List<StatementPattern> statementPatterns = StatementPatternCollector.process(query);
-        System.out.println("\n** initializeQueryAndConfig() ** \n No. of Collected Statement Patterns = " + statementPatterns.size() + "\n");
+        System.out.println("\n No. of Collected Statement Patterns = " + statementPatterns.size() + "\n");
+        System.out.println("\n The collected statement patterns are  = " + statementPatterns.toString() + "\n"); 
+
+        ///////////////////////////////////////////////////////////////////////
 
         Map<String, List<StatementPattern>> patterns = new HashMap<>();
+
         for (StatementPattern statementPattern : statementPatterns) {
             TriplePattern tp = new TriplePattern(statementPattern);
             triplePatterns.add(tp);
@@ -104,28 +127,42 @@ public class SPFClient {
 
             if(patterns.containsKey(subj)) {
                 patterns.get(subj).add(statementPattern);
+                System.out.println("the patterns are: "+ patterns.toString());
             } else {
                 List<StatementPattern> lst = new ArrayList<>();
                 lst.add(statementPattern);
                 patterns.put(subj, lst);
+                System.out.println("In the else, the patterns are: "+ patterns.toString());
             }
         }
 
-        
+        System.out.println("\n****Overall patterns are as below: "+patterns.toString()+"*************************\n");
 
         starPatterns = new ArrayList<>();
         Collection<List<StatementPattern>> lst = patterns.values();
+        System.out.println("\n\n --- lst = patterns.values() --- so lst == "+ lst+"\n");
         for(List<StatementPattern> stps : lst) {
+            System.out.println("---- stps = "+stps+" : lst = "+lst );
             StarPattern sp = new StarPattern(stps);
             starPatterns.add(sp);
+            System.out.println("------- The starPatterns = "+ starPatterns);
         }
 
         // Final output for verification
-        System.out.println("\n ** initializeQueryAndConfig()** Final Star Patterns List is : \n");
+        System.out.println("\n --- Final Star Patterns List is : \n");
         for (StarPattern sp : starPatterns) {
+            System.out.println("\n .... The StarPattern is here: "+sp);
         System.out.println(sp);
+        
+        
+        }
 }
-    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////
+    
+
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     private static void initializeInput(String[] args)
             throws ParseException, IllegalArgumentException {

@@ -1,0 +1,10 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?x ?y
+WHERE
+  { { ?x  dbprop:starring  dbpr:Bruce_Willis ;
+          dbprop:starring  ?y ;
+          dbprop:name      ?z
+    }
+  }

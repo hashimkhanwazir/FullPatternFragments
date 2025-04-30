@@ -1,0 +1,10 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?a
+WHERE
+  { ?a  rdf:type              dbpo:Group ;
+        dbpo:hometown         dbpr:South_Korea ;
+        dbpo:activeYearsEndYear  ?r
+  }

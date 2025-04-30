@@ -1,0 +1,10 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?movie ?topic ?runtime
+WHERE
+  { ?movie  rdf:type              dbpo:Film ;
+            foaf:isPrimaryTopicOf  ?topic ;
+            dbpo:runtime          ?runtime
+  }

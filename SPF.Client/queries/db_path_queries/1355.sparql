@@ -1,0 +1,9 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?auteur ?p ?o
+WHERE
+  { :The_Da_Vinci_Code
+              dbpo:author  ?auteur .
+    ?auteur   ?p           ?o
+  }

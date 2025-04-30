@@ -1,0 +1,11 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  *
+WHERE
+  { ?company  rdf:type              dbpo:Organisation ;
+              dbpo:foundationPlace  :California .
+    ?product  dbpo:developer        ?company ;
+              rdf:type              dbpo:Software
+  }

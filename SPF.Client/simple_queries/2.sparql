@@ -1,0 +1,6 @@
+# Star-shaped query: Retrieve all information about a city
+SELECT ?name ?country ?population WHERE {
+    ?city <http://example.org/name> "Berlin" .
+    ?city <http://example.org/country> ?country .
+    ?city <http://example.org/population> ?population .
+}

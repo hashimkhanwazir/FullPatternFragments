@@ -1,0 +1,10 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?p  dbprop:birthPlace  dbpr:Madrid ;
+        dbprop:team        ?t .
+    ?t  dbpo:league        ?l
+  }

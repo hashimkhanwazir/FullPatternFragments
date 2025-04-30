@@ -1,0 +1,9 @@
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?givenName ?surname ?birth
+WHERE
+  { ?person  dbpo:birthDate  ?birth ;
+             foaf:givenName  ?givenName ;
+             foaf:surname    ?surname
+  }

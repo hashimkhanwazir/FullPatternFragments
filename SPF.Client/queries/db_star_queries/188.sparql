@@ -1,0 +1,9 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?book ?author
+WHERE
+  { ?book  dbprop:name       "Emma"@en ;
+           dbprop:author     ?author ;
+           dbprop:publisher  ?pub
+  }

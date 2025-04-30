@@ -1,0 +1,10 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?m ?n
+WHERE
+  { ?m   dbpo:spouse  ?n ;
+         dbpo:parent  ?p1 .
+    ?n   dbpo:parent  ?p2 .
+    ?p1  dbpo:parent  ?p .
+    ?p2  dbpo:parent  ?p
+  }

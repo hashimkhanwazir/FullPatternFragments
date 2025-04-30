@@ -1,0 +1,8 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?movie
+WHERE
+  { ?movie   dbpo:director  dbpr:Woody_Allen .
+    ?author  dbpo:author    dbpr:Woody_Allen
+  }

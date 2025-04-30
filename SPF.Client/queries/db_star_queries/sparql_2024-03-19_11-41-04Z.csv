@@ -1,0 +1,2893 @@
+"Star","rs"
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?name ?img ?link
+WHERE
+  { ?place  rdf:type              dbpo:Building ;
+            dbprop:locationTown   dbpr:Stockholm ;
+            rdfs:label            ?name ;
+            dbpo:thumbnail        ?img ;
+            foaf:isPrimaryTopicOf  ?link
+  }
+",92
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?cityName ?name
+WHERE
+  { ?person  rdf:type         dbpo:Person ;
+             dbpo:birthPlace  ?city ;
+             foaf:name        ?name .
+    ?city    rdfs:label       ?cityName
+  }
+",23587096
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { ?company  rdf:type              dbpo:Organisation ;
+              dbpo:foundationPlace  dbpr:California .
+    ?product  dbpo:developer        ?company ;
+              rdf:type              dbpo:Software
+  }
+",144
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?label
+WHERE
+  { ?player  rdf:type              dbpo:SoccerPlayer ;
+             <http://dbpedia.org/ontology/Person/height>  ?height ;
+             dbpo:position         ?position ;
+             foaf:givenName        ?gn ;
+             dbprop:nationalteam   ?NationalTeam ;
+             dbprop:placeOfBirth   ?placeOfBirth ;
+             rdfs:label            ?label
+  }
+",217532
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?X ?name ?alcalde ?poblacion
+WHERE
+  { ?X  dbprop:officialName   ?name ;
+        rdf:type              dbpo:Place ;
+        dbprop:leaderName     ?alcalde ;
+        dbpo:populationTotal  ?poblacion
+  }
+",10111
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?place ?img
+WHERE
+  { ?place  rdf:type             dbpo:Building ;
+            dbprop:locationTown  dbpr:Stockholm ;
+            dbpo:thumbnail       ?img
+  }
+",19
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { dbpr:Paul_Walker
+              rdfs:label       ?label .
+    ?starring  dbprop:starring  dbpr:Paul_Walker ;
+              dbpo:abstract    ?abstract
+  }
+",2640
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Uzbekistan
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?name
+WHERE
+  { dbpr:Sweden  rdfs:label         ?name ;
+              dbpo:populationTotal  ?population ;
+              dbpo:flag             ?flag
+  }
+",12
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?place ?img ?link
+WHERE
+  { ?place  rdf:type              dbpo:Building ;
+            dbprop:locationTown   dbpr:Stockholm ;
+            dbpo:thumbnail        ?img ;
+            foaf:isPrimaryTopicOf  ?link
+  }
+",19
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?player  rdf:type              dbpo:SoccerPlayer ;
+             <http://dbpedia.org/ontology/Person/height>  ?height ;
+             dbpo:position         ?position ;
+             foaf:givenName        ?gn ;
+             dbprop:nationalteam   ?NationalTeam ;
+             dbprop:placeOfBirth   ?placeOfBirth ;
+             rdfs:label            ?label
+  }
+",217532
+"PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?filmName
+WHERE
+  { ?filmName  dbpo:director  dbpr:Woody_Allen ;
+              dbpo:starring  dbpr:Woody_Allen ;
+              dbpo:writer    dbpr:Woody_Allen
+  }
+",20
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?abstract ?comment ?subject
+WHERE
+  { dbpr:Chikungunya
+              dct:subject    ?subject ;
+              rdfs:comment   ?comment ;
+              dbpo:abstract  ?abstract
+  }
+",484
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?p ?l
+WHERE
+  { ?p  rdf:type           dbpo:Person .
+    ?l  rdf:type           dbpo:Place .
+    ?p  dbprop:birthplace  ?l
+  }
+",100
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?artist
+WHERE
+  { ?artist  rdf:type          dbpo:Artist ;
+             dbpo:movement     dbpr:Impressionism ;
+             dbpo:nationality  dbpr:French_people
+  }
+",5
+"PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?givenName ?surname ?birth
+WHERE
+  { ?person  dbpo:birthDate  ?birth ;
+             foaf:givenName  ?givenName ;
+             foaf:surname    ?surname
+  }
+",730066
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?name ?award
+WHERE
+  { ?person  rdf:type    dbpo:Person ;
+             rdfs:label  ?name ;
+             dbpo:award  ?award
+  }
+",253914
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbc:  <http://dbpedia.org/resource/Category:>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?film ?directorName
+WHERE
+  { ?film     rdf:type       dbpo:Film ;
+              dct:subject    dbc:Greek_films ;
+              dbpo:director  ?director .
+    ?director  rdfs:label    ?directorName
+  }
+",694
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?s
+WHERE
+  { ?s  rdf:type         foaf:Person ;
+        rdf:type         dbpo:MusicalArtist ;
+        dbpo:birthPlace  dbpr:South_Korea
+  }
+",194
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?cityName ?name
+WHERE
+  { ?person  rdf:type         dbpo:Person ;
+             dbpo:birthPlace  ?cityName ;
+             foaf:name        ?name
+  }
+",2193860
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?n ?b
+WHERE
+  { ?n  dbprop:name        ?name ;
+        dbprop:birthPlace  :Braunschweig ;
+        dbprop:birthDate   ?b
+  }
+",111
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?e  dbpo:team          <http://dbpedia.org/resource/Liverpool_F.C.> ;
+        dbpo:team          <http://dbpedia.org/resource/Everton_F.C.> ;
+        dbprop:birthPlace  ?x
+  }
+",63
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Monaco  rdf:type   dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  p:    <http://dbpedia.org/property/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?player
+WHERE
+  { ?player  rdf:type        dbpo:SoccerPlayer ;
+             p:currentclub   dbpr:FC_Barcelona ;
+             p:nationalteam  dbpr:Brazil_national_football_team
+  }
+",2
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?subject  rdf:type         dbpo:Airport ;
+              rdfs:label       ?label ;
+              dbprop:location  ?location ;
+              pos:lat          ?latitude ;
+              pos:long         ?longitude ;
+              dbprop:iata      ?IATA
+  }
+",24908
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?p
+WHERE
+  { ?s       ?p                dbpr:George_Orwell .
+    ?author  rdf:type          dbpo:Writer ;
+             dbpo:notableWork  ?work
+  }
+",637857
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?p ?l ?m
+WHERE
+  { ?p  rdf:type           dbpo:Person .
+    ?l  rdf:type           dbpo:Place .
+    ?p  dbprop:birthplace  ?l ;
+        dbprop:name        ?m
+  }
+",155
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?p        rdf:type         dbpo:Person ;
+              dbpo:influenced  ?influenced .
+    ?influenced  rdf:type      dbpo:Person
+  }
+",8072
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?albumName
+WHERE
+  { ?album  rdf:type     dbpo:Album ;
+            rdfs:label   ?albumName ;
+            dbpo:artist  dbpr:Ed_Sheeran
+  }
+",14
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?subject  rdf:type         dbpo:Airport ;
+              rdfs:label       ?label ;
+              dbprop:location  ?location ;
+              pos:lat          ?latitude ;
+              pos:long         ?longitude
+  }
+",31734
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?p ?l ?n
+WHERE
+  { ?p  rdf:type           dbpo:Person .
+    ?l  rdf:type           dbpo:Place .
+    ?p  dbprop:birthplace  ?l ;
+        dbprop:name        ?m
+  }
+",155
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?albumName ?artistName
+WHERE
+  { ?album   dbpo:producer       dbpr:Timbaland ;
+             dbpo:musicalArtist  ?artist ;
+             rdfs:label          ?albumName .
+    ?artist  rdfs:label          ?artistName
+  }
+",4822
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?x
+WHERE
+  { ?x  rdf:type  dbpo:TelevisionShow .
+    ?y  rdf:type  dbpo:TelevisionStation .
+    ?x  ?p1       ?y ;
+        ?p2       dbpr:Neil_Patrick_Harris
+  }
+",4
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?o_author_genre ?o_author_nationality ?o_author_birthPlace ?o_author_name
+WHERE
+  { dbpr:J._R._R._Tolkien
+              dbpo:genre        ?o_author_genre ;
+              dbpo:nationality  ?o_author_nationality ;
+              dbpo:birthPlace   ?o_author_birthPlace ;
+              dbprop:name       ?o_author_name
+  }
+",8
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?p  dbprop:birthPlace  dbpr:Madrid .
+    ?t  dbprop:league      dbpr:Premier_League ;
+        dbpo:league        dbpr:Premier_League
+  }
+",278080
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Mongolia
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:China  rdf:type    dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?cityName ?name ?nobel
+WHERE
+  { ?person  rdf:type         dbpo:Person ;
+             dbpo:birthPlace  ?cityName ;
+             dbpo:birthName   ?name ;
+             rdfs:label       ?label
+  }
+",409017
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?name ?award ?awardName
+WHERE
+  { ?person  rdf:type    dbpo:Person ;
+             rdfs:label  ?name ;
+             dbpo:award  ?award
+  }
+",253914
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Tuvalu  rdf:type   dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Sri_Lanka
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",3
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?name ?birthdate
+WHERE
+  { ?name  rdf:type         foaf:Person ;
+           rdf:type         dbpo:MusicalArtist ;
+           dbpo:birthPlace  dbpr:South_Korea ;
+           dbpo:birthDate   ?birthdate
+  }
+",206
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  *
+WHERE
+  { ?company  rdf:type              dbpo:Organisation ;
+              dbpo:foundationPlace  :California .
+    ?product  dbpo:developer        ?company ;
+              rdf:type              dbpo:Software
+  }
+",144
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Oman  rdf:type     dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?m ?n
+WHERE
+  { ?m   dbpo:spouse  ?n ;
+         dbpo:parent  ?p1 .
+    ?n   dbpo:parent  ?p2 .
+    ?p1  dbpo:parent  ?p .
+    ?p2  dbpo:parent  ?p
+  }
+",790
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Antigua_and_Barbuda
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Barbados
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  d:    <http://dbpedia.org/ontology/>
+
+SELECT  ?artistName ?albumName
+WHERE
+  { ?album   d:producer       :Timbaland ;
+             d:musicalArtist  ?artist ;
+             rdfs:label       ?albumName .
+    ?artist  rdfs:label       ?artistName
+  }
+",4822
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Switzerland
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?p1  dbpo:team          <http://dbpedia.org/resource/Hapoel_Tel_Aviv_F.C.> ;
+         dbpo:team          <http://dbpedia.org/resource/Maccabi_Tel_Aviv_F.C.> .
+    ?p2  dbprop:birthPlace  dbpr:Turkey
+  }
+",74520
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Turkey  rdf:type   dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  umbelrc: <http://umbel.org/umbel/rc/>
+
+SELECT  *
+WHERE
+  { ?actor2  rdf:type        umbelrc:Actor ;
+             foaf:name       ?actor_name_en ;
+             dbpo:birthDate  ?stY
+  }
+",12381
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Seychelles
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Solomon_Islands
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Guatemala
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?influenced  rdf:type        dbpo:Person .
+    ?influencer  rdf:type        dbpo:Person .
+    ?influenced  dbpo:influencedBy  ?influencer
+  }
+",18434
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Cambodia
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Papua_New_Guinea
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?p1  dbpo:team          <http://dbpedia.org/resource/Hapoel_Tel_Aviv_F.C.> ;
+         dbpo:team          <http://dbpedia.org/resource/Maccabi_Tel_Aviv_F.C.> .
+    ?p2  dbprop:birthPlace  dbpr:Turkey .
+    ?p1  dbpo:team          ?t .
+    ?p2  dbpo:team          ?t
+  }
+",105
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Malaysia
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Morocco  rdf:type  dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?p        rdf:type         dbpo:Person .
+    ?influenced  rdf:type      dbpo:Person .
+    ?p        dbpo:influenced  ?influenced
+  }
+",8072
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Kenya  rdf:type    dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Equatorial_Guinea
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:South_Africa
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",4
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Gabon  rdf:type    dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Pakistan
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?numberOfRooms ?numberOfRestaurants ?chain
+WHERE
+  { ?hotel  rdf:type              dbpo:Building ;
+            dbprop:chain          ?chain ;
+            dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+            dbprop:numberOfRooms  ?numberOfRooms ;
+            dbprop:numberOfRestaurants  ?numberOfRestaurants
+  }
+",4
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?instanceofGame ?comment
+WHERE
+  { ?instanceOfGame
+              rdf:type       dbpo:Game ;
+              foaf:name      ?gameName ;
+              dbpo:abstract  ?description
+  }
+",2444
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?film ?abstract ?music ?comment
+WHERE
+  { ?film  dbprop:name    ""Titanic""@en ;
+           dbpo:abstract  ?abstract ;
+           dbprop:music   ?music ;
+           rdfs:comment   ?comment
+  }
+",390
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?film ?abstract ?editor ?producer ?comment
+WHERE
+  { ?film  dbprop:name    ""Daddy Day Care""@en ;
+           dbpo:abstract  ?abstract ;
+           dbpo:producer  ?producer ;
+           dbpo:editing   ?editor ;
+           rdfs:comment   ?comment
+  }
+",100
+"PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?pagina ?tipo ?idioma ?propietario ?creador
+WHERE
+  { ?x  dbprop:type      ?tipo ;
+        dbprop:language  ?idioma ;
+        foaf:homepage    ?pagina ;
+        dbprop:owner     ?propietario ;
+        dbprop:author    ?creador
+  }
+",169
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Vegetation
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",158652
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Wallaby  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",5564
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?p  dbprop:birthPlace  dbpr:Madrid ;
+        dbprop:team        ?t .
+    ?t  dbpo:league        ?l
+  }
+",50
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?a ?r
+WHERE
+  { ?a  rdf:type              dbpo:Group ;
+        dbpo:hometown         dbpr:South_Korea ;
+        dbpo:activeYearsEndYear  ?r
+  }
+",83
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?a
+WHERE
+  { ?a  rdf:type              dbpo:Group ;
+        dbpo:hometown         dbpr:South_Korea ;
+        dbpo:activeYearsEndYear  ?r
+  }
+",83
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?author ?WrittenWork ?genre ?birthPlace
+WHERE
+  { ?WrittenWork  rdf:type   dbpo:WrittenWork ;
+              dbprop:author  ?author ;
+              dbprop:genre   ?genre ;
+              dbprop:author  :Stel_Pavlou ;
+              dbprop:author  ?birthPlace
+  }
+",5
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Chronicle
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",4649
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Guinea  rdf:type   dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?address ?location ?numberOfRooms ?chain
+WHERE
+  { ?hotel    rdf:type              dbpo:Building .
+    ?location  rdf:type             dbpo:Place .
+    ?hotel    dbprop:chain          ?chain ;
+              dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+              dbprop:numberOfRooms  ?numberOfRooms ;
+              dbprop:location       ?location ;
+              dbprop:address        ?address
+  }
+",21
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?address ?location ?numberOfRooms ?numberOfSuites ?chain
+WHERE
+  { ?hotel  rdf:type              dbpo:Building ;
+            dbprop:chain          ?chain ;
+            dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+            dbprop:numberOfRooms  ?numberOfRooms ;
+            dbprop:numberOfSuites  ?numberOfSuites ;
+            dbprop:location       ?location ;
+            dbprop:address        ?address
+  }
+",16
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?company  rdf:type        dbpo:Organisation .
+    ?product  dbpo:developer  ?company ;
+              rdf:type        dbpo:Software
+  }
+",19296
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?person ?name ?birth
+WHERE
+  { ?person  dbpo:birthPlace  dbpr:Lille ;
+             dbprop:name      ?name ;
+             dbpo:birthDate   ?birth
+  }
+",200
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dce:  <http://purl.org/dc/elements/1.1/>
+
+SELECT  ?birth ?other ?description
+WHERE
+  { dbpr:Ludwig_Wittgenstein
+              dbpo:birthDate   ?birth .
+    ?other    dbpo:birthDate   ?birth ;
+              dce:description  ?description
+  }
+",20
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Guam  rdf:type     dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?book ?series
+WHERE
+  { ?book  rdf:type       dbpo:Book ;
+           dbprop:author  :Wilbur_Smith ;
+           dbprop:series  ?series
+  }
+",16
+"PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Swaziland
+              rdf:type      dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }
+",2
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?address ?location ?numberOfRooms ?chain
+WHERE
+  { ?location  rdf:type             dbpo:Place .
+    ?hotel    dbprop:chain          ?chain ;
+              dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+              dbprop:numberOfRooms  ?numberOfRooms ;
+              dbprop:location       ?location ;
+              dbprop:address        ?address
+  }
+",21
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?author ?WrittenWork ?genre ?birthDate
+WHERE
+  { ?WrittenWork  rdf:type   dbpo:WrittenWork ;
+              dbprop:author  ?author ;
+              dbprop:genre   ?genre ;
+              dbprop:author  :Stel_Pavlou ;
+              dbprop:author  ?birthDate
+  }
+",5
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?address ?location ?numberOfRooms ?numberOfSuites ?chain
+WHERE
+  { ?hotel  rdf:type              dbpo:Building ;
+            dbprop:chain          ?chain ;
+            dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+            dbprop:numberOfRooms  ?numberOfRooms ;
+            dbprop:numberOfSuites  ?numberOfSuites ;
+            dbprop:location       ?location ;
+            rdfs:comment          ?address
+  }
+",16
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?squadra ?stadio
+WHERE
+  { ?squadra  rdf:type     dbpo:SoccerClub ;
+              dbpo:league  :La_Liga ;
+              dbpo:ground  ?stadio
+  }
+",41
+"PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Brazil  ?p1  ?r2 .
+    ?r2       ?p2  ?r3 .
+    ?r3       ?p3  ?r4 .
+    dbpr:Brazil  ?p1  ?r6 .
+    ?r6       ?p2  ?r7 .
+    ?r7       ?p3  ?r8
+  }
+",3537708
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?address ?location ?numberOfRooms ?chain
+WHERE
+  { ?hotel  rdf:type              dbpo:Building ;
+            dbprop:chain          ?chain ;
+            dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+            dbprop:numberOfRooms  ?numberOfRooms
+  }
+",13
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?hotel ?address ?location ?numberOfRooms ?chain
+WHERE
+  { ?hotel  rdf:type              dbpo:Building ;
+            dbprop:chain          ?chain ;
+            dbprop:chain          :Fairmont_Hotels_and_Resorts ;
+            dbprop:numberOfRooms  ?numberOfRooms ;
+            dbprop:location       ?location ;
+            dbprop:address        ?address
+  }
+",21
+"PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?x ?y ?z
+WHERE
+  { { ?x  dbprop:starring  dbpr:Bruce_Willis ;
+          dbprop:starring  ?y ;
+          dbprop:name      ?z
+    }
+  }
+",487
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?person ?name
+WHERE
+  { ?person  dbpo:birthPlace  dbpr:Lille ;
+             dbprop:name      ?name ;
+             dbpo:birthDate   ?birth
+  }
+",200
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  d:    <http://dbpedia.org/ontology/>
+
+SELECT  ?album ?artist ?producer
+WHERE
+  { ?album  d:producer       :Timbaland ;
+            d:musicalArtist  ?artist ;
+            d:producer       ?producer
+  }
+",245
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?influenced  rdf:type      dbpo:Person .
+    ?p        dbpo:influenced  ?influenced ;
+              rdf:type         dbpo:Person
+  }
+",8072
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?movie ?topic ?runtime
+WHERE
+  { ?movie  rdf:type              dbpo:Film ;
+            foaf:isPrimaryTopicOf  ?topic ;
+            dbpo:runtime          ?runtime
+  }
+",78142
+"PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?player ?position ?manager ?years
+WHERE
+  { ?player   dbprop:clubs         dbpr:FC_Barcelona ;
+              dbprop:position      ?position .
+    ?manager  dbprop:managerclubs  dbpr:FC_Barcelona ;
+              dbprop:manageryears  ?years
+  }
+",194417
+"PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?x ?y
+WHERE
+  { { ?x  dbprop:starring  dbpr:Bruce_Willis ;
+          dbprop:starring  ?y ;
+          dbprop:name      ?z
+    }
+  }
+",487
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  d:    <http://dbpedia.org/ontology/>
+
+SELECT  ?artistName ?albumName
+WHERE
+  { ?album  d:producer       :Timbaland ;
+            d:musicalArtist  ?artist ;
+            rdfs:label       ?albumName ;
+            rdfs:label       ?artistName
+  }
+",2426
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  url:  <http://schema.org/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { ?e  rdf:type              url:EducationalOrganization ;
+        rdfs:comment          ?snippet ;
+        foaf:isPrimaryTopicOf  ?url
+  }
+",78481
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  url:  <http://schema.org/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { ?e  rdf:type              url:EducationalOrganization ;
+        rdfs:label            ?name ;
+        rdfs:comment          ?snippet ;
+        foaf:isPrimaryTopicOf  ?url ;
+        dbpo:wikiPageID       ?pageId
+  }
+",229097
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?roleLabel ?jobLabel
+WHERE
+  { dbpr:The_Big_Bang_Theory
+              dbpo:starring    ?actor .
+    ?role     dbpo:portrayer   ?actor ;
+              dbpo:occupation  ?job .
+    ?job      rdfs:label       ?jobLabel .
+    ?role     rdfs:label       ?roleLabel
+  }
+",639
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?name ?alcalde
+WHERE
+  { ?X  dbprop:officialName  ?name ;
+        rdf:type             dbpo:Place ;
+        dbprop:leaderName    ?alcalde
+  }
+",11535
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?actordb  dbprop:name        ""Mae Busch""@en ;
+              dbpo:birthDate     ?birthDate ;
+              dbprop:birthPlace  ?birthPlace
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?a  rdf:type         dbpo:Actor ;
+        dbpo:birthDate   ?date ;
+        dbpo:birthPlace  ?place ;
+        dbprop:name      ?name
+  }
+",11316
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { ?x  dbpo:series      dbpr:The_Big_Bang_Theory ;
+        rdf:type         dbpo:FictionalCharacter ;
+        dbpo:occupation  ?occ
+  }
+",6
+"PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?role ?job
+WHERE
+  { dbpr:The_Big_Bang_Theory
+              dbpo:starring    ?actor .
+    ?role     dbpo:portrayer   ?actor ;
+              dbpo:occupation  ?job
+  }
+",6
+"PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  onto: <http://dbpedia.org/ontology/>
+
+SELECT  ?pagina ?tipo ?idioma ?propietario ?creador
+WHERE
+  { ?x  foaf:homepage  ?pagina ;
+        onto:type      ?tipo ;
+        onto:language  ?idioma ;
+        onto:owner     ?propietario ;
+        onto:author    ?creador
+  }
+",231
+"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  bif:  <bif:>
+
+SELECT  ?uri
+WHERE
+  { ?uri    rdfs:label    ?label .
+    ?label  bif:contains  ""'2008-09_Football_League_Championship'"" .
+    ?uri    ?property     ?value
+  }
+",73
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?soggetto ?modelli ?motori
+WHERE
+  { :Alfa_Romeo_MiTo
+              dbpo:manufacturer  ?soggetto .
+    ?modelli  dbpo:manufacturer  ?soggetto ;
+              dbpo:engine        ?motori
+  }
+",413
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?soggetto ?modelli ?motori
+WHERE
+  { :Alfa_Romeo_MiTo
+              dbpo:manufacturer  ?soggetto .
+    ?modelli  dbpo:manufacturer  ?soggetto ;
+              dbpo:engine        ?engine
+  }
+",413
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { { <http://dbpedia.org/resource/Only_You_(Yazoo_song)>
+                foaf:name   ?name ;
+                dbpo:album  ?album ;
+                foaf:name   ?other
+    }
+  }
+",16
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?name
+WHERE
+  { ?agent  rdf:type        dbpo:Agent ;
+            dbpo:birthName  ?name .
+    ?agent ^dbpo:producer ?movie .
+    ?movie  dbprop:starring  dbpr:Natalie_Portman
+  }
+",8
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  category: <http://dbpedia.org/resource/Category:>
+
+SELECT  ?s ?p ?object
+WHERE
+  { ?s  rdfs:label   ?object ;
+        dct:subject  category:Perfume_ingredients ;
+        ?p           ?o
+  }
+",45342
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { ?p  rdf:type        dbpo:Person ;
+        dbpo:birthDate  ?date ;
+        rdf:type        ?type ;
+        foaf:name       ?name ;
+        rdfs:label      ?label
+  }
+",146945662
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?property1 ?property2
+WHERE
+  { ?x  rdf:type    dbpo:Activity ;
+        ?property1  ?value ;
+        ?property2  ?value
+  }
+",184915
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?name ?protein
+WHERE
+  { ?proinsulin  rdf:type         dbpo:Biomolecule ;
+              dbprop:name         ?name ;
+              dbpo:refseqprotein  ?protein
+  }
+",42
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  umbelrc: <http://umbel.org/umbel/rc/>
+
+SELECT  ?s ?p ?o
+WHERE
+  { ?s  rdfs:label  ""Richard Nixon""@en ;
+        rdf:type    umbelrc:Politician ;
+        ?p          ?o
+  }
+",369
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?s ?cumple ?place ?ocupacion
+WHERE
+  { ?s  rdfs:label         ""Alicia Keys""@en ;
+        rdf:type           foaf:Person ;
+        dbprop:birthDate   ?cumple ;
+        dbprop:birthName   ?nombre ;
+        dbprop:birthPlace  ?place ;
+        dbprop:occupation  ?ocupacion
+  }
+",7
+"PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  onto: <http://dbpedia.org/ontology/>
+
+SELECT  ?pagina ?tipo ?idioma ?propietario ?creador
+WHERE
+  { ?Gmail  foaf:homepage  ?pagina ;
+            onto:type      ?tipo ;
+            onto:language  ?idioma ;
+            onto:owner     ?propietario ;
+            onto:author    ?creador
+  }
+",231
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?player  rdf:type              dbpo:SoccerPlayer ;
+             dbpo:birthDate        ?birthDate ;
+             <http://dbpedia.org/ontology/Person/height>  ?height ;
+             dbpo:position         ?position
+  }
+",86564
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?s ?nombre ?cumple ?place ?ocupacion
+WHERE
+  { ?s  rdfs:label         ""Alicia Keys""@en ;
+        rdf:type           foaf:Person ;
+        dbprop:birthDate   ?cumple ;
+        dbprop:birthName   ?nombre ;
+        dbprop:birthPlace  ?place ;
+        dbprop:occupation  ?ocupacion
+  }
+",7
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?X ?name
+WHERE
+  { ?X  dbprop:officialName  ?name ;
+        rdf:type             dbpo:Place ;
+        dbprop:leaderName    ?alcalde
+  }
+",11535
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT  *
+WHERE
+  { ?s  rdf:type  dbpo:PopulatedPlace ;
+        pos:lat   ?lat ;
+        pos:long  ?long
+  }
+",519913
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?river
+WHERE
+  { ?river   rdf:type      dbpo:River .
+    ?bridge  rdf:type      dbpo:Bridge ;
+             dbpo:crosses  ?river
+  }
+",2489
+"PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?airport  dbprop:name  ?name ;
+              dbprop:iata  ?iata_code ;
+              dbprop:icao  ?icao_code ;
+              pos:lat      ?latitude ;
+              pos:long     ?longitude
+  }
+",8178
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?person ?occ
+WHERE
+  { ?person  dbpo:series      dbpr:The_Big_Bang_Theory ;
+             rdf:type         dbpo:FictionalCharacter ;
+             dbpo:occupation  ?occ
+  }
+",6
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?X ?name ?poblacion
+WHERE
+  { ?X  dbprop:officialName   ?name ;
+        rdf:type              dbpo:Place ;
+        dbpo:populationTotal  ?poblacion
+  }
+",158195
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?soggetto ?modelli ?engine ?motori
+WHERE
+  { :Alfa_Romeo_MiTo
+              dbpo:manufacturer  ?soggetto .
+    ?modelli  dbpo:manufacturer  ?soggetto ;
+              dbpo:engine        ?engine
+  }
+",413
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?DBpediaInstitution
+              rdf:type              dbpo:University ;
+              dbpo:wikiPageID       ?PageID_2 ;
+              dbpo:numberOfStudents  ?City ;
+              dbpo:viceChancellor   ?VC
+  }
+",178
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?person ?name
+WHERE
+  { ?person  dbpo:birthPlace  :Lille ;
+             dbprop:name      ?name ;
+             dbpo:birthDate   ?birth
+  }
+",200
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?airport  dbprop:name           ?name ;
+              dbpo:iataLocationIdentifier  ?iata_code ;
+              pos:lat               ?latitude ;
+              pos:long              ?longitude
+  }
+",8405
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?soggetto ?modelli ?engine
+WHERE
+  { :Alfa_Romeo_MiTo
+              dbpo:manufacturer  ?soggetto .
+    ?modelli  dbpo:manufacturer  ?soggetto ;
+              dbpo:engine        ?engine
+  }
+",413
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  str(?name)
+WHERE
+  { ?s  rdf:type         dbpo:IceHockeyPlayer ;
+        dbpo:birthPlace  dbpr:Budapest ;
+        foaf:name        ?name
+  }
+",42
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?company ?name ?predecessor ?industrie
+WHERE
+  { ?company  rdf:type          dbpo:Company ;
+              dbpo:predecessor  ?predecessor ;
+              dbpo:industry     ?industrie
+  }
+",1100
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  wiki: <http://en.wikipedia.org/wiki/>
+
+SELECT  ?f ?l ?a ?pt
+WHERE
+  { ?f  rdf:type              dbpo:PopulatedPlace ;
+        foaf:isPrimaryTopicOf  wiki:Salzburg ;
+        rdfs:label            ?l ;
+        <http://dbpedia.org/ontology/PopulatedPlace/areaTotal>  ?a
+  }
+",12
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?company ?predecessor ?industrie
+WHERE
+  { ?company  rdf:type          dbpo:Company ;
+              dbpo:predecessor  ?predecessor ;
+              dbpo:industry     ?industrie
+  }
+",1100
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { ?person  dbpo:series      dbpr:The_Big_Bang_Theory ;
+             rdf:type         dbpo:FictionalCharacter ;
+             dbpo:occupation  ?occ
+  }
+",6
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  d:    <http://dbpedia.org/ontology/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?label ?capital
+WHERE
+  { ?currency  d:currency     :Euro ;
+              rdfs:label      ?label ;
+              dbprop:capital  ?capital
+  }
+",411
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?company ?name ?predecessor ?industrie
+WHERE
+  { ?company  rdf:type          dbpo:Company ;
+              dbprop:name       ?name ;
+              dbpo:predecessor  ?predecessor ;
+              dbpo:industry     ?industrie
+  }
+",1151
+"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  bif:  <bif:>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?x ?type
+WHERE
+  { ?x        grs:point      ?z ;
+              dbpo:abstract  ?abstract ;
+              dbprop:type    ?type ;
+              ?a             ?b .
+    ?abstract  bif:contains  ""beautiful""
+  }
+",9833
+"PREFIX  db-ont: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?id  rdf:type       db-ont:Film ;
+         dbprop:title   ?ft ;
+         db-ont:imdbId  ?imdb_id
+  }
+",23
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT  *
+WHERE
+  { ?s  rdf:type  dbpo:Place ;
+        pos:lat   ?lat ;
+        pos:long  ?long
+  }
+",738714
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?company ?predecessor ?subsidary ?industrie ?product
+WHERE
+  { ?company  rdf:type          dbpo:Company ;
+              dbpo:predecessor  ?predecessor ;
+              dbpo:industry     ?industrie ;
+              dbpo:product      ?product ;
+              dbpo:subsidiary   ?subsidary
+  }
+",1797
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?instanceOfGame
+WHERE
+  { ?instanceOfGame
+              rdf:type       dbpo:Game ;
+              foaf:name      ?gameName ;
+              dbpo:abstract  ?description
+  }
+",2444
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?artist  rdf:type      dbpo:MusicalArtist ;
+             dbprop:genre  :Blues ;
+             dbprop:genre  :Rock_and_roll ;
+             dbprop:genre  :Rockabilly
+  }
+",16
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?instanceOfGame ?name ?description
+WHERE
+  { ?instanceOfGame
+              rdf:type       dbpo:Game ;
+              foaf:name      ?name ;
+              dbpo:abstract  ?description
+  }
+",2444
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?instanceOfGame ?name ?comment
+WHERE
+  { ?instanceOfGame
+              rdf:type      dbpo:Game ;
+              rdfs:label    ?name ;
+              rdfs:comment  ?comment
+  }
+",18460
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Park  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1617
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Pun  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",233
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?f ?l ?a
+WHERE
+  { ?f  rdf:type       dbpo:Film ;
+        rdfs:label     ?l ;
+        dbpo:abstract  ?a
+  }
+",1465968
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  category: <http://dbpedia.org/resource/Category:>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?s ?p ?o
+WHERE
+  { ?s  rdfs:label   ""Iso E Super""@en ;
+        dct:subject  category:Perfume_ingredients ;
+        ?p           ?o
+  }
+",42
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?name
+WHERE
+  { ?s  rdf:type         dbpo:IceHockeyPlayer ;
+        dbpo:birthPlace  dbpr:Budapest ;
+        foaf:name        ?name
+  }
+",42
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?person ?birthdate ?deathdate
+WHERE
+  { ?person  dbpo:birthPlace  :Lille ;
+             dbpo:birthDate   ?birthdate ;
+             dbpo:deathDate   ?deathdate
+  }
+",66
+"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  bif:  <bif:>
+
+SELECT  *
+WHERE
+  { ?s1  ?s1textp      ?o1 .
+    ?o1  bif:contains  ""\""leader\"""" .
+    ?s1  ?s1p          ?s1o
+  }
+",7888651
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?x  foaf:name           ?name ;
+        rdf:type            dbpo:Artist ;
+        dbpo:nationality    :Spain ;
+        dbprop:dateOfBirth  ?nacimiento
+  }
+",217
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?person ?birth ?death ?hometown
+WHERE
+  { ?person  rdf:type        dbpo:Person ;
+             dbpo:birthDate  ?birth ;
+             dbpo:deathDate  ?death ;
+             dbpo:hometown   ?homwtown
+  }
+",4336
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?movie
+WHERE
+  { ?agent  rdf:type        dbpo:Agent ;
+            dbpo:birthName  ?name .
+    ?agent ^dbpo:producer ?movie .
+    ?movie  dbprop:starring  dbpr:Natalie_Portman
+  }
+",8
+"PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?pagina ?tipo ?idioma ?propietario ?creador
+WHERE
+  { dbpr:Gmail  foaf:homepage  ?pagina ;
+              dbprop:type    ?tipo ;
+              dbprop:owner   ?propietario ;
+              dbprop:author  ?creador
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?name ?predecessor ?industrie
+WHERE
+  { ?company  dbprop:name       ?name ;
+              dbpo:predecessor  ?predecessor ;
+              dbpo:industry     ?industrie
+  }
+",1151
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { ?p     rdf:type              dbpo:Person ;
+           dbpo:birthDate        ?date ;
+           rdf:type              ?type ;
+           foaf:name             ?name .
+    ?type  rdfs:label            ?label .
+    ?p     foaf:isPrimaryTopicOf  ?topic
+  }
+",1923930
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?book ?genre
+WHERE
+  { ?book  dbprop:name       ""The Catcher in the Rye""@en ;
+           dbprop:genre      ?genre ;
+           dbprop:publisher  ?pub
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?instanceOfGame ?description
+WHERE
+  { ?instanceOfGame
+              rdf:type       dbpo:Game ;
+              foaf:name      ?name ;
+              dbpo:abstract  ?description
+  }
+",2444
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?film ?abstract ?editor ?distributor ?producer ?music ?comment
+WHERE
+  { ?film  dbprop:name         ""Titanic""@en ;
+           dbpo:abstract       ?abstract ;
+           dbpo:producer       ?producer ;
+           dbpo:editing        ?editor ;
+           dbprop:distributor  ?distributor ;
+           dbprop:music        ?music ;
+           rdfs:comment        ?comment
+  }
+",1884
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { ?p     rdf:type        dbpo:Person ;
+           dbpo:birthDate  ?date ;
+           rdf:type        ?type ;
+           foaf:name       ?name .
+    ?type  rdfs:label      ?label
+  }
+",1924590
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?DBpediaInstitution
+              rdf:type             dbpo:University ;
+              dbpo:wikiPageID      ?PageID_2 ;
+              dbpo:viceChancellor  ?Link
+  }
+",381
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?DBpediaInstitution
+              rdf:type              dbpo:University ;
+              dbpo:wikiPageID       ?PageID_2 ;
+              dbpo:wikiPageExternalLink  ?Link
+  }
+",67982
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?person ?name ?birthdate
+WHERE
+  { ?person  dbpo:birthPlace  :Lille ;
+             dbprop:name      ?name ;
+             dbpo:birthDate   ?birthdate
+  }
+",200
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  wiki: <http://en.wikipedia.org/wiki/>
+
+SELECT  ?f ?l ?a ?pt
+WHERE
+  { ?f  rdf:type              dbpo:PopulatedPlace ;
+        foaf:isPrimaryTopicOf  <http://en.wikipedia.org/wiki/Salzburg_(state)> ;
+        rdfs:label            ?l ;
+        <http://dbpedia.org/ontology/PopulatedPlace/areaTotal>  ?a
+  }
+",12
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?film ?abstract ?editor ?producer ?comment
+WHERE
+  { ?film  dbprop:name    ""The Shining""@en ;
+           dbpo:abstract  ?abstract ;
+           dbpo:producer  ?producer ;
+           dbpo:editing   ?editor ;
+           rdfs:comment   ?comment
+  }
+",144
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?film ?abstract ?editor ?producer ?comment
+WHERE
+  { ?film  dbprop:name    ""She's Gotta Have It""@en ;
+           dbpo:abstract  ?abstract ;
+           dbpo:producer  ?producer ;
+           dbpo:editing   ?editor ;
+           rdfs:comment   ?comment
+  }
+",25
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT  *
+WHERE
+  { ?s  rdf:type     dbpo:Place ;
+        pos:lat      ?lat ;
+        pos:long     ?long ;
+        rdf:type     ?type ;
+        dct:subject  ?sub
+  }
+",42438030
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?name ?birth ?death ?person
+WHERE
+  { ?person  dbprop:birthPlace  :Poland ;
+             dbpo:birthDate     ?birth ;
+             dbpo:deathDate     ?death
+  }
+",595
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?DBpediaInstitution
+              rdf:type             dbpo:University ;
+              dbpo:wikiPageID      ?PageID_2 ;
+              dbpo:city            ?City ;
+              dbpo:viceChancellor  ?VC
+  }
+",506
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?DBpediaInstitution
+              rdf:type              dbpo:University ;
+              dbpo:wikiPageID       ?PageID_2 ;
+              dbpo:city             ?City ;
+              dbpo:viceChancellor   ?VC ;
+              dbpo:numberOfStudents  ?NumberOfStudents
+  }
+",226
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?DBpediaInstitution
+              rdf:type              dbpo:University ;
+              dbpo:wikiPageID       ?PageID_2 ;
+              dbpo:wikiPageExternalLink  ?Abstract
+  }
+",67982
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?DBpediaInstitution
+              rdf:type             dbpo:University ;
+              dbpo:wikiPageID      ?PageID_2 ;
+              dbpo:thumbnail       ?City ;
+              dbpo:viceChancellor  ?VC
+  }
+",200
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?company ?predecessor ?subsidiary ?industrie ?product
+WHERE
+  { ?company  rdf:type          dbpo:Company ;
+              dbpo:predecessor  ?predecessor ;
+              dbpo:industry     ?industrie ;
+              dbpo:product      ?product ;
+              dbpo:subsidiary   ?subsidiary
+  }
+",1797
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  *
+WHERE
+  { ?politician  rdf:type      dbpo:Politician ;
+              dbpo:birthPlace  :Canada ;
+              dbpo:almaMater   ?y
+  }
+",74
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Village  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",3780
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Population
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",2419
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Prize  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",472
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Composer
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1588
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?book ?author
+WHERE
+  { ?book  dbprop:name       ""Emma""@en ;
+           dbprop:author     ?author ;
+           dbprop:publisher  ?pub
+  }
+",2
+"PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?film ?abstract ?distributor ?music ?comment
+WHERE
+  { ?film  dbprop:name         ""Titanic""@en ;
+           dbpo:abstract       ?abstract ;
+           dbprop:distributor  ?distributor ;
+           dbprop:music        ?music ;
+           rdfs:comment        ?comment
+  }
+",774
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Goodness
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",261
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Novel  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1033
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Region  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",3290
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Province
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",2587
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Tower  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",326
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?gameName ?description
+WHERE
+  { ?game  rdf:type       dbpo:Game ;
+           foaf:name      ?gameName ;
+           dbpo:abstract  ?description
+  }
+",2444
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { ?motorway  rdf:type    dbpo:Road ;
+              dbpo:length  ?length ;
+              foaf:name    ?name
+  }
+",7141
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Genus  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1543
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Party  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1195
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Art  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1847
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Airline  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",45
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Wheel  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",363
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Villain  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",531
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Album  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",111
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Community
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",772
+"PREFIX  d:    <http://dbpedia.org/ontology/>
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+SELECT  ?artistName ?albumName
+WHERE
+  { ?album   d:musicalArtist  ?artist ;
+             rdfs:label       ?albumName .
+    ?artist  rdfs:label       ?artistname
+  }
+",1159482
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Mathematician
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",141
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Pharaoh  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",11989
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Film  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",157339
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Conference
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1286
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Coalition
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",3749
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Anthem  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",3035
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Anime  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",2752
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Stadium  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",478
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:District
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",2573
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Municipality
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",357
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Book  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1229
+"PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?pagina ?tipo ?idioma ?propietario ?creador
+WHERE
+  { ?x  dbprop:type      ?tipo ;
+        dbprop:language  ?idioma ;
+        dbprop:owner     ?propietario ;
+        dbprop:author    ?creador ;
+        foaf:homepage    ?pagina
+  }
+",169
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Lille  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",15658
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Island  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1690
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Cartoon  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",7156
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Hypocycloid
+              dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",1186
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Role  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",4725
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Protein  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",17484
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Species  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",2116
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { ?actor2  rdf:type        dbpo:Actor ;
+             foaf:name       ?actor_name_en ;
+             dbpo:birthDate  ?birth_date
+  }
+",10250
+"PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?type
+WHERE
+  { dbpr:Self  dct:subject  ?category .
+    ?page     dct:subject  ?category ;
+              rdf:type     ?type
+  }
+",612
+"PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?artist  rdf:type      dbpo:MusicalArtist ;
+             dbprop:genre  :Blues ;
+             dbprop:genre  :Rock_and_roll
+  }
+",92
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?films
+WHERE
+  { ?films  rdf:type       dbpo:Film ;
+            dbpo:starring  dbpr:Richard_Gere ;
+            dbpo:starring  dbpr:Julia_Roberts
+  }
+",2
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+
+SELECT  ?name
+WHERE
+  { ?s  rdf:type     dbpo:Place ;
+        pos:lat      ?lat ;
+        pos:long     ?long ;
+        rdf:type     ?type ;
+        dct:subject  ?sub
+  }
+",42438030
+"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  bif:  <bif:>
+
+SELECT  ?s1c
+WHERE
+  { ?s1  ?s1textp      ?o1 .
+    ?o1  bif:contains  ""(LIONEL AND MESSI)"" .
+    ?s1  rdf:type      ?s1c
+  }
+",16403
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  ?name ?nick
+WHERE
+  { ?person  rdf:type   foaf:Person ;
+             foaf:name  ?name ;
+             foaf:nick  ?nick
+  }
+",34821
+"PREFIX  db-ont: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?select  rdf:type       db-ont:Film .
+    ?id      dbprop:title   ?ft ;
+             db-ont:imdbId  ?imdb_id
+  }
+",120259464
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?a ?b ?c
+WHERE
+  { ?a  rdf:type       dbpo:Artist .
+    ?b  rdf:type       dbpo:Artist .
+    ?c  rdf:type       dbpo:Film ;
+        dbpo:starring  ?a ;
+        dbpo:starring  ?b
+  }
+",64277
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { ?company  rdf:type              dbpo:Organisation ;
+              dbpo:foundationPlace  dbpr:Germany .
+    ?product  dbpo:developer        ?company ;
+              rdf:type              dbpo:Software
+  }
+",18
+"PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  db-ont: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?id  db-ont:starring  ?starring ;
+         rdf:type         db-ont:Film ;
+         db-ont:imdbId    ?imdb_id
+  }
+",74319
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?b ?c
+WHERE
+  { ?b  rdf:type       dbpo:Artist .
+    ?c  rdf:type       dbpo:Work ;
+        dbpo:starring  dbpr:George_Harrison ;
+        dbpo:starring  ?b
+  }
+",57
+"PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  bif:  <bif:>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?x ?abstract
+WHERE
+  { ?x        rdf:type         dbpo:Place ;
+              grs:point        ?z ;
+              dbpo:abstract    ?abstract ;
+              dbprop:district  ?dist .
+    ?abstract  bif:contains    ""beautiful""
+  }
+",39
+"PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?actordirector ?film ?gross
+WHERE
+  { ?film  dbprop:starring  ?actordirector ;
+           dbprop:director  ?actordirector ;
+           dbprop:gross     ?gross
+  }
+",395
+"PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  bif:  <bif:>
+
+SELECT  ?x ?a ?b ?abstract
+WHERE
+  { ?x        grs:point      ?z ;
+              dbpo:abstract  ?abstract ;
+              ?a             ?b .
+    ?abstract  bif:contains  ""pretty""
+  }
+",15177

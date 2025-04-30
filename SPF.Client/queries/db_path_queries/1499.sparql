@@ -1,0 +1,11 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?military_conflicts
+WHERE
+  { ?military_conflicts
+              rdf:type     dbpo:MilitaryConflict .
+    dbpr:T._E._Lawrence
+              dbpo:battle  ?military_conflicts
+  }

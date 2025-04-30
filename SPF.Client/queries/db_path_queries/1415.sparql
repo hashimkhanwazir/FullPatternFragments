@@ -1,0 +1,9 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  umbelrc: <http://umbel.org/umbel/rc/>
+
+SELECT  ?object
+WHERE
+  { ?s       dbpo:successor  ?object .
+    ?object  rdf:type        umbelrc:Politician
+  }

@@ -1,0 +1,10 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  category: <http://dbpedia.org/resource/Category:>
+
+SELECT  ?s ?p ?object
+WHERE
+  { ?s  rdfs:label   ?object ;
+        dct:subject  category:Perfume_ingredients ;
+        ?p           ?o
+  }

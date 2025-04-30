@@ -1,0 +1,10 @@
+PREFIX  db-ont: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?select  rdf:type       db-ont:Film .
+    ?id      dbprop:title   ?ft ;
+             db-ont:imdbId  ?imdb_id
+  }

@@ -1,0 +1,9 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  db-ont: <http://dbpedia.org/ontology/>
+
+SELECT  *
+WHERE
+  { ?id  db-ont:starring  ?starring ;
+         rdf:type         db-ont:Film ;
+         db-ont:imdbId    ?imdb_id
+  }

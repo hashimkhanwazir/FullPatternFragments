@@ -1,0 +1,10 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+
+SELECT  *
+WHERE
+  { dbpr:Hitoshi_Takagi
+              foaf:name  ?name1 .
+    dbpr:Chika_Sakamoto
+              foaf:name  ?name2
+  }

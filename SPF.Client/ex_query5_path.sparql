@@ -1,0 +1,5 @@
+SELECT ?a ?b ?c
+WHERE {
+  ?a <http://example.org/property/p2> ?b .
+  ?b <http://example.org/property/p2> ?c .
+}

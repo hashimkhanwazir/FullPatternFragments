@@ -1,0 +1,13 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?film ?abstract ?distributor ?music ?comment
+WHERE
+  { ?film  dbprop:name         "Titanic"@en ;
+           dbpo:abstract       ?abstract ;
+           dbprop:distributor  ?distributor ;
+           dbprop:music        ?music ;
+           rdfs:comment        ?comment
+  }

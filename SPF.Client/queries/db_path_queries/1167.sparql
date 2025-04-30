@@ -1,0 +1,15 @@
+PREFIX  skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?dc0 ?sk0 ?sk1 ?sk2
+WHERE
+  { dbpr:Diagnosis
+              dct:subject     ?dc0 .
+    ?dc0      skos:broader    ?s0 .
+    ?s0       skos:prefLabel  ?sk0 ;
+              skos:broader    ?s1 .
+    ?s1       skos:prefLabel  ?sk1 ;
+              skos:broader    ?s2 .
+    ?s2       skos:prefLabel  ?sk2
+  }

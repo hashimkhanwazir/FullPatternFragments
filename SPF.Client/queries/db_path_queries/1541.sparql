@@ -1,0 +1,9 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?Where
+WHERE
+  { ?Where    rdf:type      dbpo:Place .
+    ?sparkling_wine
+              dbpo:product  ?Where
+  }

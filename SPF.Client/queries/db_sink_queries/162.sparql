@@ -1,0 +1,8 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?player
+WHERE
+  { ?player  dbprop:clubs  :Borussia_Dortmund ;
+             dbprop:clubs  :FC_Bayern_Munich
+  }

@@ -1,0 +1,10 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?p1  dbpo:team          <http://dbpedia.org/resource/Hapoel_Tel_Aviv_F.C.> ;
+         dbpo:team          <http://dbpedia.org/resource/Maccabi_Tel_Aviv_F.C.> .
+    ?p2  dbprop:birthPlace  dbpr:Turkey
+  }

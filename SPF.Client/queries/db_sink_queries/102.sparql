@@ -1,0 +1,11 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?albumName ?artistName
+WHERE
+  { ?album   dbpo:producer       dbpr:Timbaland ;
+             dbpo:musicalArtist  ?artist ;
+             rdfs:label          ?albumName .
+    ?artist  rdfs:label          ?artistName
+  }

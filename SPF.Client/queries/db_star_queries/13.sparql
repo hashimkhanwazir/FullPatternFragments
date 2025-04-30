@@ -1,0 +1,12 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?abstract ?comment ?subject
+WHERE
+  { dbpr:Chikungunya
+              dct:subject    ?subject ;
+              rdfs:comment   ?comment ;
+              dbpo:abstract  ?abstract
+  }

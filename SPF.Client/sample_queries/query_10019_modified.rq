@@ -1,0 +1,4 @@
+SELECT * WHERE {  
+                  ?v2 <http://purl.org/stuff/rev#text> ?v3 .  
+                  ?v2 <http://purl.org/stuff/rev#title> ?v4 .  
+                  ?v2 <http://purl.org/stuff/rev#totalVotes> ?v5 .  }

@@ -1,0 +1,10 @@
+SELECT ?s1 ?o1 ?o2 ?s2 ?o3 ?o4 ?s3 ?o6
+WHERE {
+  ?s1 <http://example.org/property/p1> ?o1 .
+  ?s1 <http://example.org/property/p2> ?o2 .
+  ?s2 <http://example.org/property/p3> ?o3 .
+  ?s2 <http://example.org/property/p4> ?o4 .
+  ?s1 <http://example.org/property/p6> ?s2 .
+  ?s3 <http://example.org/property/p7> ?o6 .
+  ?s2 <http://example.org/property/p8> ?s3 .
+}

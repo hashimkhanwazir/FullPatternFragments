@@ -1,0 +1,5 @@
+SELECT ?x ?y ?z
+WHERE {
+  ?x <http://example.org/property/p4> ?y .
+  ?y <http://example.org/property/p5> ?z .
+}

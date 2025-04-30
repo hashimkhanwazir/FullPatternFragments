@@ -1,0 +1,9 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?n ?b
+WHERE
+  { ?n  dbprop:name        ?name ;
+        dbprop:birthPlace  :Braunschweig ;
+        dbprop:birthDate   ?b
+  }

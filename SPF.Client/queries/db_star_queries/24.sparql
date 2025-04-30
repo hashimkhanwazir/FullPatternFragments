@@ -1,0 +1,11 @@
+PREFIX  p:    <http://dbpedia.org/property/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?player
+WHERE
+  { ?player  rdf:type        dbpo:SoccerPlayer ;
+             p:currentclub   dbpr:FC_Barcelona ;
+             p:nationalteam  dbpr:Brazil_national_football_team
+  }

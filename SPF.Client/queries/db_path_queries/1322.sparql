@@ -1,0 +1,14 @@
+PREFIX  xsd:  <http://www.w3.org/2001/XMLSchema#>
+PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  bif:  <bif:>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?x ?type
+WHERE
+  { ?x        grs:point      ?z ;
+              dbpo:abstract  ?abstract ;
+              dbprop:type    ?type ;
+              ?a             ?b .
+    ?abstract  bif:contains  "beautiful"
+  }

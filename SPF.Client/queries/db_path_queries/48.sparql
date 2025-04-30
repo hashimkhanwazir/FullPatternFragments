@@ -1,0 +1,8 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?p  dbprop:team    ?t .
+    ?t  dbprop:league  dbpr:Premier_League
+  }

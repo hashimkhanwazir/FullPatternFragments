@@ -1,0 +1,11 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  pos:  <http://www.w3.org/2003/01/geo/wgs84_pos#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { ?airport  dbprop:name           ?name ;
+              dbpo:iataLocationIdentifier  ?iata_code ;
+              pos:lat               ?latitude ;
+              pos:long              ?longitude
+  }

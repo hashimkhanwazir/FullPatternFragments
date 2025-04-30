@@ -1,0 +1,10 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?player ?position ?manager ?years
+WHERE
+  { ?player   dbprop:clubs         dbpr:FC_Barcelona ;
+              dbprop:position      ?position .
+    ?manager  dbprop:managerclubs  dbpr:FC_Barcelona ;
+              dbprop:manageryears  ?years
+  }

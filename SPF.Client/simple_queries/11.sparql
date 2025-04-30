@@ -1,0 +1,5 @@
+# Sink-shaped query: Find all people living in a city
+SELECT ?person ?name WHERE {
+    ?person <http://example.org/livesIn> <http://example.org/City3> .
+    ?person <http://xmlns.com/foaf/0.1/name> ?name .
+}

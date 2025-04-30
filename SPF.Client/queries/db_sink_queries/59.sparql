@@ -1,0 +1,9 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?p ?o
+WHERE
+  { dbpr:Pierre_Curie
+              ?p  ?o .
+    dbpr:Elsa_Dax
+              ?p  ?o
+  }

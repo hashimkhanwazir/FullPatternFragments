@@ -1,0 +1,9 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?Who
+WHERE
+  { ?daughter  dbpo:spouse  ?Who .
+    dbpr:Robert_F._Kennedy
+              dbpo:child   ?daughter
+  }

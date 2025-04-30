@@ -1,0 +1,2 @@
+select * where {  ?v0 <http://schema.org/nationality> <http://db.uwaterloo.ca/~galuc/wsdbm/Country7> .  
+                  ?v0 <http://xmlns.com/foaf/familyName> ?v1 . }  

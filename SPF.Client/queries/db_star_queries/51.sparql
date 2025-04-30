@@ -1,0 +1,12 @@
+PREFIX  grs:  <http://www.georss.org/georss/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  *
+WHERE
+  { dbpr:Turkey  rdf:type   dbpo:Place ;
+              dbpo:capital  ?capital .
+    ?capital  rdf:type      dbpo:PopulatedPlace ;
+              grs:point     ?coord
+  }

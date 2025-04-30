@@ -1,0 +1,11 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dct:  <http://purl.org/dc/terms/>
+PREFIX  category: <http://dbpedia.org/resource/Category:>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+
+SELECT  ?s ?p ?o
+WHERE
+  { ?s  rdfs:label   "Iso E Super"@en ;
+        dct:subject  category:Perfume_ingredients ;
+        ?p           ?o
+  }

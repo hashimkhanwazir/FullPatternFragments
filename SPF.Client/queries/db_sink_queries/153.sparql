@@ -1,0 +1,13 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?author ?WrittenWork ?genre ?birthPlace
+WHERE
+  { ?WrittenWork  rdf:type   dbpo:WrittenWork ;
+              dbprop:author  ?author ;
+              dbprop:genre   ?genre ;
+              dbprop:author  :Stel_Pavlou ;
+              dbprop:author  ?birthPlace
+  }

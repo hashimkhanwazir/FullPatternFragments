@@ -1,0 +1,8 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?DeathPlace
+WHERE
+  { ?BirthPlace  dbprop:birthPlace  dbpr:Belgium .
+    ?DeathPlace  dbprop:deathPlace  dbpr:Belgium
+  }

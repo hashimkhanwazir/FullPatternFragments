@@ -1,0 +1,11 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?company ?predecessor ?subsidiary ?industrie ?product
+WHERE
+  { ?company  rdf:type          dbpo:Company ;
+              dbpo:predecessor  ?predecessor ;
+              dbpo:industry     ?industrie ;
+              dbpo:product      ?product ;
+              dbpo:subsidiary   ?subsidiary
+  }

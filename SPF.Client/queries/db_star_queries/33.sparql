@@ -1,0 +1,11 @@
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?x
+WHERE
+  { ?x  rdf:type  dbpo:TelevisionShow .
+    ?y  rdf:type  dbpo:TelevisionStation .
+    ?x  ?p1       ?y ;
+        ?p2       dbpr:Neil_Patrick_Harris
+  }

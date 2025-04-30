@@ -28,6 +28,7 @@ dk/aau/cs/spf/callable/SpfResponseParserThread.class
 dk/aau/cs/spf/callable/BrtpfResponseParserThread.class
 dk/aau/cs/spf/task/SimpleTripleHandler.class
 dk/aau/cs/spf/main/SPFClient.class
+dk/aau/cs/spf/main/QueryShapeExtractor.class
 dk/aau/cs/spf/util/Tuple.class
 dk/aau/cs/spf/callable/InitialHttpRequestThread.class
 dk/aau/cs/spf/callable/TpfResponseParserThread.class

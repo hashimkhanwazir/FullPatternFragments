@@ -1,0 +1,8 @@
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?V
+WHERE
+  { ?V  dbprop:starring  dbpr:Rani_Mukerji ;
+        dbprop:starring  dbpr:Salman_Khan
+  }

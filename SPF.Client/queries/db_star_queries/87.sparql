@@ -1,0 +1,11 @@
+PREFIX  :     <http://dbpedia.org/resource/>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?book ?series
+WHERE
+  { ?book  rdf:type       dbpo:Book ;
+           dbprop:author  :Wilbur_Smith ;
+           dbprop:series  ?series
+  }

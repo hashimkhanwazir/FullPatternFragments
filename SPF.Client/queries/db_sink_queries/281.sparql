@@ -1,0 +1,7 @@
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?actordirector ?acted ?directed
+WHERE
+  { ?acted    dbprop:starring  ?actordirector .
+    ?directed  dbprop:director  ?actordirector
+  }

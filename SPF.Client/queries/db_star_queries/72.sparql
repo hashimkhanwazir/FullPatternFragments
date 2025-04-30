@@ -1,0 +1,11 @@
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?pagina ?tipo ?idioma ?propietario ?creador
+WHERE
+  { ?x  dbprop:type      ?tipo ;
+        dbprop:language  ?idioma ;
+        foaf:homepage    ?pagina ;
+        dbprop:owner     ?propietario ;
+        dbprop:author    ?creador
+  }

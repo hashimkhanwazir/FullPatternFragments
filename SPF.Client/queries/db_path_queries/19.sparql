@@ -1,0 +1,10 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  *
+WHERE
+  { dbpr:Paul_Walker
+              rdfs:label       ?label .
+    ?starring  dbprop:starring  dbpr:Paul_Walker
+  }

@@ -1,0 +1,16 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  foaf: <http://xmlns.com/foaf/0.1/>
+PREFIX  dbprop: <http://dbpedia.org/property/>
+
+SELECT  ?label
+WHERE
+  { ?player  rdf:type              dbpo:SoccerPlayer ;
+             <http://dbpedia.org/ontology/Person/height>  ?height ;
+             dbpo:position         ?position ;
+             foaf:givenName        ?gn ;
+             dbprop:nationalteam   ?NationalTeam ;
+             dbprop:placeOfBirth   ?placeOfBirth ;
+             rdfs:label            ?label
+  }

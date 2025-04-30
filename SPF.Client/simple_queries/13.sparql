@@ -1,0 +1,5 @@
+# Path-shaped query: Find a person's email via their workplace
+SELECT ?email WHERE {
+    ?person <http://example.org/worksAt> <http://example.org/Org3> .
+    ?person <http://xmlns.com/foaf/0.1/mbox> ?email .
+}

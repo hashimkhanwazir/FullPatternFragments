@@ -1,0 +1,9 @@
+PREFIX  rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX  dbpr: <http://dbpedia.org/resource/>
+
+SELECT  ?object ?name
+WHERE
+  { dbpr:Soviet_war_in_Afghanistan
+              ?predicate  ?object .
+    ?object   rdfs:label  ?name
+  }

@@ -1,0 +1,10 @@
+PREFIX  rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX  dbpo: <http://dbpedia.org/ontology/>
+
+SELECT  ?person ?birth ?death ?hometown
+WHERE
+  { ?person  rdf:type        dbpo:Person ;
+             dbpo:birthDate  ?birth ;
+             dbpo:deathDate  ?death ;
+             dbpo:hometown   ?homwtown
+  }
