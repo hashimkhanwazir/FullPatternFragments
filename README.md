@@ -1,4 +1,4 @@
-# _(Origional Work)_ Star Pattern Fragments: Accessing Knowledge Graphs through Star Patterns
+## _(Origional Work)_ Star Pattern Fragments: Accessing Knowledge Graphs through Star Patterns
 ## _(To be extended)_ Full Pattern Fragments 
 A github repository for Star Pattern Fragments server and client in Java (and client in Node.js).
 
@@ -17,7 +17,7 @@ Any questions, feel free to contact Christian Aebeloe at caebel@cs.aau.dk
 ---   
 ## (to be extended work -- steps to follow)
 ### 🚀 How to Run the Server
-
+> 📌 **Note:** Sample dataset of about 1000 triples is created for test purpose.
 1. Navigate to the server directory:
 
    ```bash
