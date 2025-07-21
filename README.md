@@ -1,15 +1,16 @@
-# (Origional Work) Star Pattern Fragments: Accessing Knowledge Graphs through Star Patterns
-## (To be extended) Full pattern Fragments 
-A github repository for Star Pattern Fragments server and client in Java (and client in Node.js). 
-(To be extended) _We are planning to extend this work by implmenting Path and Sink shapped query patterns, and much more._ 
+# _(Origional Work)_ Star Pattern Fragments: Accessing Knowledge Graphs through Star Patterns
+## _(To be extended)_ Full Pattern Fragments 
+A github repository for Star Pattern Fragments server and client in Java (and client in Node.js).
 
-(original work) This Readme and repository are works in progress. The SPF version available here is the one used for experiments in our paper (see also our website at http://relweb.cs.aau.dk/spf/).
+_(To be extended)_ _We are planning to extend this work by implmenting Path and Sink shapped query patterns, and much more._ 
 
-(original work) The server is available in the SPF.Server/ folder.
+_(original work)_ This Readme and repository are works in progress. The SPF version available here is the one used for experiments in our paper (see also our website at http://relweb.cs.aau.dk/spf/).
 
-(original work) The client is available for both Java (SPF.Client/) and Node.js (Client.js/).
+_(original work)_ The server is available in the SPF.Server/ folder.
 
-(To be extended) We will be working in Java SPF.Client 
+_(original work)_ The client is available for both Java (SPF.Client/) and Node.js (Client.js/).
+
+_(To be extended)_ We will be working in Java SPF.Client 
 
 Any questions, feel free to contact Christian Aebeloe at caebel@cs.aau.dk
 
@@ -24,15 +25,14 @@ Any questions, feel free to contact Christian Aebeloe at caebel@cs.aau.dk
 
 2. Make sure the following sample files are available in the directory:
 
-   sampleDataset.hdt
+   - sampleDataset.hdt
 
-   sampleDataset.json
+   - sampleDataset.json
 
 3. Start the server using the following command:
 
    ```bash
    java -jar ./target/ldf-server.jar sampleDataset.json
-
 
 4. Once the server is running, open your browser and visit:
 
@@ -46,4 +46,13 @@ Any questions, feel free to contact Christian Aebeloe at caebel@cs.aau.dk
    ```bash
    cd FullPatternFragments/SPF.Client
 
+2. Make sure the following files and folders:
 
+   - sample-queries
+
+   - ./target/spf-client.jar
+
+3. Execute one query at a time through:
+
+   ```bash
+   java -jar ./target/spf-client.jar -q sample-queries/star1.sparql -f http://localhost:8080/sampleDataset
