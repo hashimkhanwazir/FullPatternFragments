@@ -1,3 +1,6 @@
+
+### ⚠️ Not important, please ignore it at the moment
+
 This repository contains code modified from **[Triple Pattern Fragments](http://www.hydra-cg.com/spec/latest/triple-pattern-fragments/)**, to contain **Star Pattern Fragments**.
 
 # Linked Data Fragments Server <img src="http://linkeddatafragments.org/images/logo.svg" width="100" align="right" alt="" />
