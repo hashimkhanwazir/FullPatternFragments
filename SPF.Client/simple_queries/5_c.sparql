@@ -1,4 +1,0 @@
-# Sink-shaped query: Retrieve all employees of an organization
-SELECT * WHERE {
-   <http://example.org/Person1> ?p ?o .
-}  

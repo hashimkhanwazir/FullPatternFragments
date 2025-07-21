@@ -1,5 +1,0 @@
-# Sink-shaped query: Find all books owned by a person
-SELECT ?bookTitle WHERE {
-    ?book <http://example.org/owner> <http://example.org/Person3> .
-    ?book <http://schema.org/title> ?bookTitle .
-}

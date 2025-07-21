@@ -1,1 +1,0 @@
-select * where {?v1 <http://schema.org/description> ?v2}

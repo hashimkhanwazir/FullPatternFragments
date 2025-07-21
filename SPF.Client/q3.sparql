@@ -1,3 +1,0 @@
-SELECT * WHERE {  ?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/gender> <http://db.uwaterloo.ca/~galuc/wsdbm/Gender1> .  
-                  ?v0 <http://xmlns.com/foaf/familyName> ?v1 .  
-         }

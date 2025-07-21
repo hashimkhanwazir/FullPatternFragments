@@ -1,3 +1,0 @@
-SELECT * WHERE {  ?v0 <http://schema.org/nationality> <http://db.uwaterloo.ca/~galuc/wsdbm/Country7> .  
-                   
-                  ?v0 <http://db.uwaterloo.ca/~galuc/wsdbm/likes> ?v5 .  }

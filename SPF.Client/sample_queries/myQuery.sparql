@@ -1,1 +1,0 @@
-SELECT * WHERE {  <http://db.uwaterloo.ca/~galuc/wsdbm/User90945> <http://purl.org/dc/terms/Location> ?v1 }

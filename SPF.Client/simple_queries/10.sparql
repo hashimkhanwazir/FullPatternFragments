@@ -1,7 +1,0 @@
-# Path-shaped query: Find which company owns a car owned by a person
-SELECT ?orgName WHERE {
-    ?person <http://xmlns.com/foaf/0.1/name> "Bob" .
-    ?car <http://example.org/owner> ?person .
-    ?car <http://schema.org/brand> ?brand .
-    ?org <http://schema.org/name> ?orgName .
-}

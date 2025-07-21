@@ -1,2 +1,0 @@
-SELECT * WHERE {  ?v0 <http://schema.org/nationality> <http://db.uwaterloo.ca/~galuc/wsdbm/Country7> .  
-                  ?v0 <http://schema.org/birthDate> ?v2 .  }

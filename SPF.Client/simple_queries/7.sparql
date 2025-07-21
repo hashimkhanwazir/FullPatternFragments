@@ -1,7 +1,0 @@
-# Path-shaped query: Find a person's car model and brand
-SELECT ?brand ?model WHERE {
-    ?person <http://xmlns.com/foaf/0.1/name> "Charlie" .
-    ?car <http://example.org/owner> ?person .
-    ?car <http://schema.org/brand> ?brand .
-    ?car <http://schema.org/model> ?model .
-}

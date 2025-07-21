@@ -1,7 +1,0 @@
-# Path-shaped query: Find the organization where Alice works and its location
-SELECT ?orgName ?location WHERE {
-    ?person <http://xmlns.com/foaf/0.1/name> "Alice" .
-    ?person <http://example.org/worksAt> ?org .
-    ?org <http://schema.org/name> ?orgName .
-    ?org <http://schema.org/location> ?location .
-}

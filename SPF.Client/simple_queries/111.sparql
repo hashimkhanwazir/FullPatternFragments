@@ -1,9 +1,0 @@
-# Sink-shaped query: Retrieve all employees of an organization
-SELECT * WHERE {
-    ?s <http://example.org/worksAt> ?o .
-    ?o <http://schema.org/location> ?o1 .
-    ?o1 <http://example.org/name> ?o2 .
-    ?o1 <http://example.org/country> ?o3 .
-    ?o1 <http://example.org/population> ?o4 .
- 
-}  

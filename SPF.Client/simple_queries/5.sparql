@@ -1,5 +1,0 @@
-# Sink-shaped query: Retrieve all employees of an organization
-SELECT ?person ?name WHERE {
-    ?person <http://example.org/worksAt> <http://example.org/Org1> .
-    ?person <http://xmlns.com/foaf/0.1/name> ?name .
-}

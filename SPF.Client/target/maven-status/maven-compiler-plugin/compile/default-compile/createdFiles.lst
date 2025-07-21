@@ -1,4 +1,5 @@
 dk/aau/cs/spf/task/TpfTripleHandler.class
+dk/aau/cs/spf/model/PathPattern.class
 dk/aau/cs/spf/model/StarPattern.class
 dk/aau/cs/spf/main/SparqlQueryProcessor.class
 dk/aau/cs/spf/main/QueryInput$QueryProcessingMethod.class
@@ -12,6 +13,7 @@ dk/aau/cs/spf/task/CountMetadataHandler.class
 dk/aau/cs/spf/task/SpfParseResponseTask.class
 dk/aau/cs/spf/task/TripleHandler.class
 dk/aau/cs/spf/callable/TurtleParserStar.class
+dk/aau/cs/spf/model/SinkPattern.class
 dk/aau/cs/spf/util/QueryProcessingUtils.class
 dk/aau/cs/spf/task/TpfHttpRequestTask.class
 dk/aau/cs/spf/callable/BrtpfHttpRequestThread.class
@@ -28,7 +30,6 @@ dk/aau/cs/spf/callable/SpfResponseParserThread.class
 dk/aau/cs/spf/callable/BrtpfResponseParserThread.class
 dk/aau/cs/spf/task/SimpleTripleHandler.class
 dk/aau/cs/spf/main/SPFClient.class
-dk/aau/cs/spf/main/QueryShapeExtractor.class
 dk/aau/cs/spf/util/Tuple.class
 dk/aau/cs/spf/callable/InitialHttpRequestThread.class
 dk/aau/cs/spf/callable/TpfResponseParserThread.class

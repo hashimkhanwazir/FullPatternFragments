@@ -1,1 +1,0 @@
-select * where { <http://db.uwaterloo.ca/~galuc/wsdbm/Offer27496> <http://purl.org/goodrelations/includes> ?v1 .  ?v1 <http://schema.org/description> ?v2}

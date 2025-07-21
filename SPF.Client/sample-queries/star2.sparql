@@ -1,0 +1,6 @@
+SELECT ?s ?o1 ?o2 ?o3
+WHERE {
+  ?s <http://example.org/predicate1> ?o1 .
+  ?s <http://example.org/predicate2> ?o2 .
+  ?s <http://example.org/predicate3> ?o3 .
+}

@@ -1,3 +1,0 @@
-SELECT * WHERE {  ?v1 <http://db.uwaterloo.ca/~galuc/wsdbm/hasGenre> <http://db.uwaterloo.ca/~galuc/wsdbm/SubGenre2> .    
-                  ?v1 <http://schema.org/contentSize> ?v2 .  
-                  ?v1 <http://schema.org/description> ?v3 .  }

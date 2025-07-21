@@ -116,7 +116,7 @@ public class SparqlQueryProcessor {
         this.unorderedStarPatterns = new ArrayList<StarPattern>();
         for (StarPattern sp : starPatterns) {
             unorderedStarPatterns.add(sp);
-            System.out.println("\n>>The unordered star patterns are:\n " + unorderedStarPatterns);
+            //System.out.println("\n>>The unordered star patterns are:\n " + unorderedStarPatterns);
         }
 
         this.projectionElemList = projectionElemList;
@@ -238,7 +238,7 @@ public class SparqlQueryProcessor {
         while (!unorderedStarPatterns.isEmpty()) {
             ArrayList<String> boundVariables = QueryProcessingUtils.getBoundVariablesSP(starPatternOrder);
             System.out.println("\n** orderRemainingSPs() Bound Variables at this step: " + boundVariables);
-            System.out.println("\n** The unordered star patterns are: " + unorderedStarPatterns);
+            //System.out.println("\n** The unordered star patterns are: " + unorderedStarPatterns);
             StarPattern nextSP = QueryProcessingUtils
                     .findAndRemoveNextWithMaxNumberOfBVSP(unorderedStarPatterns, boundVariables);
             starPatternOrder.add(nextSP);

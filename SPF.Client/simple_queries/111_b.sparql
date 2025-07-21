@@ -1,1 +1,0 @@
-select * where {?o <http://schema.org/location> ?o1 .}

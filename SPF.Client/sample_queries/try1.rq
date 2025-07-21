@@ -1,2 +1,0 @@
-
-SELECT * WHERE {<http://db.uwaterloo.ca/~galuc/wsdbm/User84038> ?p <http://db.uwaterloo.ca/~galuc/wsdbm/Role1>}

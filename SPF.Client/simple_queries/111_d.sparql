@@ -1,1 +1,0 @@
-select * where {?o1 <http://example.org/country> ?o3 .}

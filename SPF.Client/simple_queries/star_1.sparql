@@ -1,5 +1,0 @@
-select * where {
-?o1 <http://example.org/name> ?o2 .
-    ?o1 <http://example.org/country> ?o3 .
-    ?o1 <http://example.org/population> ?o4 .
-}
